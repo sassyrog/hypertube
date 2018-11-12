@@ -8,9 +8,25 @@ var passport = require('passport');
 var flash = require('connect-flash');
 var session = require('express-session');
 const expressValidator = require('express-validator');
+var bodyParser = require('body-parser');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+
+const config = require('./config/database');
+
+mongoose.connect(config.database);
+let db = mongoose.connection;
+
+// Check connection
+db.once('open', function() {
+    console.log('Connected to MongoDB');
+});
+
+// Check for DB errors
+db.on('error', function(err) {
+    console.log(err);
+});
 
 var app = express();
 
@@ -23,6 +39,20 @@ app.use(express.json());
 app.use(express.urlencoded({
     extended: false
 }));
+
+app.use(session({
+    secret: 'keyboard cat',
+    resave: true,
+    saveUninitialized: true
+}));
+
+app.use(flash());
+
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
+app.use(bodyParser.json());
+
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 

@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const bcrypt = require('bcryptjs');
-
+var flash = require('connect-flash');
 /* GET users listing. */
 router.get('/', function(req, res, next) {
     res.send('respond with a resource');
@@ -21,11 +21,12 @@ router.post('/register', function(req, res) {
     const password1 = req.body.password1;
     const password2 = req.body.password2;
 
+    console.log('------> ' + password1 + '  --------> ' + password2);
     req.checkBody('username', 'username is rquired').notEmpty();
     req.checkBody('email', 'email is rquired').notEmpty();
     req.checkBody('email', 'email not valid').isEmail();
-    req.checkBody('password', 'password is rquired').notEmpty();
-    req.checkBody('username', 'passwords  do not match').equals(req.body.password1);
+    req.checkBody('password1', 'password is rquired').notEmpty();
+    req.checkBody('password2', 'passwords  do not match').equals(req.body.password1);
 
     let errors = req.validationErrors();
 
