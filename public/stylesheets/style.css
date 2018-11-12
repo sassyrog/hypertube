@@ -1,9 +1,57 @@
-body {
-	background-color: deeppink;
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+@media (max-width: 767px) {
+    .navbar-toggleable-sm {
+        clear: both;
+    }
 }
 
-a {
-  color: #00B7FF;
+body {
+    background-color: black;
+}
+
+.navbar {
+    color: gold;
+    font-weight: bold;
+    background-color: #FF9900;
+}
+
+.btn {
+    position: absolute;
+    top: 80%;
+    color: #ff9900;
+    border-color: #ff9900;
+    font-size: 2vw;
+    display: blok;
+    transform: translate(-50%, -50%);
+    left: 50%;
+}
+
+.btn:hover {
+    border-color: #ff9900;
+    background-color: #ff9900;
+    color: black;
+}
+
+.collapse {
+    background-color: #ff9900;
+}
+
+.hub {
+    /* height: 100%; */
+    display: block;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: white;
+    font-size: 8vw;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.hub span:nth-child(2) {
+    background: #FF9900;
+    color: #000000;
+    border-radius: 1vw;
+    padding: 0 1vw 1vw 1vw;
+    display: inline-block;
 }
