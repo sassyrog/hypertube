@@ -15,6 +15,11 @@ var usersRouter = require('./routes/users');
 
 const config = require('./config/database');
 
+const mongooseValidator = require('mongoose-unique-validator');
+const bcrypt = require('bcrypt');
+const md5 = require('md5');
+const uuid = require('shortid');
+
 mongoose.connect(config.database);
 let db = mongoose.connection;
 
@@ -34,11 +39,15 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({
     extended: false
 }));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(session({
     secret: 'keyboard cat',
@@ -47,6 +56,16 @@ app.use(session({
 }));
 
 app.use(flash());
+
+// Express Messages Middleware
+app.use(require('connect-flash')());
+app.use(function(req, res, next) {
+    res.locals.messages = require('express-messages')(req, res);
+    next();
+});
+
+// Express Validator Mid
+
 
 app.use(bodyParser.urlencoded({
     extended: false
@@ -61,11 +80,15 @@ app.use(expressValidator())
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-const mongooseValidator = require('mongoose-unique-validator');
-const bcrypt = require('bcrypt');
-const md5 = require('md5');
-const uuid = require('shortid');
 
+
+require('./config/passport')(passport);
+// Passport Middleware
+
+app.get('*', function(req, res, next) {
+    res.locals.user = req.user || null;
+    next();
+});
 
 
 // catch 404 and forward to error handler

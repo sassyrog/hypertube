@@ -1,30 +1,47 @@
 <link rel="stylesheet" href="/stylesheets/login.css">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="/javascripts/validate.js" charset="utf-8"></script>
 <div class="container">
 	<div class="row">
 		<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+			{{#if errors}}
+				<div id="errors" class="alert alert-danger" role="alert">
+					{{#each errors}}
+						<li class="err_li">{{this.msg}}</li>
+					{{/each}}
+				</div>
+			{{/if}}
+			<div id="err_msg" style="display:none" class="alert alert-danger" role="alert"> </div>
 			<div class="card card-signin my-5">
 				<div class="card-body">
 					<h5 class="card-title text-center">Sign up</h5>
-					<!-- <h1>{{errors}}</h1> -->
-					<form class="form-signin" method="POST" action="/users/register">
+					<form id="form" class="form-signin" method="POST" action="/users/register">
 						<div class="form-label-group">
-							<input type="text" name="username" id="username" class="form-control" placeholder="username" required autofocus>
+							<input type="text" name="firstname" id="firstname" class="form-control" placeholder="firstname" autofocus>
+							<label for="firstname">firstname</label>
+						</div>
+						<div class="form-label-group">
+							<input type="text" name="lastname" id="lastname" class="form-control" placeholder="lastname" autofocus>
+							<label for="lastname">lastname</label>
+						</div>
+						<div class="form-label-group">
+							<input type="text" name="username" id="username" class="form-control" placeholder="username" autofocus>
 							<label for="username">username</label>
 						</div>
 						<div class="form-label-group">
-							<input type="email" name="email" id="email" class="form-control" placeholder="email" required autofocus>
+							<input type="email" name="email" id="email" class="form-control" placeholder="email" autofocus>
 							<label for="email">email</label>
 						</div>
 						<div class="form-label-group">
-							<input name="password1" type="password" id="password1" class="form-control" placeholder="password" required>
+							<input name="password1" type="password" id="password1" class="form-control" placeholder="password">
 							<label for="password1">password</label>
+							<div class="bar"></div>
 						</div>
-
 						<div class="form-label-group">
-							<input name="password2" type="password" id="password2" class="form-control" placeholder="confirm password" required>
+							<input name="password2" type="password" id="password2" class="form-control" placeholder="confirm password">
 							<label for="password2">confirm password</label>
 						</div>
-						<button class="btn btn-lg btn-primary btn-block " type="submit"> <span>create account</span> </button>
+						<button id="submit" class="btn btn-lg btn-primary btn-block disabled" disabled="disabled" type="submit"> <span>create account</span> </button>
 					</form>
 					<hr class="my-4">
 					<p class="text-center">have an account? <a href="/login">login</a> </p>

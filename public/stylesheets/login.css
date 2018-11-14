@@ -11,8 +11,16 @@ body {
     font-family: Consolas;
 }
 
+.form-control {
+    background-color: #FFC773;
+}
+
+.alert-danger {
+    font-size: 12px;
+}
+
 .mx-auto {
-    margin-top: 9vw;
+    margin-top: 4vw;
 }
 
 .card-signin {
