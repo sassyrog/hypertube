@@ -20,12 +20,17 @@ const bcrypt = require('bcrypt');
 const md5 = require('md5');
 const uuid = require('shortid');
 
-mongoose.connect(config.database);
+var chalk = require('chalk');
+const mdb = require('moviedb')('5d54c4f8fe9a065d6ed438ef09982650');
+
+mongoose.connect(config.database, {
+    useMongoClient: true
+});
 let db = mongoose.connection;
 
 // Check connection
 db.once('open', function() {
-    console.log('Connected to MongoDB');
+    console.log(chalk.yellow('Connected to MongoDB'));
 });
 
 // Check for DB errors
@@ -60,7 +65,10 @@ app.use(flash());
 // Express Messages Middleware
 app.use(require('connect-flash')());
 app.use(function(req, res, next) {
-    res.locals.messages = require('express-messages')(req, res);
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    res.locals.error = req.flash('error');
+    res.locals.user = req.user || null;
     next();
 });
 
@@ -76,14 +84,67 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(expressValidator())
+require('./config/passport')(passport);
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 
+app.get('/auth/github/callback',
+    passport.authenticate('github', {
+        failureRedirect: '/login'
+    }),
 
-require('./config/passport')(passport);
-// Passport Middleware
+    function(req, res) {
+        res.redirect('/home');
+    });
+
+app.get('/auth/google/callback',
+    passport.authenticate('google', {
+        failureRedirect: '/login'
+    }),
+    function(req, res) {
+        res.redirect('/home');
+    });
+
+app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', {
+        successRedirect: '/home',
+        failureRedirect: '/login'
+    }));
+
+app.get('/auth/42/callback',
+    passport.authenticate('42', {
+        failureRedirect: '/login'
+    }),
+    function(req, res) {
+        // Successful authentication, redirect home.
+        res.redirect('/home');
+    });
+
+
+app.get('/sea', (req, response) => {
+    var yy = [];
+    mdb.searchMovie({
+        query: 'it'
+    }, (err, res) => {
+        for (i = 0; i < res.results.length; i++) {
+            yy.push({
+                'id': res.results[i].id,
+                'title': res.results[i].title,
+                'desc': res.results[i].overview,
+                'year': res.results[i].release_date.substring(0, 4),
+                'pic': 'https://image.tmdb.org/t/p/w500' + res.results[i].backdrop_path,
+                'pic2': 'https://image.tmdb.org/t/p/w500' + res.results[i].poster_path,
+                'lang': res.results[i].original_language,
+                'rate': res.results[i].vote_average
+            });
+        }
+        response.render('home', {
+            img: yy
+        });
+    })
+})
 
 app.get('*', function(req, res, next) {
     res.locals.user = req.user || null;

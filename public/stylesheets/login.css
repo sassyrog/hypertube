@@ -7,6 +7,14 @@ body {
     background: black;
 }
 
+body i {
+    font-family: 'FontAwesome' !important;
+}
+
+a {
+    text-decoration: none;
+}
+
 * {
     font-family: Consolas;
 }

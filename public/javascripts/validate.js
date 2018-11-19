@@ -35,6 +35,7 @@ $(window).on("load", function() {
         $('#err_msg').html(tex);
         if (!tex && firstname && lastname && email && $('#password1').val() && $('#password2').val()) {
             $('#submit').removeClass('disabled');
+            $("#submit").removeAttr('disabled');
         } else if (!$('#submit').hasClass('disabled') && (!firstname || !lastname || !email || !$('#password1').val() || !$('#password2').val() || tex))
             $('#submit').addClass('disabled');
     });

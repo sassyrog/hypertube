@@ -4,6 +4,8 @@ const bcrypt = require('bcryptjs');
 var flash = require('connect-flash');
 const passport = require('passport');
 /* GET users listing. */
+
+require('../config/passport')(passport);
 router.get('/', function(req, res, next) {
     res.send('respond with a resource');
 });
@@ -40,34 +42,67 @@ router.post('/register', function(req, res) {
             errors: errors
         });
     } else {
-        let newUser = new User({
-            firstname: firstname,
-            lastname: lastname,
-            username: username,
-            email: email,
-            password: password1
-        });
-
-        bcrypt.genSalt(10, function(err, salt) {
-            bcrypt.hash(newUser.password, salt, function(err, hash) {
-                // Store hash in your password DB.
-                if (err) {
-                    console.log(err);
+        User.findOne({
+            username: {
+                "$regex": "^" + username + "\\b",
+                "$options": "i"
+            }
+        }, function(err, user) {
+            User.findOne({
+                email: {
+                    "$regex": "^" + email + "\\b",
+                    "$options": "i"
                 }
-                newUser.password = hash;
-                newUser.save(function(err) {
-                    if (err) {
-                        console.log(err);
-                        return;
-                    } else {
-                        req.flash('success', 'you are now registered');
-                        res.redirect('/users/login');
-                    }
-                });
+            }, function(err, mail) {
+                if (user) {
+                    res.render('register', {
+                        firstname: firstname,
+                        lastname: lastname,
+                        email: email,
+                        user: 'username already taken'
+                    });
+                } else if (mail) {
+                    res.render('register', {
+                        firstname: firstname,
+                        lastname: lastname,
+                        username: username,
+                        mail: 'email already exists'
+                    });
+                } else {
+                    let newUser = new User({
+                        firstname: firstname,
+                        lastname: lastname,
+                        username: username,
+                        email: email,
+                        password: password1
+                    });
+                    bcrypt.genSalt(10, function(err, salt) {
+                        bcrypt.hash(newUser.password, salt, function(err, hash) {
+                            // Store hash in your password DB.
+                            if (err) {
+                                console.log(err);
+                            }
+                            newUser.password = hash;
+                            newUser.save(function(err) {
+                                if (err) {
+                                    console.log(err);
+                                    return;
+                                } else {
+                                    req.flash('success', 'you are now registered');
+                                    res.redirect('/users/login');
+                                }
+                            });
+                        });
+                    });
+                    req.flash('success_msg', 'You are registered and can now login');
+                    res.redirect('/users/login');
+                }
             });
         });
     }
 });
+
+
 
 router.get('/login', function(req, res) {
     res.render('login');
@@ -81,5 +116,16 @@ router.post('/login', function(req, res, next) {
         failureFlash: true
     })(req, res, next);
 });
+
+
+// router.get('/auth/github/callback',
+//     passport.authenticate('github', {
+//         failureRedirect: '/login'
+//     }),
+//
+//     function(req, res) {
+//         res.redirect('/home');
+//     });
+
 
 module.exports = router;

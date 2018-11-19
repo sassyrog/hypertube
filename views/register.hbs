@@ -11,25 +11,29 @@
 					{{/each}}
 				</div>
 			{{/if}}
+			{{#if mail}}
+				<div id="errors" class="alert alert-danger" role="alert">{{mail}}</div>
+			{{else if user}}
+				<div id="errors" class="alert alert-danger" role="alert">{{user}}</div>
+			{{/if}}
 			<div id="err_msg" style="display:none" class="alert alert-danger" role="alert"> </div>
 			<div class="card card-signin my-5">
 				<div class="card-body">
 					<h5 class="card-title text-center">Sign up</h5>
 					<form id="form" class="form-signin" method="POST" action="/users/register">
 						<div class="form-label-group">
-							<input type="text" name="firstname" id="firstname" class="form-control" placeholder="firstname" autofocus>
+							<input type="text" name="firstname" id="firstname" class="form-control" placeholder="firstname" {{#if firstname}} value="{{firstname}}" {{/if}}>
 							<label for="firstname">firstname</label>
 						</div>
 						<div class="form-label-group">
-							<input type="text" name="lastname" id="lastname" class="form-control" placeholder="lastname" autofocus>
+							<input type="text" name="lastname" id="lastname" class="form-control" placeholder="lastname" {{#if lastname}} value="{{lastname}}" {{/if}}>
 							<label for="lastname">lastname</label>
 						</div>
 						<div class="form-label-group">
-							<input type="text" name="username" id="username" class="form-control" placeholder="username" autofocus>
+							<input type="text" name="username" id="username" class="form-control" placeholder="username" {{#if user}} autofocus {{/if}} {{#if username}} value="{{username}}" {{/if}}>
 							<label for="username">username</label>
 						</div>
-						<div class="form-label-group">
-							<input type="email" name="email" id="email" class="form-control" placeholder="email" autofocus>
+						<div class="form-label-group"> <input type="email" name="email" id="email" class="form-control" placeholder="email" {{#if mail}} autofocus {{/if}} {{#if email}} value="{{email}}" {{/if}}>
 							<label for="email">email</label>
 						</div>
 						<div class="form-label-group">

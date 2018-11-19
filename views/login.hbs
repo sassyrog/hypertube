@@ -1,24 +1,19 @@
-<link rel="stylesheet" href="/stylesheets/bootstrap-social.css">
-<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 <link rel="stylesheet" href="/stylesheets/login.css">
-<!-- <link rel="stylesheet" href="/stylesheets/fontawesome/css/all.css"> -->
 <link rel="stylesheet" href="/stylesheets/bootstrap-social.css">
 
+
 <div class="container">
-	<!-- {{#if errors}} -->
-	<!-- {{/if}} -->
 	<div class="row">
 		<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-			{{#if messages}}
-				<div>
-					<strong>FLASH!</strong> {{msg}}
+			{{#if error}}
+				<div id="errors" class="alert alert-danger" role="alert">
+					{{error}}
 				</div>
 			{{/if}}
 			<div class="card card-signin my-5">
 				<div class="card-body">
 					<h5 class="card-title text-center">Sign In</h5>
-					<form class="form-signin" method="POST" action="/users/login">
-						<h1>{{errors}}</h1>
+					<form method="POST" action="/users/login">
 						<div class="form-label-group">
 							<input name="username" type="text" id="username" class="form-control" placeholder="username">
 							<label for="username">username</label>
@@ -34,23 +29,30 @@
 						</div>
 						<button class="btn btn-lg btn-primary btn-block " type="submit"> <span>login</span> </button>
 						<hr class="my-4">
-
-						<button class="btn btn-block btn-social btn-github">
-							<span class="fa fa-github"></span>
-							<span>github</span>
-						</button>
-						<button class="btn btn-block btn-social btn-facebook">
-							<span class="fa fa-facebook"></span>
-							<span>facebook</span>
-						</button>
-						<button class="btn btn-block btn-social btn-dropbox">
-							<span class="fa fa-google"></span>
-							<span>google</span>
-						</button>
-						<button class="btn btn-block btn-social btn-tumblr">
-							<span class="fa-intra"><img src="/images/42.svg" alt=""> </span>
-							<span>intra</span>
-						</button>
+						<a class="btn-block" href="/auth/github">
+							<button type="button" class="btn btn-block btn-social btn-github">
+								<span class="fa fa-github"></span>
+								<span>github</span>
+							</button>
+						</a>
+						<a class="btn-block" href="/auth/google">
+							<button type="button" class="btn btn-block btn-social btn-google">
+								<span class="fa fa-google"></span>
+								<span>google</span>
+							</button>
+						</a>
+						<a class="btn-block" href="/auth/facebook">
+							<button type="button" class="btn btn-block btn-social btn-facebook">
+								<span class="fa fa-facebook"></span>
+								<span>facebook</span>
+							</button>
+						</a>
+						<a class="btn-block" href="/auth/42">
+							<button type="button" class="btn btn-block btn-social btn-tumblr">
+								<span class="fa-intra"><img src="/images/42.svg" alt=""> </span>
+								<span>intra</span>
+							</button>
+						</a>
 						<hr class="my-4">
 						<p class="text-center">have an account? <a href="/register">sign up</a> </p>
 					</form>
