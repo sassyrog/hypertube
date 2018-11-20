@@ -26,7 +26,7 @@ router.get('/', function(req, res, next) {
 	//
 	//	1.	Path to the movie to stream
 	//
-	let file = './public/toystory.mp4';
+	let file = '../mlky_6.mp4';
 
 	//
 	//	2.	Get meta information from the file. In this case we are interested
