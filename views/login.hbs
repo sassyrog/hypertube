@@ -10,6 +10,11 @@
 					{{error}}
 				</div>
 			{{/if}}
+			{{#if success_msg}}
+				<div id="errors" class="alert alert-success" role="alert">
+					{{success_msg}}
+				</div>
+			{{/if}}
 			<div class="card card-signin my-5">
 				<div class="card-body">
 					<h5 class="card-title text-center">Sign In</h5>
