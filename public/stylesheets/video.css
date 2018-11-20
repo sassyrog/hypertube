@@ -1,0 +1,65 @@
+body {
+	background-color: black;
+}
+
+#videoPlayer {
+	width : 900px;
+	height : 600px;
+	align-content: center;
+	text-align: center;
+	border: 5px solid #FF9900;
+}
+
+.player {
+	position: absolute;
+	height: 73%;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+	/* text-align: center; */
+	margin: auto;
+}
+
+/* .divider-text {
+	position: relative;
+	text-align: center;
+	margin-top: 15px;
+	margin-bottom: 15px;
+} */
+
+* {
+	font-family: Consolas;
+}
+
+/* .err_li {
+	font-size: 2px;
+}
+
+.form-control {
+	border: 1px solid black;
+}
+
+form {
+	width: 80%;
+	margin: 0 auto;
+}
+
+input {
+	text-align: center;
+}
+
+article {
+	padding: 20px;
+	margin-top: 9vw;
+	background-color: #ff9900;
+}
+
+.btn {
+	color: #FF9900;
+	border: 0;
+	background-color: black;
+	width: 80%;
+	margin: 0 auto;
+	;
+} */

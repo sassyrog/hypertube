@@ -11,6 +11,7 @@ const expressValidator = require('express-validator');
 var bodyParser = require('body-parser');
 
 var indexRouter = require('./routes/index');
+var videoRouter = require('./routes/video');
 var usersRouter = require('./routes/users');
 
 const config = require('./config/database');
@@ -43,7 +44,6 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
-
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -87,6 +87,7 @@ app.use(expressValidator())
 require('./config/passport')(passport);
 
 app.use('/', indexRouter);
+app.use('/video', videoRouter);
 app.use('/users', usersRouter);
 
 
