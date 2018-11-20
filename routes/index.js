@@ -5,6 +5,7 @@ const passport = require('passport');
 
 //route handlers
 
+
 router.get('/', function(req, res, next) {
     res.render('index', {
         title: 'Express'
@@ -36,7 +37,8 @@ router.get('/auth/github',
 router.get('/auth/google',
     passport.authenticate('google', {
         scope: ['https://www.googleapis.com/auth/plus.login']
-    }));
+    })
+);
 
 router.get('/auth/facebook',
     passport.authenticate('facebook'));
