@@ -37,11 +37,11 @@ router.post('/register', function(req, res) {
     let errors = req.validationErrors();
 
     if (errors) {
-        console.log(errors);
         res.render('register', {
             errors: errors
         });
     } else {
+        //checking for email and username are already taken
         User.findOne({
             username: {
                 "$regex": "^" + username + "\\b",
@@ -54,45 +54,33 @@ router.post('/register', function(req, res) {
                     "$options": "i"
                 }
             }, function(err, mail) {
-                if (user) {
-                    res.render('register', {
-                        firstname: firstname,
-                        lastname: lastname,
-                        email: email,
-                        user: 'username already taken'
-                    });
-                } else if (mail) {
-                    res.render('register', {
-                        firstname: firstname,
-                        lastname: lastname,
-                        username: username,
-                        mail: 'email already exists'
-                    });
+                if (user || mail) {
+                    if (user) {
+                        res.render('register', {
+                            firstname: firstname,
+                            lastname: lastname,
+                            email: email,
+                            user: 'username already taken'
+                        });
+                    } else if (mail) {
+                        res.render('register', {
+                            firstname: firstname,
+                            lastname: lastname,
+                            username: username,
+                            mail: 'email already exists'
+                        });
+                    }
                 } else {
-                    let newUser = new User({
+                    var newUser = new User({
                         firstname: firstname,
                         lastname: lastname,
                         username: username,
                         email: email,
                         password: password1
                     });
-                    bcrypt.genSalt(10, function(err, salt) {
-                        bcrypt.hash(newUser.password, salt, function(err, hash) {
-                            // Store hash in your password DB.
-                            if (err) {
-                                console.log(err);
-                            }
-                            newUser.password = hash;
-                            newUser.save(function(err) {
-                                if (err) {
-                                    console.log(err);
-                                    return;
-                                } else {
-                                    req.flash('success', 'you are now registered');
-                                    res.redirect('/users/login');
-                                }
-                            });
-                        });
+                    User.createUser(newUser, function(err, user) {
+                        if (err) throw err;
+                        console.log(user);
                     });
                     req.flash('success_msg', 'You are registered and can now login');
                     res.redirect('/users/login');
