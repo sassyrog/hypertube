@@ -126,7 +126,7 @@ app.get('/auth/42/callback',
 app.get('/sea', (req, response) => {
     var yy = [];
     mdb.searchMovie({
-        query: 'it'
+        query: 'johnny english'
     }, (err, res) => {
         for (i = 0; i < res.results.length; i++) {
             yy.push({
@@ -140,6 +140,7 @@ app.get('/sea', (req, response) => {
                 'rate': res.results[i].vote_average
             });
         }
+        console.log(yy);
         response.render('home', {
             img: yy
         });
