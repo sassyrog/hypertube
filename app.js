@@ -11,7 +11,6 @@ const expressValidator = require('express-validator');
 var bodyParser = require('body-parser');
 
 var indexRouter = require('./routes/index');
-var videoRouter = require('./routes/video');
 var usersRouter = require('./routes/users');
 
 const config = require('./config/database');
@@ -87,7 +86,6 @@ app.use(expressValidator())
 require('./config/passport')(passport);
 
 app.use('/', indexRouter);
-app.use('/video', videoRouter);
 app.use('/users', usersRouter);
 
 
@@ -124,29 +122,63 @@ app.get('/auth/42/callback',
     });
 
 
-app.get('/sea', (req, response) => {
-    var yy = [];
-    mdb.searchMovie({
-        query: 'johnny english'
-    }, (err, res) => {
-        for (i = 0; i < res.results.length; i++) {
-            yy.push({
-                'id': res.results[i].id,
-                'title': res.results[i].title,
-                'desc': res.results[i].overview,
-                'year': res.results[i].release_date.substring(0, 4),
-                'pic': 'https://image.tmdb.org/t/p/w500' + res.results[i].backdrop_path,
-                'pic2': 'https://image.tmdb.org/t/p/w500' + res.results[i].poster_path,
-                'lang': res.results[i].original_language,
-                'rate': res.results[i].vote_average
-            });
-        }
-        console.log(yy);
-        response.render('home', {
-            img: yy
-        });
-    })
-})
+var searchRouter = require('./routes/movie');
+app.use('/movie', searchRouter);
+
+
+// var MovieDB = require('node-moviedb');
+//
+//
+// MovieDB.search('Prison Break', {}, (err, response) => {
+//     if (err) console.log(err);
+//     console.log(response);
+// });
+// // var magnet = require('magnet-scraper');
+// //
+//
+// var opts = {
+//     url: "https://pirateproxy.red/",
+//     page: 2, // note: start in 0.
+//     cat: 200 // Audio = 100, Video = 200, Apps = 300, Games = 400, Porn = 500
+// }
+// magnet.search("johnny english", opts, function(err, res) {
+//     console.log(res);
+// });
+
+
+
+
+
+
+
+//
+
+
+
+
+
+
+// const PirateBay = require('thepiratebay')
+//
+// app.get('/search', (req, res) => {
+//     PirateBay.search('Fantastic Beasts', {
+//             category: 207
+//         })
+//         .then(results => console.log(results))
+//         .catch(err => console.log(err))
+//     res.render('search')
+// })
+
+
+
+// const MytsApi = require('myts-api').API;
+// const myts = new MytsApi();
+// // var query = require('yify-search');
+// // console.log(query);
+// var query = require('yify-query')
+// query('The Imitation Game (2014)', (error, result) => {
+//     console.log(result);
+// });
 
 app.get('*', function(req, res, next) {
     res.locals.user = req.user || null;

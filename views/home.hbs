@@ -1,4 +1,6 @@
 <!-- Font Awesome -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://twitter.github.io/typeahead.js/js/handlebars.js"></script>
 <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
 <link rel="stylesheet" href="/stylesheets/home.css">
 <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
@@ -20,11 +22,11 @@
 	</div>
 </nav>
 <div class="container">
-	<form method="GET">
+	<form id="search_form" action="/movie/search" method="POST">
 		<div class="row">
 			<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
 				<div class="input-group">
-					<input type="text" class="form-control" placeholder="Search" id="txtSearch" />
+					<input type="text" class="form-control" placeholder="Search" id="search" name="search" autofocus {{#if search}} value="{{search}}" {{/if}} />
 					<div class="input-group-btn">
 						<button class="btn btn-primary" type="submit">
 							<i class="fab fa-search"></i>
@@ -37,54 +39,54 @@
 </div>
 
 <div class="containers">
-	{{#each img}}
-		<div class="movie-card">
-			<div class="movie-header" style="background-image: url('{{this.pic2}}')">
-				<div class="header-icon-container">
-					<a href="#">
-						<i class="material-icons header-icon"><span class="fas fa-play"></span></i>
-					</a>
-				</div>
-			</div>
-			<!--movie-header-->
-			<div class="movie-content">
-				<div class="movie-content-header">
-					<a href="#">
-						<h3 class="movie-title">{{this.title}}</h3>
-					</a>
-					<div class="imax-logo"></div>
-				</div>
-				<div class="movie-info">
-					<div class="info-section">
-						<label>release date</label>
-						<span>{{this.year}}</span>
-					</div>
-					<!--date,time-->
-					<div class="info-section">
-						<label>rating</label>
-						<span>{{this.rate}}</span>
-					</div>
-					<!--screen-->
-					<div class="info-section">
-						<label>Row</label>
-						<span>F</span>
-					</div>
-					<!--row-->
-					<div class="info-section">
-						<label>Seat</label>
-						<span>21,22</span>
-					</div>
-					<!--seat-->
-				</div>
-			</div>
-			<!--movie-content-->
-		</div>
-		<!--movie-card-->
-	{{/each}}
 
 </div>
+</script>
 <!--container-->
 
 <script>
-	console.log();
+	$('document').ready(function() {
+
+		// var data = {};
+		// data.search = 'sssss'
+		//
+		// $.ajax({
+		// 	type: 'POST',
+		// 	data: JSON.stringify(data),
+		// 	contentType: 'application/json',
+		// 	url: '/movie/default',
+		// 	success: function(res) {
+		// 		// console.log(res);
+		// 		// $('.containers').html(res);
+		// 		// var source = $("#image-template").html();
+		// 		// var template = Handlebars.compile(source);
+		// 		// var html = template(res);
+		// 		// $('.containers').innerHTML = res;
+		// 		// console.log(html);
+		// 		// window.location = '/home'
+		// 	}
+		// });
+
+		document.getElementById("search").addEventListener("input", function() {
+			var data = {};
+			data.search = $('#search').val();
+
+			$.ajax({
+				type: 'POST',
+				data: JSON.stringify(data),
+				contentType: 'application/json',
+				url: '/movie/search',
+				success: function(res) {
+					console.log(res);
+					$('.containers').html(res);
+					// var source = $("#image-template").html();
+					// var template = Handlebars.compile(source);
+					// var html = template(res);
+					// $('.containers').innerHTML = res;
+					// console.log(html);
+					// window.location = '/home'
+				}
+			});
+		});
+	});
 </script>

@@ -12,9 +12,9 @@ router.get('/', function(req, res, next) {
     });
 });
 
-router.get('/video', function(req, res) {
-    res.render('video');
-});
+// router.get('/video', function(req, res) {
+//     res.render('video');
+// });
 
 router.get('/login', function(req, res) {
     res.render('login');
