@@ -5,16 +5,15 @@ const passport = require('passport');
 
 //route handlers
 
-
 router.get('/', function(req, res, next) {
     res.render('index', {
         title: 'Express'
     });
 });
 
-// router.get('/video', function(req, res) {
-//     res.render('video');
-// });
+router.get('/video', function(req, res) {
+    res.render('video');
+});
 
 router.get('/login', function(req, res) {
     res.render('login');
