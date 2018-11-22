@@ -9,10 +9,11 @@ body {
     margin: 0 auto;
 } */
 .movie-desc {
+    z-index: 1;
     width: 0;
     height: 0;
     /* width: 70vw; */
-    /* height: 800px; */
+    height: 800px;
     background: #FFAB2E;
     /* background: linear-gradient(to bottom left, rgba(255, 255, 255, .8), #FFAB2E); */
     position: fixed;
@@ -39,9 +40,10 @@ body {
 }
 
 .box {
+    z-index: 1;
     border-radius: 10px;
     width: 100%;
-    height: 75%;
+    height: 70%;
     background-size: 100%;
     background-repeat: no-repeat;
     clip-path: polygon(-34% 0%, 101% 0%, 100% 90%);
@@ -137,7 +139,7 @@ a:hover {
     border: 1px solid #FF9900;
     padding: 0;
     margin: 0;
-    height: 367px;
+    height: 450px;
     width: 100%;
     display: block;
     border-top-left-radius: 10px;
@@ -146,6 +148,19 @@ a:hover {
 
 .header-icon-container {
     position: relative;
+}
+
+.player {
+    width: 100%;
+    height: 900px;
+}
+
+#videoPlayer {
+	width : 900px;
+	height : 600px;
+	align-content: center;
+	text-align: center;
+	border: 5px solid #FF9900;
 }
 
 .header-icon {
@@ -179,6 +194,10 @@ a:hover {
 .movie-content {
     padding: 18px 18px 24px 18px;
     margin: 0;
+}
+
+.container {
+    z-index: 0;
 }
 
 .movie-content-header, .movie-info {
