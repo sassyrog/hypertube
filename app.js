@@ -126,6 +126,7 @@ var searchRouter = require('./routes/movie');
 app.use('/movie', searchRouter);
 
 
+app.use('/movie/info', require('./routes/movie_info'));
 // var MovieDB = require('node-moviedb');
 //
 //

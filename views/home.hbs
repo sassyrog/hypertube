@@ -39,54 +39,94 @@
 </div>
 
 <div class="containers">
+	<div class="gala">
+
+	</div>
+</div>
+<div class="movie-desc">
+	<div class="box">
+		<div class="cancel">
+			<img style="width:100%;height:100%" src="/images/cancel.svg" id="cancel">
+		</div>
+	</div>
+	<p>ddfdf</p>
 
 </div>
+
+
+
 </script>
 <!--container-->
 
 <script>
-	$('document').ready(function() {
+	function makeMovieCall() {
+		var data = {};
+		$.ajax({
+			type: 'POST',
+			data: JSON.stringify(data),
+			contentType: 'application/json',
+			url: '/movie/default',
+			success: function(res) {
+				// console.log(res);
+				$('.gala').html(res);
+			}
+		});
+	}
 
-		// var data = {};
-		// data.search = 'sssss'
-		//
-		// $.ajax({
-		// 	type: 'POST',
-		// 	data: JSON.stringify(data),
-		// 	contentType: 'application/json',
-		// 	url: '/movie/default',
-		// 	success: function(res) {
-		// 		// console.log(res);
-		// 		// $('.containers').html(res);
-		// 		// var source = $("#image-template").html();
-		// 		// var template = Handlebars.compile(source);
-		// 		// var html = template(res);
-		// 		// $('.containers').innerHTML = res;
-		// 		// console.log(html);
-		// 		// window.location = '/home'
-		// 	}
-		// });
+	function func(e) {
+		var year = $(e).find($('.year')).html(),
+			title = $(e).find($('.movie-title')).html();
+		var data = {};
+		data.title = title;
+
+		var data;
+		$.ajax({
+			type: 'POST',
+			data: JSON.stringify(data),
+			contentType: 'application/json',
+			url: '/movie/info',
+			success: function(res) {
+				console.log(res);
+				$('.box').css({
+					'background-image': 'url("https://image.tmdb.org/t/p/w500' + res.backdrop_path + '")'
+				})
+			}
+		});
+
+		// console.log(data);
+		$('.movie-desc').css({
+			'width': '70vw',
+			'height': '800px'
+		});
+	}
+
+	$('document').ready(function() {
+		makeMovieCall();
+
+		$('#cancel').on('click', function() {
+			$('.movie-desc').css({
+				'width': '0',
+				'height': '0'
+			});
+		})
 
 		document.getElementById("search").addEventListener("input", function() {
-			var data = {};
-			data.search = $('#search').val();
-
-			$.ajax({
-				type: 'POST',
-				data: JSON.stringify(data),
-				contentType: 'application/json',
-				url: '/movie/search',
-				success: function(res) {
-					console.log(res);
-					$('.containers').html(res);
-					// var source = $("#image-template").html();
-					// var template = Handlebars.compile(source);
-					// var html = template(res);
-					// $('.containers').innerHTML = res;
-					// console.log(html);
-					// window.location = '/home'
-				}
-			});
+			if ($('#search').val() === '') {
+				makeMovieCall();
+			} else {
+				var data = {};
+				data.search = $('#search').val();
+				$.ajax({
+					type: 'POST',
+					data: JSON.stringify(data),
+					contentType: 'application/json',
+					url: '/movie/search',
+					success: function(res) {
+						// console.log(res);
+						$('.gala').html(res);
+					}
+				});
+			}
 		});
 	});
 </script>
