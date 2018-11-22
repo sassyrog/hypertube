@@ -59,50 +59,6 @@
 <!--container-->
 
 <script>
-<<<<<<< HEAD
-	$('document').ready(function() {
-
-		// var data = {};
-		// data.search = 'sssss'
-		//
-		// $.ajax({
-		// 	type: 'POST',
-		// 	data: JSON.stringify(data),
-		// 	contentType: 'application/json',
-		// 	url: '/movie/default',
-		// 	success: function(res) {
-		// 		// console.log(res);
-		// 		// $('.containers').html(res);
-		// 		// var source = $("#image-template").html();
-		// 		// var template = Handlebars.compile(source);
-		// 		// var html = template(res);
-		// 		// $('.containers').innerHTML = res;
-		// 		// console.log(html);
-		// 		// window.location = '/home'
-		// 	}
-		// });
-
-		document.getElementById("search").addEventListener("input", function() {
-			var data = {};
-			data.search = $('#search').val();
-
-			$.ajax({
-				type: 'POST',
-				data: JSON.stringify(data),
-				contentType: 'application/json',
-				url: '/movie/search',
-				success: function(res) {
-					console.log(res);
-					$('.containers').html(res);
-					// var source = $("#image-template").html();
-					// var template = Handlebars.compile(source);
-					// var html = template(res);
-					// $('.containers').innerHTML = res;
-					// console.log(html);
-					// window.location = '/home'
-				}
-			});
-=======
 	function makeMovieCall() {
 		var data = {};
 		$.ajax({
@@ -171,7 +127,6 @@
 					}
 				});
 			}
->>>>>>> 4e7a52e99fbcd34fb289721e1e50c3c380d59ba4
 		});
 	});
 </script>
