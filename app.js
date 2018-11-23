@@ -19,13 +19,11 @@ const mongooseValidator = require('mongoose-unique-validator');
 const bcrypt = require('bcrypt');
 const md5 = require('md5');
 const uuid = require('shortid');
-
 var chalk = require('chalk');
+
 const mdb = require('moviedb')('5d54c4f8fe9a065d6ed438ef09982650');
 
-mongoose.connect(config.database, {
-    useMongoClient: true
-});
+mongoose.connect(config.database);
 let db = mongoose.connection;
 
 // Check connection
@@ -117,7 +115,6 @@ app.get('/auth/42/callback',
         failureRedirect: '/login'
     }),
     function(req, res) {
-        // Successful authentication, redirect home.
         res.redirect('/home');
     });
 
@@ -127,59 +124,6 @@ app.use('/movie', searchRouter);
 
 
 app.use('/movie/info', require('./routes/movie_info'));
-// var MovieDB = require('node-moviedb');
-//
-//
-// MovieDB.search('Prison Break', {}, (err, response) => {
-//     if (err) console.log(err);
-//     console.log(response);
-// });
-// // var magnet = require('magnet-scraper');
-// //
-//
-// var opts = {
-//     url: "https://pirateproxy.red/",
-//     page: 2, // note: start in 0.
-//     cat: 200 // Audio = 100, Video = 200, Apps = 300, Games = 400, Porn = 500
-// }
-// magnet.search("johnny english", opts, function(err, res) {
-//     console.log(res);
-// });
-
-
-
-
-
-
-
-//
-
-
-
-
-
-
-// const PirateBay = require('thepiratebay')
-//
-// app.get('/search', (req, res) => {
-//     PirateBay.search('Fantastic Beasts', {
-//             category: 207
-//         })
-//         .then(results => console.log(results))
-//         .catch(err => console.log(err))
-//     res.render('search')
-// })
-
-
-
-// const MytsApi = require('myts-api').API;
-// const myts = new MytsApi();
-// // var query = require('yify-search');
-// // console.log(query);
-// var query = require('yify-query')
-// query('The Imitation Game (2014)', (error, result) => {
-//     console.log(result);
-// });
 
 app.get('*', function(req, res, next) {
     res.locals.user = req.user || null;

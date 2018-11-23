@@ -11,7 +11,7 @@
 	<div class="collapse navbar-collapse" id="navbarNav">
 		<ul class="navbar-nav">
 			<li class="nav-item active">
-				<a class="nav-link" href="#">home<span class="sr-only">(current)</span></a>
+				<a class="nav-link" href="/">home<span class="sr-only">(current)</span></a>
 			</li>
 		</ul>
 		<ul class="navbar-nav">
@@ -90,20 +90,26 @@
 				$('.box').css({
 					'background-image': 'url("https://image.tmdb.org/t/p/w500' + res.backdrop_path + '")'
 				})
+				$('.movie-desc').css({
+					'display': 'block',
+				});
+				$('.movie-desc').css({
+					'width': '70vw',
+					'height': '800px'
+				});
 			}
 		});
 
 		// console.log(data);
-		$('.movie-desc').css({
-			'width': '70vw',
-			'height': '800px'
-		});
 	}
 
 	$('document').ready(function() {
 		makeMovieCall();
 
 		$('#cancel').on('click', function() {
+			$('.movie-desc').css({
+				'display': 'none',
+			});
 			$('.movie-desc').css({
 				'width': '0',
 				'height': '0'
