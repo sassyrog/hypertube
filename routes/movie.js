@@ -8,7 +8,6 @@ router.post('/default', (req, response) => {
     mdb.miscPopularMovies({}, (err, res) => {
         if (res.results.length != 0) {
             for (i = 0; i < res.results.length; i++) {
-                // var pic = res.results[i]._path
                 if (res.results[i].poster_path === null)
                     continue;
                 gg = gg +
