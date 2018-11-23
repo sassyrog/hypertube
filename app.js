@@ -12,6 +12,7 @@ var bodyParser = require('body-parser');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var videoRouter = require('./routes/video');
 
 const config = require('./config/database');
 
@@ -85,7 +86,7 @@ require('./config/passport')(passport);
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
+app.use('/video', videoRouter);
 
 app.get('/auth/github/callback',
     passport.authenticate('github', {
@@ -121,6 +122,8 @@ app.get('/auth/42/callback',
 
 var searchRouter = require('./routes/movie');
 app.use('/movie', searchRouter);
+
+app.use('/movie/info',  require('./routes/movie_info'));
 
 
 app.use('/movie/info', require('./routes/movie_info'));
