@@ -1,0 +1,14 @@
+.avatar {
+    vertical-align: middle;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.form-control:disabled, .form-control:disabled, .form-control:disabled {
+    background-color: #FFC773;
+}
+
+#submit {
+    background-color: forestgreen;
+}

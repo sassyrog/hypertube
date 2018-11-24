@@ -4,9 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
-var passport = require('passport');
 var flash = require('connect-flash');
 var session = require('express-session');
+var passport = require('passport');
 const expressValidator = require('express-validator');
 var bodyParser = require('body-parser');
 
@@ -24,7 +24,9 @@ var chalk = require('chalk');
 
 const mdb = require('moviedb')('5d54c4f8fe9a065d6ed438ef09982650');
 
-mongoose.connect(config.database);
+mongoose.connect(config.database, {
+    useNewUrlParser: true
+});
 let db = mongoose.connection;
 
 // Check connection
@@ -49,14 +51,17 @@ app.use(express.urlencoded({
     extended: false
 }));
 
-app.use(passport.initialize());
-app.use(passport.session());
+
+app.enable('trust proxy');
 
 app.use(session({
     secret: 'keyboard cat',
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    proxy: true
 }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(flash());
 
@@ -70,7 +75,23 @@ app.use(function(req, res, next) {
     next();
 });
 
-// Express Validator Mid
+// var torrentStream = require('torrent-stream');
+//
+// var engine = torrentStream('magnet:?xt=urn:btih:966D30A8BBC61A1FB50842CAB6983B17ECA2CF9A&dn=Big%20Hero%206%20(2014)&tr=udp://open.demonii.com:1337&tr=udp://tracker.istole.it:80&tr=http://tracker.yify-torrents.com/announce&tr=udp://tracker.publicbt.com:80&tr=udp://tracker.openbittorrent.com:80&tr=udp://tracker.coppersurfer.tk:6969&tr=udp://exodus.desync.com:6969&tr=http://exodus.desync.com:6969/announce');
+//
+// engine.on('ready', function() {
+//     engine.files.forEach(function(file) {
+//         console.log('filename:', file.name);
+//         var stream = file.createReadStream();
+//         // stream is readable stream to containing the file content
+//     });
+// });
+
+// const query = require('yify-search');
+//
+// query.search('big hero 6', (error, result) => {
+//     console.log(result);
+// })
 
 
 app.use(bodyParser.urlencoded({
@@ -81,12 +102,16 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(expressValidator())
-require('./config/passport')(passport);
+app.use(expressValidator()), require('./config/passport')(passport);
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/video', videoRouter);
+
+
+
+
+
 
 app.get('/auth/github/callback',
     passport.authenticate('github', {
@@ -120,18 +145,25 @@ app.get('/auth/42/callback',
     });
 
 
+
+
 var searchRouter = require('./routes/movie');
 app.use('/movie', searchRouter);
 
-app.use('/movie/info',  require('./routes/movie_info'));
+app.use('/movie/info', require('./routes/movie_info'));
 
 
 app.use('/movie/info', require('./routes/movie_info'));
+
+app.use('/user/update', require('./routes/update'));
+
 
 app.get('*', function(req, res, next) {
     res.locals.user = req.user || null;
     next();
 });
+
+
 
 
 // catch 404 and forward to error handler

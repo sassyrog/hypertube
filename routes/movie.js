@@ -54,7 +54,6 @@ router.post('/default', (req, response) => {
                     '</div>';
             }
         }
-        console.log('body: ' + JSON.stringify(req.body));
         response.send(gg);
     })
 })
