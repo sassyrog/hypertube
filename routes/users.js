@@ -96,14 +96,17 @@ router.get('/login', function(req, res) {
 });
 
 // Login Process
-router.post('/login', function(req, res, next) {
+router.post('/login',
     passport.authenticate('local', {
-        successRedirect: '/home',
         failureRedirect: '/users/login',
         failureFlash: true
-    })(req, res, next);
-});
-
+    }),
+    function(req, res) {
+        req.session.save(() => {
+            res.redirect('/home');
+        })
+    }
+);
 
 // router.get('/auth/github/callback',
 //     passport.authenticate('github', {

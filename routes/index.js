@@ -1,9 +1,18 @@
 var express = require('express');
 var router = express.Router();
-
+var session = require('express-session');
 const passport = require('passport');
 
 //route handlers
+
+function loggedIn(req, res, next) {
+    if (req.user) {
+        next();
+    } else {
+        res.redirect('/login');
+    }
+}
+
 
 router.get('/', function(req, res, next) {
     res.render('index', {
@@ -11,12 +20,39 @@ router.get('/', function(req, res, next) {
     });
 });
 
+router.get('/profile/update', (req, res) => {
+    res.render('profile_update', {
+        // firstname: req.user.firstname,
+        // lastname: req.user.lastname,
+        // username: req.user.username,
+        // email: req.user.email
+    });
+})
+
+router.get('/video', function(req, res) {
+    res.render('video');
+});
+
 router.get('/login', function(req, res) {
     res.render('login');
 });
 
 router.get('/home', function(req, res) {
+    // console.log(req.user);
     res.render('home');
+});
+
+router.get('/test', function(req, res) {
+    // console.log(req.user);
+    res.render('test');
+});
+
+
+
+router.get('/logout', function(req, res) {
+    req.session.destroy(function(err) {
+        res.redirect('/');
+    });
 });
 
 router.get('/register', function(req, res) {

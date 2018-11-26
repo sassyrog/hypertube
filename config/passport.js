@@ -6,6 +6,8 @@ const GitHubStrategy = require('passport-github2').Strategy;
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const FortyTwoStrategy = require('passport-42').Strategy;
+var session = require('express-session');
+
 
 
 module.exports = function(passport) {
