@@ -45,6 +45,7 @@
     "thepiratebay": "^1.4.7",
     "torrent-scraper": "0.0.5",
     "torrent-search-api": "^2.0.3",
+    "torrent-stream": "^1.1.0",
     "tpb-search": "0.0.1",
     "xtorrent": "^0.2.3",
     "yify-query": "^2.0.3",
