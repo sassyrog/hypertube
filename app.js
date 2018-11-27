@@ -9,11 +9,9 @@ var session = require('express-session');
 var passport = require('passport');
 const expressValidator = require('express-validator');
 var bodyParser = require('body-parser');
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var videoRouter = require('./routes/video');
-
 const config = require('./config/database');
 
 const mongooseValidator = require('mongoose-unique-validator');
@@ -21,7 +19,6 @@ const bcrypt = require('bcrypt');
 const md5 = require('md5');
 const uuid = require('shortid');
 var chalk = require('chalk');
-
 const mdb = require('moviedb')('5d54c4f8fe9a065d6ed438ef09982650');
 
 mongoose.connect(config.database, {
@@ -50,7 +47,6 @@ app.use(express.json());
 app.use(express.urlencoded({
     extended: false
 }));
-
 
 app.enable('trust proxy');
 
@@ -107,11 +103,6 @@ app.use(expressValidator()), require('./config/passport')(passport);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/video', videoRouter);
-
-
-
-
-
 
 app.get('/auth/github/callback',
     passport.authenticate('github', {

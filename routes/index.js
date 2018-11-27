@@ -5,6 +5,10 @@ const passport = require('passport');
 
 //route handlers
 
+// router.get('/video', function(req, res) {
+//     res.render('video');
+// });
+
 function loggedIn(req, res, next) {
     if (req.user) {
         next();
@@ -28,10 +32,6 @@ router.get('/profile/update', (req, res) => {
         // email: req.user.email
     });
 })
-
-router.get('/video', function(req, res) {
-    res.render('video');
-});
 
 router.get('/login', function(req, res) {
     res.render('login');
