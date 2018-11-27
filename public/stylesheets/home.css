@@ -35,7 +35,8 @@ body {
     margin: auto;
 }
 
-.fa-spinner, .fa-spin {
+.fa-spinner,
+.fa-spin {
     color: #ff9900;
     font-size: 100% !important;
 }
@@ -90,7 +91,8 @@ body {
     padding-left: 1.5rem;
 }
 
-.fa, .fas {
+.fa,
+.fas {
     font-size: 25px;
 }
 
@@ -207,7 +209,6 @@ h1 {
     background-size: 100%;
     background-repeat: no-repeat;
     clip-path: polygon(-34% 0%, 101% 0%, 100% 90%);
-    border-bottom: 2px solid black;
 }
 
 .box:hover {
@@ -300,7 +301,12 @@ ul {
     list-style-type: none;
 }
 
-h1, h2, h3, h4, h5, p {
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
     font-weight: 400;
 }
 
@@ -432,7 +438,8 @@ a:hover {
     height: 20px;
 }
 
-.movie-content-header, .movie-info {
+.movie-content-header,
+.movie-info {
     display: table;
     width: 100%;
 }
