@@ -85,6 +85,11 @@ body i {
     background-color: #FF9900;
 }
 
+.containers {
+    position: relative;
+    z-index: 0;
+}
+
 .collapse {
     background-color: #ff9900;
 }
@@ -130,8 +135,7 @@ a:hover {
     color: #6ABCEA;
 }
 
-.containers {
-    /* background-color: yellow; */
+.gala {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -143,6 +147,7 @@ a:hover {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
+    padding-top: 100px;
 }
 
 .movie-card {
@@ -161,7 +166,7 @@ a:hover {
     border: 1px solid #FF9900;
     padding: 0;
     margin: 0;
-    height: 367px;
+    height: 450px;
     width: 100%;
     display: block;
     border-top-left-radius: 10px;
@@ -170,6 +175,19 @@ a:hover {
 
 .header-icon-container {
     position: relative;
+}
+
+.player {
+    width: 100%;
+    height: 900px;
+}
+
+#videoPlayer {
+    width: 900px;
+    height: 600px;
+    align-content: center;
+    text-align: center;
+    border: 5px solid #FF9900;
 }
 
 .header-icon {
@@ -203,6 +221,10 @@ a:hover {
 .movie-content {
     padding: 18px 18px 24px 18px;
     margin: 0;
+}
+
+.container {
+    z-index: 0;
 }
 
 .movie-content-header, .movie-info {
@@ -259,6 +281,10 @@ a:hover {
 }
 
 @media screen and (max-width: 500px) {
+    .movie-desc {
+        width: 100%;
+    }
+
     .movie-card {
         width: 95%;
         max-width: 95%;

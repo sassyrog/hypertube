@@ -6,6 +6,8 @@ const GitHubStrategy = require('passport-github2').Strategy;
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const FortyTwoStrategy = require('passport-42').Strategy;
+var session = require('express-session');
+
 
 
 module.exports = function(passport) {
@@ -89,11 +91,11 @@ module.exports = function(passport) {
     ));
 
     passport.serializeUser(function(user, done) {
-        done(null, user.id);
+        console.log(user);
+        done(null, user);
     });
-    passport.deserializeUser(function(id, done) {
-        User.findById(id, function(err, user) {
-            done(err, user);
-        });
+
+    passport.deserializeUser(function(user, done) {
+        done(null, user);
     });
 }
