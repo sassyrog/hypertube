@@ -1,5 +1,4 @@
 <!-- Font Awesome -->
-<xmlns="http://www.w3.org/1999/xhtml"></xmlns>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://twitter.github.io/typeahead.js/js/handlebars.js"></script>
 <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
@@ -33,7 +32,7 @@
 			<div class="row">
 				<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
 					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Search" id="search" name="search" autofocus {{#if search}} value="{{search}}" {{/if}} />
+						<input type="text" class="form-control" placeholder="Search" id="search" name="search"  {{#if search}} value="{{search}}" {{/if}} />
 						<div class="input-group-btn">
 							<button class="btn btn-primary" type="submit">
 								<i class="fab fa-search"></i>
@@ -45,7 +44,7 @@
 		</form>
 	</div>
 </div>
-
+<div id="body">
 <div class="containers">
 	<div class="gala">
 	</div>
@@ -61,6 +60,7 @@
 	</div>
 	<p></p>
 </div>
+</div>
 <div class='player'>
 	<center>
 		<video id="videoPlayer" controls>
@@ -69,7 +69,6 @@
 		</video>
 	</center>
 </div>
-
 <script>
 	function makeMovieCall() {
 		var data = {};
@@ -113,6 +112,20 @@
 
 		// console.log(data);
 	}
+
+	$('.play').on('click', function() {
+		$('.player').css({
+			'display': 'block',
+		});
+
+		$('#body').css({
+			'display': 'none',
+		});
+		$('.container').css({
+			'display': 'none',
+		});
+		console.log('yeah');
+	})
 
 	$('document').ready(function() {
 		makeMovieCall();
