@@ -108,7 +108,9 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/video', videoRouter);
 
-
+// app.get('/video', function(req, res) {
+//     res.render('video');
+// });
 
 
 
