@@ -26,9 +26,6 @@ body {
     margin: auto;
     width: 60%;
     height: auto;
-    z-index: 3;
-    align-content: center;
-    text-align: center;
     border: 2px solid #FF9900;
 }
 
