@@ -22,6 +22,16 @@ const md5 = require('md5');
 const uuid = require('shortid');
 var chalk = require('chalk');
 
+
+
+var torrentStream = require('torrent-stream');
+
+
+
+
+
+
+
 const mdb = require('moviedb')('5d54c4f8fe9a065d6ed438ef09982650');
 
 mongoose.connect(config.database, {
@@ -86,10 +96,10 @@ app.use(function(req, res, next) {
 //         // stream is readable stream to containing the file content
 //     });
 // });
-
+//
 // const query = require('yify-search');
 //
-// query.search('big hero 6', (error, result) => {
+// query.search('fast and furious', (error, result) => {
 //     console.log(result);
 // })
 

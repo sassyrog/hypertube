@@ -1,15 +1,15 @@
 const express = require('express');
 const fs = require('fs');
+var torrentStream = require('torrent-stream');
 const path = require('path');
 const app = express();
 
-var i = 0;
+
 app.get('/', function(req, res) {
     const path = 'assets/mlky_6.mp4'
     const stat = fs.statSync(path)
     const fileSize = stat.size
     const range = req.headers.range
-
     if (range) {
 
         const parts = range.replace(/bytes=/, "").split("-")
@@ -30,12 +30,9 @@ app.get('/', function(req, res) {
         }
         res.writeHead(206, head)
         file.pipe(res)
-        console.log(res.headersSent);
-        console.log('------->  ' + i++);
+    } else {
+        res.render('video');
     }
-    res.render('video');
-    // res.end();
-    // return;
 })
 
 module.exports = app;
