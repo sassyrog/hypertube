@@ -17,17 +17,22 @@ body {
     transition: 600ms;
     width: 0;
     height: 0;
-    /* width: 70vw;
-    height: 800px; */
     background: #FFAB2E;
-    /* background: linear-gradient(to bottom left, rgba(255, 255, 255, .8), #FFAB2E); */
     position: fixed;
-    top: 200px;
+    top: 20px;
     right: 0;
     left: 0;
     margin: auto;
     border-radius: 10px;
+    z-index: 2;
     display: none;
+    /* background: linear-gradient(to bottom left, rgba(255, 255, 255, .8), #FFAB2E); */
+    /* width: 70vw;
+    height: 800px; */
+}
+
+.row {
+    padding-top: 8px;
 }
 
 .cancel {
@@ -37,6 +42,7 @@ body {
     margin-top: 1vw;
     width: 4vw;
     height: 4vw;
+    z-index: 2;
     /* background-color: tomato; */
 }
 
@@ -46,12 +52,13 @@ body {
 .play {
     /* position: absolute; */
     float: right;
-    bottom: 30px;
-    margin-right: 10vw;
+    bottom: 0px;
+    margin-right: 1vw;
     margin-top: 1vw;
-    width: 4vw;
-    height: 4vw;
+    width: 1vw;
+    height: 1vw;
     transform: scale(2);
+    z-index: 2;
     /* background-color: tomato; */
 }
 
@@ -106,7 +113,7 @@ body i {
 }
 
 .btn:hover {
-    background: black;
+    background: rgba(0, 0, 0, 0.507);
     border: 2px solid #ff9900;
 }
 
@@ -226,6 +233,7 @@ a:hover {
 
 .container {
     z-index: 0;
+    color: rgba(0, 0, 0, 0.507);
 }
 
 .movie-content-header, .movie-info {
