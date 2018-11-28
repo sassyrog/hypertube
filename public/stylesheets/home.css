@@ -2,6 +2,79 @@ body {
     background-color: black;
 }
 
+.dslc-content i.fa {
+    font-style: normal;
+}
+
+/* .div-info {
+    background-color: springgreen;
+    width: 70%;
+    height: 50vw;
+    margin: 0 auto;
+} */
+.movie-desc {
+    -webkit-transition: 600ms;
+    transition: 600ms;
+    width: 0;
+    height: 0;
+    /* width: 70vw;
+    height: 800px; */
+    background: #FFAB2E;
+    /* background: linear-gradient(to bottom left, rgba(255, 255, 255, .8), #FFAB2E); */
+    position: fixed;
+    top: 20px;
+    right: 0;
+    left: 0;
+    margin: auto;
+    border-radius: 10px;
+    display: none;
+}
+
+.cancel {
+    /* position: absolute; */
+    float: right;
+    margin-right: 1vw;
+    margin-top: 1vw;
+    width: 4vw;
+    height: 4vw;
+    /* background-color: tomato; */
+}
+
+.cancel:hover {
+    transform: scale(1.2);
+}
+.play {
+    /* position: absolute; */
+    float: right;
+    bottom: 30px;
+    margin-right: 10vw;
+    margin-top: 1vw;
+    width: 4vw;
+    height: 4vw;
+    transform: scale(2);
+    /* background-color: tomato; */
+}
+
+.play:hover {
+    transform: scale(2.2);
+}
+
+.box {
+    z-index: 1;
+    border-radius: 10px;
+    width: 100%;
+    height: 65%;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    clip-path: polygon(-34% 0%, 101% 0%, 100% 90%);
+    /* filter: blur(8px);
+    -webkit-filter: blur(8px); */
+}
+
+.box:hover {
+    clip-path: polygon(-100000px 0%, 101% 0%, 100% 90%);
+}
+
 body i {
     font-family: 'FontAwesome' !important;
 }
