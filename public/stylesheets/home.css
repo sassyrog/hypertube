@@ -6,20 +6,15 @@ body {
     font-style: normal;
 }
 
-/* .div-info {
-    background-color: springgreen;
-    width: 70%;
-    height: 50vw;
-    margin: 0 auto;
-} */
 .movie-desc {
     -webkit-transition: 600ms;
     transition: 600ms;
     width: 0;
-    height: 0;
+    height: 20vw;
     background: #FFAB2E;
     position: fixed;
-    top: 20px;
+    top: 100px;
+    padding-bottom: 5vw;
     right: 0;
     left: 0;
     margin: auto;
@@ -45,25 +40,27 @@ body {
     z-index: 2;
     /* background-color: tomato; */
 }
-
 .cancel:hover {
     transform: scale(1.2);
 }
+
 .play {
     /* position: absolute; */
-    float: right;
     bottom: 0px;
-    margin-right: 1vw;
-    margin-top: 1vw;
+    margin-left: 60vw;
+    margin-top: 10vw;
     width: 1vw;
     height: 1vw;
-    transform: scale(2);
-    z-index: 2;
+    transform: scale(5);
+    background: #FFAB2E;
+    border-radius: 50%;
+    /* z-index: 2; */
     /* background-color: tomato; */
 }
-
 .play:hover {
-    transform: scale(2.2);
+    transform: scale(5.2);
+    background: white;
+    transition: all .5s;
 }
 
 .box {
