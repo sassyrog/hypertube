@@ -4,7 +4,6 @@ var torrentStream = require('torrent-stream');
 const path = require('path');
 const app = express();
 
-
 app.get('/', function(req, res) {
 	const path = 'assets/mlky_6.mp4'
 	const stat = fs.statSync(path)
