@@ -55,6 +55,9 @@
 			<img style="width:100%;height:100%" src="/images/cancel.svg" id="cancel">
 		</div>
 	</div>
+	<div class="play_btn">
+		<img src="/images/play_btn.svg" id="start_play">
+	</div>
 	<p></p>
 </div>
 
@@ -93,9 +96,15 @@
 				$('.movie-desc').css({
 					'display': 'block',
 				});
+				$('.container').css({
+					'display': 'none',
+				});
+				$('.head').css({
+					'height': '100%'
+				});
 				$('.movie-desc').css({
 					'width': '70vw',
-					'height': '800px'
+					'height': 'auto' ,
 				});
 			}
 		});
@@ -109,6 +118,12 @@
 		$('#cancel').on('click', function() {
 			$('.movie-desc').css({
 				'display': 'none',
+			});
+			$('.container').css({
+				'display': 'block',
+			});
+			$('.head').css({
+				'height': '106px',
 			});
 			$('.movie-desc').css({
 				'width': '0',
