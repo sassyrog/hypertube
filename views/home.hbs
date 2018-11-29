@@ -1,15 +1,16 @@
 <!-- Font Awesome -->
-<xmlns="http://www.w3.org/1999/xhtml"></xmlns>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://twitter.github.io/typeahead.js/js/handlebars.js"></script>
 <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
 <link rel="stylesheet" href="/stylesheets/home.css">
 <div class="head">
 	<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-		<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+		<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav"
+		 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		<a class="navbar-brand" href="/home"><img src="/images/logo.png" width="30" height="30" class="d-inline-block align-top" alt=""></a>
+		<a class="navbar-brand" href="/home"><img src="/images/logo.png" width="30" height="30" class="d-inline-block align-top"
+			 alt=""></a>
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav">
 				<li class="nav-item active">
@@ -33,7 +34,8 @@
 			<div class="row">
 				<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
 					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Search" id="search" name="search" autofocus {{#if search}} value="{{search}}" {{/if}} />
+						<input type="text" class="form-control" placeholder="Search" id="search" name="search" autofocus {{#if search}}
+						 value="{{search}}" {{/if}} />
 						<div class="input-group-btn">
 							<button class="btn btn-primary" type="submit">
 								<i class="fab fa-search"></i>
@@ -67,9 +69,11 @@
 			<img style="width:100%;height:100%" src="/images/cancel.svg" id="cancel">
 		</div>
 	</div>
-	<div class="play_btn">
-		<img src="/images/play_btn.svg" id="start_play">
-	</div>
+	<a class="movie_link" href="">
+		<div class="play_btn">
+			<img src="/images/play_btn.svg" id="start_play">
+		</div>
+	</a>
 	<div class="vid_desc">
 		<h1></h1>
 		<p class="overview"></p>
@@ -85,7 +89,7 @@
 			data: JSON.stringify(data),
 			contentType: 'application/json',
 			url: '/movie/default',
-			success: function(res) {
+			success: function (res) {
 				// console.log(res);
 				$('.gala').html(res);
 			}
@@ -104,7 +108,7 @@
 			data: JSON.stringify(data),
 			contentType: 'application/json',
 			url: '/movie/info',
-			success: function(res) {
+			success: function (res) {
 				console.log(res);
 
 				$('.box').css({
@@ -121,26 +125,32 @@
 				});
 				$('.movie-desc').css({
 					'width': '70vw',
-					'height': 'auto' ,
+					'height': 'auto',
 				});
 				$('.overview').html(res.overview);
 				$('.vid_desc').find('h1').html(res.title);
+
+				var url = 'title=' + res.title +
+					'&desc=' + res.overview +
+					'&year=' + res.release_date.substring(0, 4);
+
+				var newUrl = Base64.encode(url);
+
+
+				$('.movie_link').attr('href', '/video?' + newUrl);
 			}
 		});
 
-		// console.log(data);
 	}
 
-	
-	$('#start_play').on('click', function() {
-			$(location).attr('href', '/video')
-		});
-	
 
-	$('document').ready(function() {
+
+
+
+	$('document').ready(function () {
 		makeMovieCall();
 
-		$('#cancel').on('click', function() {
+		$('#cancel').on('click', function () {
 			$('.movie-desc').css({
 				'display': 'none',
 			});
@@ -156,7 +166,9 @@
 			});
 		})
 
-		document.getElementById("search").addEventListener("input", function() {
+
+
+		document.getElementById("search").addEventListener("input", function () {
 			if ($('#search').val() === '') {
 				makeMovieCall();
 			} else {
@@ -167,7 +179,7 @@
 					data: JSON.stringify(data),
 					contentType: 'application/json',
 					url: '/movie/search',
-					success: function(res) {
+					success: function (res) {
 						// console.log(res);
 						$('.gala').html(res);
 					}
@@ -175,4 +187,5 @@
 			}
 		});
 	});
+
 </script>
