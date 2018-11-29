@@ -208,8 +208,24 @@ a:hover {
     margin: 0;
 }
 
+.head {
+    position: fixed;
+    width:100%;
+    margin-bottom: 10px;
+    background-color:rgba(0, 0, 0, 0.507);
+    z-index:2;
+    height: 106px;
+}
+
 .container {
-    z-index: 0;
+    height: 0px;
+    top: 6px;
+    right: 0;
+    left: 0;
+}
+
+#search_form {
+    height: 20px;
 }
 
 .movie-content-header, .movie-info {
