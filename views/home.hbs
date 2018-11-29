@@ -50,7 +50,7 @@
 	<div class="gala">
 	</div>
 </div>
-<div class="movie-desc">
+{{!-- <div class="movie-desc">
 	<div class="box">
 		<div class="cancel">
 			<img style="width:100%;height:100%" src="/images/cancel.svg" id="cancel">
@@ -60,7 +60,7 @@
 		<img style="width:100%;height:100%" src="/images/play-circle-regular.svg" id="play">
 	</div>
 	<p></p>
-</div>
+</div> --}}
 <div class="movie-desc">
 	<div class="box">
 		<div class="cancel">
@@ -70,7 +70,10 @@
 	<div class="play_btn">
 		<img src="/images/play_btn.svg" id="start_play">
 	</div>
-	<p></p>
+	<div class="vid_desc">
+		<h1></h1>
+		<p class="overview"></p>
+	</div>
 </div>
 
 
@@ -102,6 +105,8 @@
 			contentType: 'application/json',
 			url: '/movie/info',
 			success: function(res) {
+				console.log(res);
+
 				$('.box').css({
 					'background-image': 'url("https://image.tmdb.org/t/p/w500' + res.backdrop_path + '")'
 				})
@@ -118,11 +123,19 @@
 					'width': '70vw',
 					'height': 'auto' ,
 				});
+				$('.overview').html(res.overview);
+				$('.vid_desc').find('h1').html(res.title);
 			}
 		});
 
 		// console.log(data);
 	}
+
+	
+	$('#start_play').on('click', function() {
+			$(location).attr('href', '/video')
+		});
+	
 
 	$('document').ready(function() {
 		makeMovieCall();

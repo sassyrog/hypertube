@@ -6,6 +6,28 @@ body {
 	font-style: normal;
 }
 
+h1 {
+	font-weight: bold;
+	font-size: 50px;
+}
+
+.vid_desc {
+    /* color: white; */
+	/* top: 3vw;
+	bottom: 187px; */
+    /* color: white; */
+	top: -12px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	position: relative;
+	align-self: center;
+	/* text-align: center; */
+	/* width: 61%; */
+	margin-left: 1vw;
+	margin-right: 12vw;
+}
+
 .play_btn {
 	float: right;
 	margin-right: 3.2vw;
