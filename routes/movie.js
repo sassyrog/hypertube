@@ -14,9 +14,6 @@ router.post('/default', (req, response) => {
                     '<div class="movie-card" onclick="func(this)">\n' +
                     '<div class="movie-header" style="background-image: url(\'https://image.tmdb.org/t/p/w500' + res.results[i].poster_path + '\')">\n' +
                     '<div class="header-icon-container">\n' +
-                    '<a href="#">' +
-                    '<i class="material-icons header-icon"><span class="fas fa-play"></span></i>' +
-                    '</a>' +
                     '</div>' +
                     '</div>' +
                     '<!--movie-header-->' +
