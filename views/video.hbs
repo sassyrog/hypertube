@@ -20,7 +20,7 @@
 </nav>
 <div class="main">
 	<div class='player'>
-		<video id="videoPlayer" class="video-js vjs-default-skin vjs-fill" controls preload="metadata" data-setup='{}'>
+		<video poster="" id="videoPlayer" class="video-js vjs-default-skin vjs-fill" controls preload="metadata">
 			<source src="http://localhost:8080/video" type="video/mp4">
 			Your browser does not support the video tag.
 		</video>
@@ -35,11 +35,17 @@
 <script>
 	var player = videojs('videoPlayer');
 
+
 	$('document').ready(function() {
 		var encodedUrl = document.location.search;
 
 		var decodedUrl = Base64.decode(encodedUrl);
 		var query = getQueryParams(decodedUrl);
+
+		console.log(query.poster)
+		player.poster('https://image.tmdb.org/t/p/w500' + query.poster);
+
+		//$('#videoPlayer_html5_api').attr('poster', 'https://image.tmdb.org/t/p/w500' + query.poster);
 		$('.vid_desc').find('h2').html(query.title);
 		$('.vid_desc').find('p').html(query.desc);
 		console.log(query);
