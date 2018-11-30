@@ -8,6 +8,17 @@ body {
 	background-color: #FF9900;
 }
 
+.vjs-big-play-button {
+	position: absolute !important;
+	top: 45% !important;
+	left: 45% !important;
+	border-color: #ff9900 !important;
+  }
+
+.vjs-icon-placeholder {
+	color: #ff9900 !important;
+}
+
 .containers {
 	position: relative;
 	z-index: 0;
@@ -81,5 +92,19 @@ body {
 
 	.player {
 		height: 185px;
+	}
+
+	.vjs-big-play-button {
+		border-radius: 2px !important;
+		width: 40px !important;
+		height: 25px !important;
+		border: 1px solid #FF9900;
+	}
+
+	.vjs-icon-placeholder {
+		position: absolute !important;
+		font-size: 15px !important;
+		top: -55% !important;
+		left: 30% !important;
 	}
 }
