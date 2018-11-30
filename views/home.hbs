@@ -28,9 +28,7 @@
 				</li>
 			</ul>
 			<ul class="navbar-nav">
-				<li class="nav-item active">
-					<a class="nav-link" href="/video">video<span class="sr-only">(current)</span></a>
-				</li>
+				<img src="/images/search.svg" id="search_btn">
 			</ul>
 		</div>
 	</nav>
@@ -39,13 +37,7 @@
 			<div class="row">
 				<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
 					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Search" id="search" name="search" autofocus {{#if search}}
-						 value="{{search}}" {{/if}} />
-						<div class="input-group-btn">
-							<button class="btn btn-primary" type="submit">
-								<i class="fab fa-search"></i>
-							</button>
-						</div>
+						<input type="text" class="form-control" placeholder="Search" id="search" name="search"/>
 					</div>
 				</div>
 			</div>
@@ -57,17 +49,6 @@
 	<div class="gala">
 	</div>
 </div>
-{{!-- <div class="movie-desc">
-	<div class="box">
-		<div class="cancel">
-			<img style="width:100%;height:100%" src="/images/cancel.svg" id="cancel">
-		</div>
-	</div>
-	<div class="play" onclick="myFunction()">
-		<img style="width:100%;height:100%" src="/images/play-circle-regular.svg" id="play">
-	</div>
-	<p></p>
-</div> --}}
 <div class="movie-desc">
 	<div class="box">
 		<div class="cancel">
@@ -136,9 +117,9 @@
 				$('.vid_desc').find('h1').html(res.title);
 
 				var url = 'title=' + res.title +
-					'&poster=' + res.backdrop_path +
-					'&desc=' + res.overview +
-					'&year=' + res.release_date.substring(0, 4);
+						'&poster=' + res.backdrop_path +
+						'&desc=' + res.overview +
+						'&year=' + res.release_date.substring(0, 4);
 
 				var newUrl = Base64.encode(url);
 
@@ -146,15 +127,17 @@
 				$('.movie_link').attr('href', '/video?' + newUrl);
 			}
 		});
-
 	}
-
-
-
-
 
 	$('document').ready(function () {
 		makeMovieCall();
+
+		$('#search_form').css({
+			'display': 'none',
+		});
+		$('.head').css({
+			'height': '0px',
+		});
 
 		$('#cancel').on('click', function () {
 			$('.movie-desc').css({
@@ -172,7 +155,14 @@
 			});
 		})
 
-
+		$('#search_btn').on('click', function () {
+			$('#search_form').css({
+				'display': 'block',
+			});
+			$('.head').css({
+				'height': '106px',
+			});
+		});
 
 		document.getElementById("search").addEventListener("input", function () {
 			if ($('#search').val() === '') {
