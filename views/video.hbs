@@ -34,6 +34,25 @@
 
 <script>
 	var player = videojs('videoPlayer');
+	var i = 0;
+
+//	Make full screnn border 0px;
+
+//	$('document').ready(function () {
+//		$('.vjs-fullscreen-control').on('click', function () {
+//			if (i == 0) {
+//				$('#videoPlayer').css({
+//					'border': '0px',
+//				});
+//				i = 1;
+//			} else {
+//				$('#videoPlayer').css({
+//					'border': '2px solid #ff9900',
+//				});
+//				i = 0;
+//			}
+//		});
+//	});
 
 
 	$('document').ready(function() {
@@ -45,7 +64,6 @@
 		console.log(query.poster)
 		player.poster('https://image.tmdb.org/t/p/w500' + query.poster);
 
-		//$('#videoPlayer_html5_api').attr('poster', 'https://image.tmdb.org/t/p/w500' + query.poster);
 		$('.vid_desc').find('h2').html(query.title);
 		$('.vid_desc').find('p').html(query.desc);
 		console.log(query);
