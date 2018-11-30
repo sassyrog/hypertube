@@ -1,15 +1,15 @@
 <title>yesus</title>
 <link rel="stylesheet" href="/stylesheets/video.css">
+<link href="https://vjs.zencdn.net/7.3.0/video-js.css" rel="stylesheet">
+<script src="https://vjs.zencdn.net/7.3.0/video.js"></script>
 <!-- Font Awesome -->
 <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
 <!-- <link rel="stylesheet" href="/stylesheets/home.css"> -->
 <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-	<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav"
-	 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
-	<a class="navbar-brand" href="#"><img src="/images/logo.png" width="30" height="30" class="d-inline-block align-top"
-		 alt=""></a>
+	<a class="navbar-brand" href="#"><img src="/images/logo.png" width="30" height="30" class="d-inline-block align-top" alt=""></a>
 	<div class="collapse navbar-collapse" id="navbarNav">
 		<ul class="navbar-nav">
 			<li class="nav-item active">
@@ -20,12 +20,10 @@
 </nav>
 <div class="main">
 	<div class='player'>
-		<center>
-			<video id="videoPlayer" controls>
-				<source src="http://localhost:8080/video" type="video/mp4">
-				Your browser does not support the video tag.
-			</video>
-		</center>
+		<video id="videoPlayer" class="video-js vjs-default-skin vjs-fill" controls preload="metadata" data-setup='{}'>
+			<source src="http://localhost:8080/video" type="video/mp4">
+			Your browser does not support the video tag.
+		</video>
 	</div>
 	<br>
 	<div class="vid_desc">
@@ -35,7 +33,9 @@
 </div>
 
 <script>
-	$('document').ready(function () {
+	var player = videojs('videoPlayer');
+
+	$('document').ready(function() {
 		var encodedUrl = document.location.search;
 
 		var decodedUrl = Base64.decode(encodedUrl);
@@ -44,5 +44,4 @@
 		$('.vid_desc').find('p').html(query.desc);
 		console.log(query);
 	})
-
 </script>
