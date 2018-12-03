@@ -3,6 +3,7 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 const mdb = require('moviedb')('5d54c4f8fe9a065d6ed438ef09982650');
 
+
 router.post('/default', (req, response) => {
 	var gg = '';
 	mdb.miscPopularMovies({}, (err, res) => {
