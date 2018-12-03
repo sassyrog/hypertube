@@ -2,6 +2,16 @@ body {
 	background-color: black;
 }
 
+#search_btn {
+	height: 35px;
+    margin-top: 5px;
+    margin-left: 9px;
+}
+
+#search_btn:hover {
+	transform: scale(1.2);
+}
+
 .dslc-content i.fa {
 	font-style: normal;
 }
@@ -187,7 +197,7 @@ a:hover {
 	-webkit-box-pack: center;
 	-ms-flex-pack: center;
 	justify-content: center;
-	padding-top: 100px;
+	padding-top: 73px;
 }
 
 .movie-card {
@@ -269,7 +279,6 @@ a:hover {
 	margin-bottom: 10px;
 	background-color:rgba(0, 0, 0, 0.507) ;
 	z-index:2;
-	height: 106px;
 	transition: 0s;
 }
 

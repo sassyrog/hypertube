@@ -1,68 +1,114 @@
-/* * {
-    transition: 0s;
-} */
 body {
-    background-color: black;
+	background-color: black;
+}
+
+* {
+	outline: none !important;
 }
 
 .navbar {
-    color: gold;
-    font-weight: bold;
-    background-color: #FF9900;
+	color: gold;
+	font-weight: bold;
+	background-color: #FF9900;
+}
+
+.vjs-big-play-button {
+	position: absolute !important;
+	top: 45% !important;
+	left: 45% !important;
+	border-color: #ff9900 !important;
+  }
+
+.vjs-icon-placeholder {
+	color: #ff9900 !important;
 }
 
 .containers {
-    position: relative;
-    z-index: 0;
+	position: relative;
+	z-index: 0;
 }
 
 .collapse {
-    background-color: #ff9900;
+	background-color: #ff9900;
 }
 
 .main {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
 }
 
 #videoPlayer {
-    position: relative;
-    top: 2vw;
-    display: table;
-    width: 60%;
-    height: 100%;
-    border: 2px solid #ff9900;
-    margin: 0 auto;
+	position: relative;
+	top: 2vw;
+	display: table;
+	width: 900px;
+	height: 508px;
+	border: 2px solid #ff9900;
+	margin: 0 auto;
 }
 
 .player {
-    position: relative;
-    width: 100%;
-    height: 48.7%;
-}
-
-video>.vjs-big-play-button {
-    background-color: aqua;
-    border: 0.067em solid #ff9900;
+	position: relative;
+	width: 100%;
+	height: 500px;
 }
 
 .vid_desc {
-    color: white;
-    top: 3vw;
-    bottom: 187px;
-    left: 0;
-    right: 0;
-    position: relative;
-    align-self: center;
-    /* text-align: center; */
-    width: 61%;
-    margin: auto;
+	color: white;
+	top: 3vw;
+	bottom: 187px;
+	left: 0;
+	right: 0;
+	position: relative;
+	align-self: center;
+	height: auto;
+	width: 850px;
+	margin: auto;
 }
 
+@media screen and (max-width: 990px) {
+	#videoPlayer {
+		width: 560px;
+		height: 317px;
+	}
+
+	.vid_desc {
+		width: 500px;
+	}
+
+	.player {
+		height: 310px;
+	}
+}
+
+
 @media screen and (max-width: 624px) {
-    #videoplayer {
-        width: 100%;
-    }
+	#videoplayer {
+		width: 359px;
+		height: 204px;
+	}
+
+	.vid_desc {
+		width: 325px;
+	}
+
+	.player {
+		height: 185px;
+	}
+
+	.vjs-big-play-button {
+		border-radius: 2px !important;
+		width: 40px !important;
+		height: 25px !important;
+		border: 1px solid #FF9900;
+	}
+
+	.vjs-icon-placeholder {
+		position: absolute !important;
+		font-size: 15px !important;
+		top: -55% !important;
+		left: 30% !important;
+	}
 }

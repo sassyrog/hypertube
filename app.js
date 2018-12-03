@@ -22,15 +22,7 @@ const md5 = require('md5');
 const uuid = require('shortid');
 var chalk = require('chalk');
 
-
-
 var torrentStream = require('torrent-stream');
-
-
-
-
-
-
 
 const mdb = require('moviedb')('5d54c4f8fe9a065d6ed438ef09982650');
 
