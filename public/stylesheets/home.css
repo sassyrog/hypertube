@@ -197,7 +197,7 @@ a:hover {
 	-webkit-box-pack: center;
 	-ms-flex-pack: center;
 	justify-content: center;
-	padding-top: 73px;
+	padding-top: 70px;
 }
 
 .movie-card {
@@ -205,13 +205,19 @@ a:hover {
 	box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.1);
 	width: 100%;
 	max-width: 315px;
-	margin: 2em;
+	margin: 1em;
 	border-radius: 10px;
 	display: inline-block;
 }
 
+/* .movie-card-cover {
+} */
+
 .movie-header {
+	background: #FF9900;
+	/* background: linear-gradient( rgba(0, 0, 0, 0), rgb(0, 0, 0)); */
 	background-size: 100% 100%;
+	border-radius: 20px;
 	background-repeat: no-repeat;
 	border: 1px solid #FF9900;
 	padding: 0;
@@ -224,7 +230,11 @@ a:hover {
 }
 
 .header-icon-container {
-	position: relative;
+	height: 50%;
+    background-image: linear-gradient(#00000000, #000000 69%);
+    position: relative;
+	top: 50%;
+	border-radius: 10px;
 }
 
 .player {
@@ -299,9 +309,14 @@ a:hover {
 }
 
 .movie-title {
-	font-size: 24px;
-	margin: 0;
-	display: table-cell;
+	padding: 10px;
+	font-family: Consolas;
+	color: #ff9900;
+	font-size: 1em;
+	font-weight: bold;
+    position: relative;
+    top: 70%;
+    text-align: center;
 }
 
 .imax-logo {

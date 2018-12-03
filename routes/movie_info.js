@@ -7,6 +7,7 @@ router.post('/', (req, response) => {
     mdb.searchMovie({
         query: req.body.title
     }, (err, res) => {
+        // console.log(res);
         response.json(res.results[0]);
     });
 })
