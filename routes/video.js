@@ -8,10 +8,13 @@ app.get('/', function(req, res) {
     const path = 'assets/sintel-trailer.m4v'
     const stat = fs.statSync(path)
     const fileSize = stat.size
-    const range = req.headers.range
+	const range = req.headers.range
+	console.log("xxx"+range+"xxx");
+	
     if (range) {
         const parts = range.replace(/bytes=/, "").split("-")
-        const start = parseInt(parts[0], 10)
+		const start = parseInt(parts[0], 10)
+		console.log("filesize = " + fileSize)
         const end = parts[1] ?
             parseInt(parts[1], 10) :
             fileSize - 1
