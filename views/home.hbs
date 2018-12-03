@@ -68,6 +68,7 @@
 
 
 <script>
+	var i = 0;
 	function makeMovieCall() {
 		var data = {};
 		$.ajax({
@@ -156,12 +157,23 @@
 		})
 
 		$('#search_btn').on('click', function () {
-			$('#search_form').css({
-				'display': 'block',
-			});
-			$('.head').css({
-				'height': '106px',
-			});
+			if (i == 0) {
+				$('#search_form').css({
+					'display': 'block',
+				});
+				$('.head').css({
+					'height': '106px',
+				});
+				i = 1;
+			} else {
+				$('#search_form').css({
+					'display': 'none',
+				});
+				$('.head').css({
+					'height': '0px',
+				});
+				i = 0;
+			}
 		});
 
 		document.getElementById("search").addEventListener("input", function () {
@@ -176,7 +188,7 @@
 					contentType: 'application/json',
 					url: '/movie/search',
 					success: function (res) {
-						// console.log(res);
+						console.log(res);
 						$('.gala').html(res);
 					}
 				});
