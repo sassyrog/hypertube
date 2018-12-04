@@ -50,11 +50,11 @@
 			<img style="width:100%;height:100%" src="/images/cancel.svg" id="cancel">
 		</div>
 	</div>
-	{{!-- <a class="movie_link" href=""> --}}
+	<a class="movie_link" href="">
 		<div class="play_btn">
-			<img onclick="" src="/images/play_btn.svg" id="start_play">
+			<img src="/images/play_btn.svg" id="start_play">
 		</div>
-	{{!-- </a> --}}
+	</a>
 	<div class="vid_desc">
 		<h1></h1>
 		<p class="overview"></p>
@@ -73,22 +73,6 @@
 			success: function(res) {
 				// console.log(res);
 				$('.gala').html(res);
-			}
-		});
-	}
-
-	function yify_vid(mdb_id) {
-		var data = {};
-		data.id = mdb_id;
-
-		$.ajax({
-			type: 'POST',
-			data: JSON.stringify(data),
-			contentType: 'application/json',
-			url: '/mdb/yify/search',
-			success: function (res) {
-				window.location.href = "/video/" + res;
-				console.log(res);
 			}
 		});
 	}
@@ -129,13 +113,14 @@
 
 				var url = 'title=' + res.title +
 					'&poster=' + res.backdrop_path +
+					'&mdbID=' + res.id +
 					'&desc=' + res.overview +
 					'&year=' + res.release_date.substring(0, 4);
 
 				var newUrl = Base64.encode(url);
 
 
-				$('.movie_link').attr('href', '/video?' + newUrl);
+				$('.movie_link').attr('href', '/video?info=' + newUrl);
 			}
 		});
 	}
