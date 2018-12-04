@@ -166,6 +166,8 @@ app.use('/forgot/password', require('./routes/password_reset'));
 
 
 
+
+
 app.get('*', function(req, res, next) {
     res.locals.user = req.user || null;
     next();

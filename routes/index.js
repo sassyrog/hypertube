@@ -37,6 +37,11 @@ router.get('/profile/update', (req, res) => {
 //     res.render('video');
 // });
 
+
+router.get('/user/profile', (req, res) => {
+    res.render('profile');
+})
+
 router.get('/reset', (req, res) => {
     res.render('reset_form');
 })
