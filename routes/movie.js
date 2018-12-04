@@ -12,16 +12,16 @@ router.post('/default', (req, response) => {
 				if (res.results[i].poster_path === null)
 					continue;
 				gg = gg +
-					'<div class="movie-card" onclick="func(this)">\n' +
+				'<div class="movie-card" onclick="func(this)">\n' +
 					'<div class="movie-card-cover">\n' +
-					'<div class="movie-header" style="background-image: url(\'https://image.tmdb.org/t/p/w500' + res.results[i].poster_path + '\')">\n' +
-					'<div class="header-icon-container">\n' +
-					'<div class="movie-title">' + res.results[i].title +
-					'</div>'+
+						'<div class="movie-header" style="background-image: url(\'https://image.tmdb.org/t/p/w500' + res.results[i].poster_path + '\')">\n' +
+							'<div class="header-icon-container">\n' +
+								'<div class="movie-title">' + res.results[i].title +
+								'</div>'+
+							'</div>' +
+						'</div>' +
 					'</div>' +
-					'</div>' +
-					'</div>' +
-					'</div>';
+				'</div>';
 			}
 		}
 		response.send(gg);
