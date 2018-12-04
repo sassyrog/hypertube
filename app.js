@@ -66,6 +66,7 @@ app.use(flash());
 
 // Express Messages Middleware
 app.use(require('connect-flash')());
+
 app.use(function(req, res, next) {
     res.locals.success_msg = req.flash('success_msg');
     res.locals.error_msg = req.flash('error_msg');
@@ -157,6 +158,12 @@ app.use('/movie/info', require('./routes/movie_info'));
 app.use('/movie/info', require('./routes/movie_info'));
 
 app.use('/user/update', require('./routes/update'));
+
+app.use('/forgot/password', require('./routes/password_reset'));
+
+
+
+
 
 
 app.get('*', function(req, res, next) {

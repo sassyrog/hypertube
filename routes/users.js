@@ -3,6 +3,7 @@ var router = express.Router();
 const bcrypt = require('bcryptjs');
 var flash = require('connect-flash');
 const passport = require('passport');
+const emailExistence = require('email-existence');
 /* GET users listing. */
 
 require('../config/passport')(passport);
@@ -60,29 +61,42 @@ router.post('/register', function(req, res) {
                             firstname: firstname,
                             lastname: lastname,
                             email: email,
-                            user: 'username already taken'
+                            user_err: 'username already taken'
                         });
                     } else if (mail) {
                         res.render('register', {
                             firstname: firstname,
                             lastname: lastname,
                             username: username,
-                            mail: 'email already exists'
+                            mail_err: 'email already exists'
                         });
                     }
                 } else {
-                    var newUser = new User({
-                        firstname: firstname,
-                        lastname: lastname,
-                        username: username,
-                        email: email,
-                        password: password1
+                    emailExistence.check(email, function(error, response) {
+
+                        if (!response) {
+                            res.render('register', {
+                                firstname: firstname,
+                                lastname: lastname,
+                                username: username,
+                                mail_err: 'email does not exist'
+                            });
+                        } else {
+                            var newUser = new User({
+                                firstname: firstname,
+                                lastname: lastname,
+                                username: username,
+                                email: email,
+                                password: password1
+                            });
+                            User.createUser(newUser, function(err, user) {
+                                if (err) throw err;
+                            });
+                            req.flash('success_msg', 'You are registered and can now login');
+                            res.redirect('/users/login');
+                        }
                     });
-                    User.createUser(newUser, function(err, user) {
-                        if (err) throw err;
-                    });
-                    req.flash('success_msg', 'You are registered and can now login');
-                    res.redirect('/users/login');
+
                 }
             });
         });

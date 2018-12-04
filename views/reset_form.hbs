@@ -1,0 +1,53 @@
+<link rel="stylesheet" href="/stylesheets/login.css">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<div class="container">
+	<div class="row">
+		<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+			{{#if errors}}
+				<div id="errors" class="alert alert-danger" role="alert">
+					{{#each errors}}
+						<li class="err_li">{{this.msg}}</li>
+					{{/each}}
+				</div>
+			{{/if}}
+			{{#if mail_err}}
+				<div id="errors" class="alert alert-danger" role="alert">{{mail_err}}</div>
+			{{/if}}
+			<div id="err_msg" style="display:none" class="alert alert-danger" role="alert"> </div>
+			<div class="card card-signin my-5">
+				<div class="card-body">
+					<h5 class="card-title text-center">password reset</h5>
+					<form id="form" class="form-signin" method="POST" action="/forgot/password">
+						<div class="form-label-group"> <input type="email" name="email" id="email" class="form-control" placeholder="email" {{#if mail}} autofocus {{/if}} {{#if email}} value="{{email}}" {{/if}}>
+							<label for="email">email</label>
+						</div>
+						<button id="submit" class="btn btn-lg btn-primary btn-block disabled" disabled="disabled" type="submit"> <span>create account</span> </button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(window).on("load", function() {
+		$('#form').on('input', function() {
+			var regem = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+			tex = '';
+			if ($('#email').val() && !$('#email').val().match(regem))
+				tex += '- email should have formart login@domain.ext<br>';
+			if (tex) {
+				$('#err_msg').css('display', 'block');
+			} else {
+				$('#err_msg').css('display', 'none');
+			}
+			$('#err_msg').html(tex);
+			if (!tex && $('#email').val()) {
+				$('#submit').removeClass('disabled');
+				$("#submit").removeAttr('disabled');
+			} else if (!$('#submit').hasClass('disabled') && (!$('#email').val() || tex))
+				$('#submit').addClass('disabled');
+		});
+	});
+</script>
