@@ -25,9 +25,9 @@ router.post('/', (req, res) => {
         }]
     }, function(err, user) {
         if (user && user.email == email)
-            console.log('email');
+            console.log('------>' + user + ' <--------');
         else if (user && user.username == username) {
-            console.log('username');
+            console.log('------>' + user + ' <--------');
         }
     });
 

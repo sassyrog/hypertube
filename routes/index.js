@@ -5,6 +5,10 @@ const passport = require('passport');
 
 //route handlers
 
+// router.get('/video', function(req, res) {
+//     res.render('video');
+// });
+
 function loggedIn(req, res, next) {
     if (req.user) {
         next();
@@ -32,6 +36,15 @@ router.get('/profile/update', (req, res) => {
 // router.get('/video', function(req, res) {
 //     res.render('video');
 // });
+
+
+router.get('/user/profile', (req, res) => {
+    res.render('profile');
+})
+
+router.get('/reset', (req, res) => {
+    res.render('reset_form');
+})
 
 router.get('/login', function(req, res) {
     res.render('login');

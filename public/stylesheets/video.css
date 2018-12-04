@@ -1,114 +1,286 @@
 body {
-	background-color: black;
+    background-color: black !important;
 }
 
 * {
-	outline: none !important;
+    font-family: Consolas;
 }
 
+b, strong {
+    font-weight: 700 !important;
+    color: #FF9900 !important;
+}
+
+.post .post-description .stats .stat-item {
+    background-color: #FF9900 !important;
+    border: 1px solid #FF9900 !important;
+    display: inline-block !important;
+    margin-right: 15px !important;
+    font-weight: bold !important;
+}
+
+.post .post-description .stats .stat-item:hover {
+    background-color: rgb(255, 255, 255) !important;
+    border: 1px solid rgb(255, 255, 255) !important;
+    display: inline-block !important;
+    margin-right: 15px !important;
+    font-weight: bold !important;
+}
+
+.post .post-description p {
+    color: #FF9900;
+}
+
+.container {
+    top: 40px;
+}
+
+.col-sm-8 {
+    margin: auto;
+}
+
+.panel {
+    background-color: black !important;
+    border: 1px solid #FF9900 !important;
+}
+
+.panel-shadow {
+    box-shadow: rgba(0, 0, 0, 0.3) 7px 7px 7px;
+}
+
+.panel-white {
+    border: 1px solid #dddddd;
+}
+
+.panel-white .panel-heading {
+    color: #333;
+    background-color: #fff;
+    border-color: #ddd;
+}
+
+.panel-white .panel-footer {
+    background-color: #fff;
+    border-color: #ddd;
+}
+
+.post .post-heading {
+    height: 95px;
+    padding: 20px 15px;
+}
+
+.post .post-heading .avatar {
+    width: 60px;
+    height: 60px;
+    display: block;
+    margin-right: 15px;
+}
+
+.post .post-heading .meta .title {
+    margin-bottom: 0;
+}
+
+.post .post-heading .meta .title a {
+    color: black;
+}
+
+.post .post-heading .meta .title a:hover {
+    color: #aaaaaa;
+}
+
+.post .post-heading .meta .time {
+    margin-top: 8px;
+    color: #999;
+}
+
+.post .post-image .image {
+    width: 100%;
+    height: auto;
+}
+
+.post .post-description {
+    padding: 15px;
+}
+
+.post .post-description p {
+    font-size: 14px;
+}
+
+.post .post-description .stats {
+    margin-top: 20px;
+}
+
+.post .post-description .stats .stat-item {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.post .post-description .stats .stat-item .icon {
+    margin-right: 8px;
+}
+
+.post .post-footer {
+    border-top: 1px solid #ddd;
+    padding: 15px;
+}
+
+.post .post-footer .input-group-addon a {
+    color: #454545;
+}
+
+.post .post-footer .comments-list {
+    padding: 0;
+    margin-top: 20px;
+    list-style-type: none;
+}
+
+.post .post-footer .comments-list .comment {
+    display: block;
+    width: 100%;
+    margin: 20px 0;
+}
+
+.post .post-footer .comments-list .comment .avatar {
+    width: 35px;
+    height: 35px;
+}
+
+.post .post-footer .comments-list .comment .comment-heading {
+    display: block;
+    width: 100%;
+}
+
+.post .post-footer .comments-list .comment .comment-heading .user {
+    font-size: 14px;
+    font-weight: bold;
+    display: inline;
+    margin-top: 0;
+    margin-right: 10px;
+}
+
+.post .post-footer .comments-list .comment .comment-heading .time {
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 0;
+    display: inline;
+}
+
+.post .post-footer .comments-list .comment .comment-body {
+    margin-left: 50px;
+}
+
+.post .post-footer .comments-list .comment>.comments-list {
+    margin-left: 50px;
+}
+
+* {
+    outline: none !important;
+}
+
+/* .comment_form {
+
+} */
 .navbar {
-	color: gold;
-	font-weight: bold;
-	background-color: #FF9900;
+    color: gold;
+    font-weight: bold;
+    background-color: #FF9900;
 }
 
 .vjs-big-play-button {
-	position: absolute !important;
-	top: 45% !important;
-	left: 45% !important;
-	border-color: #ff9900 !important;
-  }
+    position: absolute !important;
+    top: 45% !important;
+    left: 45% !important;
+    border-color: #ff9900 !important;
+}
 
 .vjs-icon-placeholder {
-	color: #ff9900 !important;
+    color: #ff9900 !important;
 }
 
 .containers {
-	position: relative;
-	z-index: 0;
+    position: relative;
+    z-index: 0;
 }
 
 .collapse {
-	background-color: #ff9900;
+    background-color: #ff9900;
 }
 
 .main {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 #videoPlayer {
-	position: relative;
-	top: 2vw;
-	display: table;
-	width: 900px;
-	height: 508px;
-	border: 2px solid #ff9900;
-	margin: 0 auto;
+    position: relative;
+    top: 2vw;
+    display: table;
+    width: 900px;
+    height: 508px;
+    border: 2px solid #ff9900;
+    margin: 0 auto;
 }
 
 .player {
-	position: relative;
-	width: 100%;
-	height: 500px;
+    position: relative;
+    width: 100%;
+    height: 500px;
 }
 
 .vid_desc {
-	color: white;
-	top: 3vw;
-	bottom: 187px;
-	left: 0;
-	right: 0;
-	position: relative;
-	align-self: center;
-	height: auto;
-	width: 850px;
-	margin: auto;
+    color: white;
+    top: 3vw;
+    bottom: 187px;
+    left: 0;
+    right: 0;
+    position: relative;
+    align-self: center;
+    height: auto;
+    width: 850px;
+    margin: auto;
 }
 
 @media screen and (max-width: 990px) {
-	#videoPlayer {
-		width: 560px;
-		height: 317px;
-	}
+    #videoPlayer {
+        width: 560px;
+        height: 317px;
+    }
 
-	.vid_desc {
-		width: 500px;
-	}
+    .vid_desc {
+        width: 500px;
+    }
 
-	.player {
-		height: 310px;
-	}
+    .player {
+        height: 310px;
+    }
 }
 
-
 @media screen and (max-width: 624px) {
-	#videoplayer {
-		width: 359px;
-		height: 204px;
-	}
+    #videoplayer {
+        width: 359px;
+        height: 204px;
+    }
 
-	.vid_desc {
-		width: 325px;
-	}
+    .vid_desc {
+        width: 325px;
+    }
 
-	.player {
-		height: 185px;
-	}
+    .player {
+        height: 185px;
+    }
 
-	.vjs-big-play-button {
-		border-radius: 2px !important;
-		width: 40px !important;
-		height: 25px !important;
-		border: 1px solid #FF9900;
-	}
+    .vjs-big-play-button {
+        border-radius: 2px !important;
+        width: 40px !important;
+        height: 25px !important;
+        border: 1px solid #FF9900;
+    }
 
-	.vjs-icon-placeholder {
-		position: absolute !important;
-		font-size: 15px !important;
-		top: -55% !important;
-		left: 30% !important;
-	}
+    .vjs-icon-placeholder {
+        position: absolute !important;
+        font-size: 15px !important;
+        top: -55% !important;
+        left: 30% !important;
+    }
 }

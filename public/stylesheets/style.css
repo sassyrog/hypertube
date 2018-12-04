@@ -3,8 +3,21 @@
         clear: both;
     }
 }
+
 body {
     background-color: black;
+}
+
+.d-inline-block {
+    border-radius: 100%;
+}
+
+* {
+    font-family: Consolas !important;
+}
+
+.navbar-toggleable-md .navbar-nav .nav-link {
+    padding-left: 1.5rem;
 }
 
 .navbar {
@@ -37,7 +50,7 @@ body {
 .hub {
     /* height: 100%; */
     display: block;
-    font-family: sans-serif;
+    font-family: sans-serif !important;
     font-weight: bold;
     color: white;
     font-size: 8vw;
