@@ -33,7 +33,7 @@
 		</div>
 	</nav>
 	<div class="container">
-		<form id="search_form" action="/movie/search" method="POST">
+		<form id="search_form">
 			<div class="row">
 				<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
 					<div class="input-group">
@@ -55,11 +55,11 @@
 			<img style="width:100%;height:100%" src="/images/cancel.svg" id="cancel">
 		</div>
 	</div>
-	<a class="movie_link" href="">
+	{{!-- <a class="movie_link" href=""> --}}
 		<div class="play_btn">
-			<img src="/images/play_btn.svg" id="start_play">
+			<img onclick="" src="/images/play_btn.svg" id="start_play">
 		</div>
-	</a>
+	{{!-- </a> --}}
 	<div class="vid_desc">
 		<h1></h1>
 		<p class="overview"></p>
@@ -83,20 +83,35 @@
 		});
 	}
 
+	function yify_vid(mdb_id) {
+		var data = {};
+		data.id = mdb_id;
+
+		$.ajax({
+			type: 'POST',
+			data: JSON.stringify(data),
+			contentType: 'application/json',
+			url: '/mdb/yify/search',
+			success: function (res) {
+				window.location.href = "/video/" + res;
+				console.log(res);
+			}
+		});
+	}
+
 	function func(e) {
 		var year = $(e).find($('.year')).html(),
 			title = $(e).find($('.movie-title')).html();
 		var data = {};
 		data.title = title;
 
-		var data;
 		$.ajax({
 			type: 'POST',
 			data: JSON.stringify(data),
 			contentType: 'application/json',
 			url: '/movie/info',
 			success: function (res) {
-				console.log(res);
+				//console.log(res);
 
 				$('.box').css({
 					'background-image': 'url("https://image.tmdb.org/t/p/w500' + res.backdrop_path + '")'
@@ -117,15 +132,7 @@
 				$('.overview').html(res.overview);
 				$('.vid_desc').find('h1').html(res.title);
 
-				var url = 'title=' + res.title +
-						'&poster=' + res.backdrop_path +
-						'&desc=' + res.overview +
-						'&year=' + res.release_date.substring(0, 4);
-
-				var newUrl = Base64.encode(url);
-
-
-				$('.movie_link').attr('href', '/video?' + newUrl);
+				$('#start_play').attr('onclick', 'yify_vid(' + res.id + ')');
 			}
 		});
 	}

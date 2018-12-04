@@ -90,8 +90,8 @@ app.use(function(req, res, next) {
 // });
 //
 // const query = require('yify-search');
-//
-// query.search('fast and furious', (error, result) => {
+
+// query.search('big hero 6', (error, result) => {
 //     console.log(result);
 // })
 
@@ -161,6 +161,7 @@ app.use('/movie/info', require('./routes/movie_info'));
 
 app.use('/user/update', require('./routes/update'));
 
+app.use('/mdb/yify/search', require('./routes/mdb_to_yify'));
 
 app.get('*', function(req, res, next) {
     res.locals.user = req.user || null;
