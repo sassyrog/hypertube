@@ -5,6 +5,10 @@ const passport = require('passport');
 
 //route handlers
 
+// router.get('/video', function(req, res) {
+//     res.render('video');
+// });
+
 function loggedIn(req, res, next) {
     if (req.user) {
         next();

@@ -44,7 +44,6 @@
 		</form>
 	</div>
 </div>
-
 <div class="containers">
 	<div class="gala">
 	</div>
@@ -65,8 +64,14 @@
 		<p class="overview"></p>
 	</div>
 </div>
-
-
+<div class='player'>
+	<center>
+		<video id="videoPlayer" controls>
+			<source src="http://localhost:8080/video" type="video/mp4">
+  			Your browser does not support the video tag.
+		</video>
+	</center>
+</div>
 <script>
 	var i = 0;
 	function makeMovieCall() {
@@ -82,7 +87,6 @@
 			}
 		});
 	}
-
 	function func(e) {
 		var year = $(e).find($('.year')).html(),
 			title = $(e).find($('.movie-title')).html();

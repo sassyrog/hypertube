@@ -9,11 +9,9 @@ var session = require('express-session');
 var passport = require('passport');
 const expressValidator = require('express-validator');
 var bodyParser = require('body-parser');
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var videoRouter = require('./routes/video');
-
 const config = require('./config/database');
 
 const mongooseValidator = require('mongoose-unique-validator');
@@ -52,7 +50,6 @@ app.use(express.json());
 app.use(express.urlencoded({
     extended: false
 }));
-
 
 app.enable('trust proxy');
 
