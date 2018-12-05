@@ -111,8 +111,9 @@
 
 		var decodedUrl = Base64.decode(encodedUrl);
 		var query = getQueryParams(decodedUrl);
-
-		player.poster('https://image.tmdb.org/t/p/w500' + query.poster);
+		console.log(query.poster);
+		//player.poster('https://image.tmdb.org/t/p/w500' + query.poster);
+		player.poster('https://image.tmdb.org/t/p/w1280' + query.poster);
 
 		$('.vid_desc').find('h2').html(query.title);
 		$('.vid_desc').find('p').html(query.desc);
