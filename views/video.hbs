@@ -107,7 +107,7 @@
 	var i = 0;
 
 	$('document').ready(function () {
-		var encodedUrl = document.location.search;
+		var encodedUrl = document.location.search.replace("info=", "");
 
 		var decodedUrl = Base64.decode(encodedUrl);
 		var query = getQueryParams(decodedUrl);
