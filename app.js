@@ -9,7 +9,6 @@ var session = require('express-session');
 var passport = require('passport');
 const expressValidator = require('express-validator');
 var bodyParser = require('body-parser');
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var videoRouter =  require('./routes/video');
@@ -21,6 +20,8 @@ const bcrypt = require('bcrypt');
 const md5 = require('md5');
 const uuid = require('shortid');
 var chalk = require('chalk');
+
+var torrentStream = require('torrent-stream');
 
 const mdb = require('moviedb')('5d54c4f8fe9a065d6ed438ef09982650');
 
@@ -51,7 +52,6 @@ app.use(express.urlencoded({
     extended: false
 }));
 
-
 app.enable('trust proxy');
 
 app.use(session({
@@ -67,6 +67,7 @@ app.use(flash());
 
 // Express Messages Middleware
 app.use(require('connect-flash')());
+
 app.use(function(req, res, next) {
     res.locals.success_msg = req.flash('success_msg');
     res.locals.error_msg = req.flash('error_msg');
@@ -86,9 +87,9 @@ app.use(function(req, res, next) {
 //         // stream is readable stream to containing the file content
 //     });
 // });
-
-// const query = require('yify-search');
 //
+// const query = require('yify-search');
+
 // query.search('big hero 6', (error, result) => {
 //     console.log(result);
 // })
@@ -108,7 +109,9 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/video', videoRouter);
 
-
+// app.get('/video', function(req, res) {
+//     res.render('video');
+// });
 
 
 
@@ -156,6 +159,14 @@ app.use('/movie/info', require('./routes/movie_info'));
 app.use('/movie/info', require('./routes/movie_info'));
 
 app.use('/user/update', require('./routes/update'));
+
+app.use('/forgot/password', require('./routes/password_reset'));
+
+
+
+
+
+
 
 
 app.get('*', function(req, res, next) {
