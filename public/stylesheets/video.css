@@ -237,6 +237,11 @@ h4 {
     background-color: #FF9900;
 }
 
+
+.navbar-toggleable-md .navbar-nav .nav-link {
+    padding-left: 1.5rem;
+}
+
 .vjs-big-play-button {
     position: absolute !important;
     top: 45% !important;
