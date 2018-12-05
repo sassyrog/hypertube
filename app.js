@@ -9,11 +9,9 @@ var session = require('express-session');
 var passport = require('passport');
 const expressValidator = require('express-validator');
 var bodyParser = require('body-parser');
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var videoRouter = require('./routes/video');
-
 const config = require('./config/database');
 
 const mongooseValidator = require('mongoose-unique-validator');
@@ -53,7 +51,6 @@ app.use(express.urlencoded({
     extended: false
 }));
 
-
 app.enable('trust proxy');
 
 app.use(session({
@@ -69,6 +66,7 @@ app.use(flash());
 
 // Express Messages Middleware
 app.use(require('connect-flash')());
+
 app.use(function(req, res, next) {
     res.locals.success_msg = req.flash('success_msg');
     res.locals.error_msg = req.flash('error_msg');
@@ -90,8 +88,8 @@ app.use(function(req, res, next) {
 // });
 //
 // const query = require('yify-search');
-//
-// query.search('fast and furious', (error, result) => {
+
+// query.search('big hero 6', (error, result) => {
 //     console.log(result);
 // })
 
@@ -160,6 +158,14 @@ app.use('/movie/info', require('./routes/movie_info'));
 app.use('/movie/info', require('./routes/movie_info'));
 
 app.use('/user/update', require('./routes/update'));
+
+app.use('/forgot/password', require('./routes/password_reset'));
+
+
+
+
+
+
 
 
 app.get('*', function(req, res, next) {

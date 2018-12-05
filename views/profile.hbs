@@ -1,0 +1,50 @@
+<link rel="stylesheet" href="/stylesheets/user_profile.css">
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/stylesheets/croppie.css" />
+<script src="/javascripts/croppie.js"></script>
+
+<div style="width:500px;height:500px;background-color:red" id="upload-demo" class="">
+</div>
+
+<button type="button" name="button"></button>
+
+<p></p>
+<img src="" alt="" id="the_img">
+{{!-- <img src="/images/logo.png" width="300" height="300" alt="" class="the_img"> --}}
+
+<script>
+	$('document').ready(function() {
+		var uploadCrop;
+
+
+
+		uploadCrop = $('#upload-demo').croppie({
+			viewport: {
+				width: 200,
+				height: 200,
+				type: 'square'
+			},
+			enableExif: true,
+			showZoomer: false
+		});
+
+
+		uploadCrop.croppie('bind', {
+			url: '/images/logo.png'
+		})
+
+		$('button').on('click', function() {
+			uploadCrop.croppie('result', {
+				type: 'base64'
+			}).then(function(g) {
+				// html is div (overflow hidden)
+				console.log(g);
+				$('#the_img').attr('src', g);
+				// with img positioned inside.
+			});
+		})
+
+		function saveImg() {}
+
+	});
+</script>

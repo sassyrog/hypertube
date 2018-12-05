@@ -5,6 +5,10 @@ const passport = require('passport');
 
 //route handlers
 
+// router.get('/video', function(req, res) {
+//     res.render('video');
+// });
+
 function loggedIn(req, res, next) {
     if (req.user) {
         next();
@@ -16,7 +20,7 @@ function loggedIn(req, res, next) {
 
 router.get('/', function(req, res, next) {
     res.render('index', {
-        title: 'Express'
+        title: 'hypertube'
     });
 });
 
@@ -33,13 +37,26 @@ router.get('/profile/update', (req, res) => {
 //     res.render('video');
 // });
 
+
+router.get('/user/profile', (req, res) => {
+    res.render('profile');
+})
+
+router.get('/reset', (req, res) => {
+    res.render('reset_form');
+})
+
 router.get('/login', function(req, res) {
-    res.render('login');
+    res.render('login', {
+        title: 'login'
+    });
 });
 
 router.get('/home', function(req, res) {
     // console.log(req.user);
-    res.render('home');
+    res.render('home', {
+        title: 'home'
+    });
 });
 
 router.get('/test', function(req, res) {

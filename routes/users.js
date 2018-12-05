@@ -3,6 +3,9 @@ var router = express.Router();
 const bcrypt = require('bcryptjs');
 var flash = require('connect-flash');
 const passport = require('passport');
+const emailExistence = require('email-existence');
+
+const fs = require('fs');
 /* GET users listing. */
 
 require('../config/passport')(passport);
@@ -19,6 +22,9 @@ router.get('/register', function(req, res) {
 //register process.argv
 
 router.post('/register', function(req, res) {
+
+
+
     const firstname = req.body.firstname;
     const lastname = req.body.lastname;
     const username = req.body.username;
@@ -60,29 +66,51 @@ router.post('/register', function(req, res) {
                             firstname: firstname,
                             lastname: lastname,
                             email: email,
-                            user: 'username already taken'
+                            user_err: 'username already taken'
                         });
                     } else if (mail) {
                         res.render('register', {
                             firstname: firstname,
                             lastname: lastname,
                             username: username,
-                            mail: 'email already exists'
+                            mail_err: 'email already exists'
                         });
                     }
                 } else {
-                    var newUser = new User({
-                        firstname: firstname,
-                        lastname: lastname,
-                        username: username,
-                        email: email,
-                        password: password1
+                    emailExistence.check(email, function(error, response) {
+
+                        if (!response) {
+                            res.render('register', {
+                                firstname: firstname,
+                                lastname: lastname,
+                                username: username,
+                                mail_err: 'email does not exist'
+                            });
+                        } else {
+                            var newUser = new User({
+                                firstname: firstname,
+                                lastname: lastname,
+                                username: username,
+                                email: email,
+                                password: password1
+                            });
+
+                            fs.readFile('./public/images/avatar.png', (err, data) => {
+                                let base64 = data.toString('base64');
+
+                                let burger = new Buffer(base64, 'base64');
+
+                                newUser.profile_img = burger;
+                                User.createUser(newUser, function(err, user) {
+                                    if (err) throw err;
+                                });
+                            });
+
+                            req.flash('success_msg', 'You are registered and can now login');
+                            res.redirect('/users/login');
+                        }
                     });
-                    User.createUser(newUser, function(err, user) {
-                        if (err) throw err;
-                    });
-                    req.flash('success_msg', 'You are registered and can now login');
-                    res.redirect('/users/login');
+
                 }
             });
         });

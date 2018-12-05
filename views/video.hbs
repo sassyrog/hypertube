@@ -79,13 +79,14 @@
 		var player = videojs('videoPlayer');
 		var i = 0;
 
-		$('document').ready(function () {
-			var encodedUrl = document.location.search;
+	$('document').ready(function () {
+		var encodedUrl = document.location.search.replace("info=", "");
 
-			var decodedUrl = Base64.decode(encodedUrl);
-			var query = getQueryParams(decodedUrl);
-
-			player.poster('https://image.tmdb.org/t/p/w500' + query.poster);
+		var decodedUrl = Base64.decode(encodedUrl);
+		var query = getQueryParams(decodedUrl);
+		console.log(query.poster);
+		//player.poster('https://image.tmdb.org/t/p/w500' + query.poster);
+		player.poster('https://image.tmdb.org/t/p/w1280' + query.poster);
 
 			$('.vid_desc').find('h2').html(query.title);
 			$('.vid_desc').find('p').html(query.desc);
