@@ -36,4 +36,44 @@ router.post('/', (req, res) => {
 
 })
 
+var id = '5c0783d3b2c80ef5831bb459';
+
+router.post('/email', (req, res) => {
+    User.findOne({
+        email: {
+            "$regex": "^" + req.body.email + "\\b",
+            "$options": "i"
+        }
+    }, function(err, user) {
+        if (user != null) {
+            if (user.id == id) {
+                res.send('same')
+            } else {
+                res.send('taken');
+            }
+        } else {
+            res.send('available');
+        }
+    })
+})
+
+router.post('/username', (req, res) => {
+    User.findOne({
+        username: {
+            "$regex": "^" + req.body.username + "\\b",
+            "$options": "i"
+        }
+    }, function(err, user) {
+        if (user != null) {
+            if (user.id == id) {
+                res.send('same')
+            } else {
+                res.send('taken');
+            }
+        } else {
+            res.send('available');
+        }
+    })
+})
+
 module.exports = router;

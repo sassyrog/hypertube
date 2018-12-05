@@ -93,7 +93,7 @@
 				console.log(res);
 
 				$('.box').css({
-//					'background-image': 'url("https://image.tmdb.org/t/p/w500' + res.backdrop_path + '")'
+					//					'background-image': 'url("https://image.tmdb.org/t/p/w500' + res.backdrop_path + '")'
 					'background-image': 'url("https://image.tmdb.org/t/p/w1280' + res.backdrop_path + '")'
 				})
 				$('.movie-desc').css({
@@ -105,10 +105,19 @@
 				$('.head').css({
 					'height': '100%'
 				});
-				$('.movie-desc').css({
-					'width': '70vw',
-					'height': 'auto',
-				});
+
+				if (window.matchMedia('(max-width: 500px)').matches) {
+					$('.movie-desc').css({
+						'width': '95%',
+						'height': '500px'
+					});
+				} else {
+					$('.movie-desc').css({
+						'width': '70vw',
+						'height': 'auto'
+					});
+				}
+
 				$('.overview').html(res.overview);
 				$('.vid_desc').find('h1').html(res.title);
 
