@@ -64,8 +64,6 @@ router.get('/test', function(req, res) {
     res.render('test');
 });
 
-
-
 router.get('/logout', function(req, res) {
     req.session.destroy(function(err) {
         res.redirect('/');

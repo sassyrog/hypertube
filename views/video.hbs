@@ -5,6 +5,9 @@
 <!-- Font Awesome -->
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+{{!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+ crossorigin="anonymous"> --}}
+
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!--- Include the above in your HEAD tag --->
 
@@ -38,67 +41,105 @@
 	<div class="vid_desc">
 		<h2>Title</h2>
 		<p></p>
+
+		{{!-- comment input --}}
 		<div class="container">
-			<div class="col-lg-4 col-sm-6 text-center">
-				<div class="well">
-					<h4>What is on your mind?</h4>
-					<div class="input-group">
-						<input type="text" id="userComment" class="form-control input-sm chat-input" placeholder="Write your message here..." />
-						<span class="input-group-btn" onclick="addComment()">
-							<a href="#" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-comment"></span> Add Comment</a>
-						</span>
-					</div>
-					<hr data-brackets-id="12673">
-					<ul data-brackets-id="12674" id="sortable" class="list-unstyled ui-sortable">
-						<strong class="pull-left primary-font">James</strong>
-						<small class="pull-right text-muted">
-							<span class="glyphicon glyphicon-time"></span>7 mins ago</small>
-						</br>
-						<li class="ui-state-default">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-							incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-							nisi ut aliquip ex ea commodo consequat. </li>
-						</br>
-						<strong class="pull-left primary-font">Taylor</strong>
-						<small class="pull-right text-muted">
-							<span class="glyphicon glyphicon-time"></span>14 mins ago</small>
-						</br>
-						<li class="ui-state-default">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-							fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-							anim id est laborum.</li>
-					</ul>
+			<div class="row">
+				<div class="input-group">
+					<input type="text" class="comment form-control" placeholder="Make a comment&hellip;">
+					<span class="input-group-btn">
+						<button type="button" class="comment-btn btn btn-default"> Comment </button>
+					</span>
 				</div>
+			</div>
+
+			{{!-- list  of comments --}}
+
+			<div class="com-boxes row">
 			</div>
 		</div>
 	</div>
+</div>
+<div  class="back-to-top_1 text-right" id="myBtn">
+	<a href="#" class="btn-block"><i class="arrow up"></i></a>
+</div>
+<div class="footer">
+	<p>Footer</p>
+</div>
 
-	<div class="footer">
-		<p>Footer</p>
-	</div>
+<script>
+	var player = videojs('videoPlayer');
+	var i = 0;
+	var query;
 
-	<script>
-		var player = videojs('videoPlayer');
-		var i = 0;
+	window.onscroll = function() {scrollFunction()};
+
+
+	function getComments() {
+		var data = {};
+		$.ajax({
+			type: 'POST',
+			data: JSON.stringify(data),
+			contentType: 'application/json',
+			url: '/comments/get_comments',
+			success: function (res) {
+				$('.com-boxes').html(res);
+			}
+		})
+	}
 
 	$('document').ready(function () {
+		getComments();
+
+		$('#myBtn').css({
+			'display': 'none',
+		});
 		var encodedUrl = document.location.search.replace("info=", "");
 
 		var decodedUrl = Base64.decode(encodedUrl);
-		var query = getQueryParams(decodedUrl);
-		console.log(query.poster);
-		//player.poster('https://image.tmdb.org/t/p/w500' + query.poster);
+		query = getQueryParams(decodedUrl);
+		//console.log(query);
 		player.poster('https://image.tmdb.org/t/p/w1280' + query.poster);
 
-			$('.vid_desc').find('h2').html(query.title);
-			$('.vid_desc').find('p').html(query.desc);
+		$('.vid_desc').find('h2').html(query.title);
+		$('.vid_desc').find('p').html(query.desc);
 
-			//		Make fullscrenn border 0px;
+		//		Make fullscrenn border 0px;
 
-			//		if (window.innerHeight == screen.height) {
-			//			console.log("Comparison works");
-			//			$('#videoPlayer').css({
-			//				'border': '0px',
-			//			});
-			//		}
-		})
+		//		if (window.innerHeight == screen.height) {
+		//			console.log("Comparison works");
+		//			$('#videoPlayer').css({
+		//				'border': '0px',
+		//			});
+		//		}
+	})
 
-	</script>
+	$('.comment-btn').on('click', function () {
+
+		if ($('.comment').val() != '') {
+			var data = {};
+			data.comment = $('.comment').val();
+			data.title = query.title;
+			data.year = parseInt(query.year);
+			$.ajax({
+				type: 'POST',
+				data: JSON.stringify(data),
+				contentType: 'application/json',
+				url: '/comments',
+				success: function (res) {
+//					$('.com-boxes').html(res);
+				}
+			})
+			getComments();
+		}
+	})
+
+
+function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementById("myBtn").style.display = "block";
+    } else {
+        document.getElementById("myBtn").style.display = "none";
+    }
+}
+</script>

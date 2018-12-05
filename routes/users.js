@@ -22,9 +22,6 @@ router.get('/register', function(req, res) {
 //register process.argv
 
 router.post('/register', function(req, res) {
-
-
-
     const firstname = req.body.firstname;
     const lastname = req.body.lastname;
     const username = req.body.username;

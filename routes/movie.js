@@ -9,7 +9,7 @@ router.post('/default', (req, response) => {
 	mdb.miscPopularMovies({}, (err, res) => {
 		if (res.results.length != 0) {
 			for (i = 0; i < res.results.length; i++) {
-				if (res.results[i].poster_path === null)
+				if (res.results[i].poster_path === null || res.results[i].backdrop_path === null)
 					continue;
 				gg = gg +
 				'<div class="movie-card" onclick="func(this)">\n' +
@@ -35,9 +35,8 @@ router.post('/search', (req, response) => {
 			query: req.body.search
 		}, (err, res) => {
 			if (res.results.length != 0) {
-				for (i = 0; i < res.results.length; i++) {
-					// var pic = res.results[i]._path
-					if (res.results[i].poster_path === null)
+				for (i = 0; i < res.results.length ; i++) {
+					if (res.results[i].poster_path === null || res.results[i].backdrop_path === null)
 						continue;
 					yy = yy +
 					'<div class="movie-card" onclick="func(this)">\n' +
