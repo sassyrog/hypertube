@@ -20,7 +20,7 @@ function loggedIn(req, res, next) {
 
 router.get('/', function(req, res, next) {
     res.render('index', {
-        title: 'Express'
+        title: 'hypertube'
     });
 });
 
@@ -47,12 +47,16 @@ router.get('/reset', (req, res) => {
 })
 
 router.get('/login', function(req, res) {
-    res.render('login');
+    res.render('login', {
+        title: 'login'
+    });
 });
 
 router.get('/home', function(req, res) {
     // console.log(req.user);
-    res.render('home');
+    res.render('home', {
+        title: 'home'
+    });
 });
 
 router.get('/test', function(req, res) {
