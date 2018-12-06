@@ -28,7 +28,6 @@
     "mongoose": "^5.2.1",
     "mongoose-unique-validator": "^2.0.2",
     "morgan": "~1.9.0",
-    "movie-trailer": "^2.0.3",
     "moviedb": "^0.2.10",
     "myts-api": "^0.2.0",
     "node-moviedb": "^0.1.1",

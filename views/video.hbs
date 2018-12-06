@@ -1,32 +1,36 @@
 <title>yesus</title>
 <link rel="stylesheet" href="/stylesheets/video.css">
 <link href="https://vjs.zencdn.net/7.3.0/video-js.css" rel="stylesheet">
-<script src="https://vjs.zencdn.net/7.3.0/video.js"></script>
-<!-- Font Awesome -->
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+<script src="https://vjs.zencdn.net/7.3.0/video.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
-
-<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+<!-- Font Awesome -->
+<!--- Include the above in your HEAD tag --->
+{{!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+ crossorigin="anonymous"> --}}
+{{!-- <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"> --}}
 <!-- <link rel="stylesheet" href="/stylesheets/home.css"> -->
-<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-	<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav"
-	 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-	</button>
-	<a class="navbar-brand" href="#"><img src="/images/logo.png" width="30" height="30" class="d-inline-block align-top"
-		 alt=""></a>
-	<div class="collapse navbar-collapse" id="navbarNav">
-		<ul class="navbar-nav">
-			<li class="nav-item active">
-				<a class="nav-link" href="/home">home<span class="sr-only">(current)</span></a>
-			</li>
-		</ul>
-	</div>
-</nav>
+
+<div class="head">
+	<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+		<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav"
+		 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<a class="navbar-brand" href="/user/profile"><img src="/images/avatar.png" width="40" height="40" class="d-inline-block align-top"
+			 alt=""></a>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item active">
+					<a class="nav-link" href="/logout">logout<span class="sr-only">(current)</span></a>
+				</li>
+			</ul>
+		</div>
+		{{!-- <div class="profile_icon"></div> --}}
+	</nav>
+</div>
 <div class="main">
 	<div class='player'>
 		<video poster="" id="videoPlayer" class="video-js vjs-default-skin vjs-fill" controls preload="metadata">
@@ -38,65 +42,27 @@
 	<div class="vid_desc">
 		<h2>Title</h2>
 		<p></p>
+
+		{{!-- comment input --}}
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-8">
-					<div class="panel panel-white post panel-shadow">
-						<div class="post-heading">
-							<div class="pull-left image">
-								<img src="http://bootdey.com/img/Content/user_1.jpg" class="img-circle avatar" alt="user profile image">
-							</div>
-							<div class="pull-left meta">
-								<div class="title h5">
-									<a href="#"><b>Ryan Haywood</b></a>
-									made a post.
-								</div>
-								<h6 class="text-muted time">1 minute ago</h6>
-							</div>
-						</div> 
-						<div class="post-description"> 
-							<p>Bootdey is a gallery of free snippets resources templates and utilities for bootstrap css hmtl js framework. Codes for developers and web designers</p>
-							<div class="stats">
-								<a href="#" class="btn btn-default stat-item">
-									<i class="fa fa-thumbs-up icon"></i>2
-								</a>
-								<a href="#" class="btn btn-default stat-item">
-									<i class="fa fa-thumbs-down icon"></i>12
-								</a>
-							</div>
-						</div>
-					</div>
+				<div class="input-group">
+					<input type="text" class="comment form-control" placeholder="Make a comment&hellip;">
+					<span class="input-group-btn">
+						<button type="button" class="comment-btn btn btn-default"> Comment </button>
+					</span>
 				</div>
-				<div class="col-sm-8">
-					<div class="panel panel-white post panel-shadow">
-						<div class="post-heading">
-							<div class="pull-left image">
-								<img src="http://bootdey.com/img/Content/user_1.jpg" class="img-circle avatar" alt="user profile image">
-							</div>
-							<div class="pull-left meta">
-								<div class="title h5">
-									<a href="#"><b>Ryan Haywood</b></a>
-									made a post.
-								</div>
-								<h6 class="text-muted time">1 minute ago</h6>
-							</div>
-						</div> 
-						<div class="post-description"> 
-							<p>Bootdey is a gallery of free snippets resources templates and utilities for bootstrap css hmtl js framework. Codes for developers and web designers</p>
-							<div class="stats">
-								<a href="#" class="btn btn-default stat-item">
-									<i class="fa fa-thumbs-up icon"></i>2
-								</a>
-								<a href="#" class="btn btn-default stat-item">
-									<i class="fa fa-thumbs-down icon"></i>12
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
+			</div>
+
+			{{!-- list  of comments --}}
+
+			<div class="com-boxes row">
 			</div>
 		</div>
 	</div>
+</div>
+<div class="back-to-top_1 text-right" id="myBtn">
+	<a href="#" class="btn-block"><i class="arrow up"></i></a>
 </div>
 <div class="footer">
 	<p>Footer</p>
@@ -105,27 +71,79 @@
 <script>
 	var player = videojs('videoPlayer');
 	var i = 0;
+	var query;
+
+	window.onscroll = function () {
+		scrollFunction()
+	};
+
+
+	function getComments() {
+		var data = {};
+		$.ajax({
+			type: 'POST',
+			data: JSON.stringify(data),
+			contentType: 'application/json',
+			url: '/comments/get_comments',
+			success: function (res) {
+				$('.com-boxes').html(res);
+			}
+		})
+	}
 
 	$('document').ready(function () {
+		getComments();
+
+		$('#myBtn').css({
+			'display': 'none',
+		});
 		var encodedUrl = document.location.search.replace("info=", "");
 
 		var decodedUrl = Base64.decode(encodedUrl);
-		var query = getQueryParams(decodedUrl);
-		console.log(query.poster);
-		//player.poster('https://image.tmdb.org/t/p/w500' + query.poster);
+		query = getQueryParams(decodedUrl);
+		//console.log(query);
 		player.poster('https://image.tmdb.org/t/p/w1280' + query.poster);
 
 		$('.vid_desc').find('h2').html(query.title);
 		$('.vid_desc').find('p').html(query.desc);
 
-//		Make fullscrenn border 0px;
+		//		Make fullscrenn border 0px;
 
-//		if (window.innerHeight == screen.height) {
-//			console.log("Comparison works");
-//			$('#videoPlayer').css({
-//				'border': '0px',
-//			});
-//		}
+		//		if (window.innerHeight == screen.height) {
+		//			console.log("Comparison works");
+		//			$('#videoPlayer').css({
+		//				'border': '0px',
+		//			});
+		//		}
 	})
+
+	$('.comment-btn').on('click', function () {
+
+		if ($('.comment').val() != '') {
+			var data = {};
+			data.comment = $('.comment').val();
+			data.title = query.title;
+			data.year = parseInt(query.year);
+			$.ajax({
+				type: 'POST',
+				data: JSON.stringify(data),
+				contentType: 'application/json',
+				url: '/comments',
+				success: function (res) {
+					//					$('.com-boxes').html(res);
+				}
+			})
+			getComments();
+		}
+	})
+
+
+	function scrollFunction() {
+		if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+			document.getElementById("myBtn").style.display = "block";
+		} else {
+			document.getElementById("myBtn").style.display = "none";
+		}
+	}
 
 </script>

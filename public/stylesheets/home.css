@@ -66,7 +66,7 @@ h1 {
     float: right;
     margin-right: 3.2vw;
     margin-top: 0vw;
-    width: 8vw;
+    width: 6vw;
     padding-bottom: 3.2vw;
     transition: 0s;
     background: rgba(106, 187, 234, 0);
@@ -97,6 +97,7 @@ h1 {
     border-radius: 10px;
     display: none;
     z-index: 4;
+    overflow: hidden;
     /* padding: 50px; */
     /* width: 70vw;
 	height: 800px; */
@@ -108,8 +109,8 @@ h1 {
     float: left;
     margin-left: 1vw;
     margin-top: 1vw;
-    width: 2vw;
-    height: 2vw;
+    width: 5vw;
+    height: 5vw;
     border-radius: 90%;
 }
 
@@ -136,7 +137,6 @@ h1 {
 
 .box {
     z-index: 1;
-    border-radius: 10px;
     width: 100%;
     height: 550px;
     background-size: 100%;
@@ -396,12 +396,26 @@ a:hover {
         padding-left: 0.5rem;
     }
 
+    h1 {
+        margin-top: 20px;
+        font-size: x-large;
+    }
+
+    .vid_desc>p {
+        font-size: x-small;
+    }
+
+    .play_btn {
+        margin-top: 2vw;
+    }
+
     .movie-desc {
-        width: 100%;
+        top: 80px;
     }
 
     .box {
         height: 157px;
+        clip-path: none;
     }
 
     .movie-card {

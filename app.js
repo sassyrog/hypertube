@@ -162,7 +162,7 @@ app.use('/user/update', require('./routes/update'));
 
 app.use('/forgot/password', require('./routes/password_reset'));
 
-
+app.use('/comments', require('./routes/comments'))
 
 
 

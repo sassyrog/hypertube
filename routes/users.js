@@ -4,6 +4,8 @@ const bcrypt = require('bcryptjs');
 var flash = require('connect-flash');
 const passport = require('passport');
 const emailExistence = require('email-existence');
+
+const fs = require('fs');
 /* GET users listing. */
 
 require('../config/passport')(passport);
@@ -89,9 +91,18 @@ router.post('/register', function(req, res) {
                                 email: email,
                                 password: password1
                             });
-                            User.createUser(newUser, function(err, user) {
-                                if (err) throw err;
+
+                            fs.readFile('./public/images/avatar.png', (err, data) => {
+                                let base64 = data.toString('base64');
+
+                                let burger = new Buffer(base64, 'base64');
+
+                                newUser.profile_img = burger;
+                                User.createUser(newUser, function(err, user) {
+                                    if (err) throw err;
+                                });
                             });
+
                             req.flash('success_msg', 'You are registered and can now login');
                             res.redirect('/users/login');
                         }

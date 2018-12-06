@@ -105,10 +105,19 @@
 				$('.head').css({
 					'height': '100%'
 				});
-				$('.movie-desc').css({
-					'width': '70vw',
-					'height': 'auto',
-				});
+
+				if (window.matchMedia('(max-width: 500px)').matches) {
+					$('.movie-desc').css({
+						'width': '95%',
+						'height': '500px'
+					});
+				} else {
+					$('.movie-desc').css({
+						'width': '70vw',
+						'height': 'auto'
+					});
+				}
+
 				$('.overview').html(res.overview);
 				$('.vid_desc').find('h1').html(res.title);
 
