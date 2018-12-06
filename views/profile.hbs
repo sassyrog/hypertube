@@ -1,8 +1,37 @@
 <link rel="stylesheet" href="/stylesheets/user_profile.css">
-<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+ crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" href="/stylesheets/croppie.css" />
 <script src="/javascripts/croppie.js"></script>
+<div class="head">
+	<nav class="navbar navbar-toggleable-md navbar-light bg-faded" style="background: #FF9900;">
+		<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav"
+		 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<a class="navbar-brand" href="/user/profile"><img src="/images/avatar.png" width="40" height="40" class="d-inline-block align-top"
+			 alt=""></a>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item active">
+					<a class="nav-link" href="/logout">Logout<span class="sr-only">(current)</span></a>
+				</li>
+			</ul>
+			<ul class="navbar-nav">
+				<li class="nav-item active">
+					<a class="nav-link" href="/user/profile">Profile<span class="sr-only">(current)</span></a>
+				</li>
+			</ul>
+			<ul class="navbar-nav">
+				<li class="nav-item active">
+					<img src="/images/search.svg" id="search_btn">
+				</li>
+			</ul>
+		</div>
+		{{!-- <div class="profile_icon"></div> --}}
+	</nav>
+</div>
 
 
 <div class="col-lg-6 col-sm-6">
@@ -57,28 +86,32 @@
 
 						<div class="input-group">
 							<span class="input-group-addon"><input type="checkbox" value="firstname"></span>
-							<input type="text" name="firstname" id="firstname" class="form-control" placeholder="firstname" {{#if firstname}} value="{{firstname}}" {{/if}}>
+							<input type="text" name="firstname" id="firstname" class="form-control" placeholder="firstname"
+							 {{#if firstname}} value="{{firstname}}" {{/if}}>
 						</div>
 
 						<!-- lastname -->
 
 						<div class="input-group">
 							<span class="input-group-addon"><input type="checkbox" value="lastname"></span>
-							<input type="text" name="lastname" id="lastname" class="form-control" disabled="disabled" placeholder="lastname" {{#if lastname}} value="{{lastname}}" {{/if}}>
+							<input type="text" name="lastname" id="lastname" class="form-control" disabled="disabled" placeholder="lastname"
+							 {{#if lastname}} value="{{lastname}}" {{/if}}>
 						</div>
 
 						<!-- username -->
 
 						<div class="input-group">
 							<span class="input-group-addon"><input type="checkbox" value="username"></span>
-							<input type="text" name="username" id="username" class="form-control" disabled="disabled" placeholder="username" {{#if username}} value="{{username}}" {{/if}}>
+							<input type="text" name="username" id="username" class="form-control" disabled="disabled" placeholder="username"
+							 {{#if username}} value="{{username}}" {{/if}}>
 						</div>
 
 						<!-- email -->
 
 						<div class="input-group">
 							<span class="input-group-addon"><input type="checkbox" value="email"></span>
-							<input type="email" name="email" id="email" disabled="disabled" class="form-control" placeholder="email" {{#if email}} value="{{email}}" {{/if}}>
+							<input type="email" name="email" id="email" disabled="disabled" class="form-control" placeholder="email"
+							 {{#if email}} value="{{email}}" {{/if}}>
 						</div>
 
 						<!-- passwords -->
@@ -96,7 +129,8 @@
 
 						<button id="submit" class="btn btn-lg btn-primary btn-block" type="submit"> <span>save changes</span> </button>
 
-						<a href="/home" class="btn-block"><button id="cancel" class="btn btn-lg btn-primary btn-block" type="button"> <span>cancel</span> </button></a>
+						<a href="/home" class="btn-block"><button id="cancel" class="btn btn-lg btn-primary btn-block" type="button">
+								<span>cancel</span> </button></a>
 						<input type="text" style="display:none" name="" value="">
 					</form>
 				</div>
@@ -133,7 +167,7 @@
 		showZoomer: false,
 	});
 
-	$('.nav-item').on('click', function() {
+	$('.nav-item').on('click', function () {
 		$('.nav-item').removeClass('active');
 		$(this).addClass('active');
 		if ($(this).hasClass('class-1')) {
@@ -141,9 +175,9 @@
 		}
 	})
 
-	$('document').ready(function() {
+	$('document').ready(function () {
 
-		$('input:checkbox').on('click', function() {
+		$('input:checkbox').on('click', function () {
 			if ($(this).prop('checked')) {
 				if ($(this).val() == 'password') {
 					$('#' + $(this).val() + '1').attr('disabled', false);
@@ -164,7 +198,7 @@
 			}
 		})
 
-		$('.form-control').on('input', function() {
+		$('.form-control').on('input', function () {
 			var firstname = $('#firstname').val(),
 				lastname = $('#lastname').val(),
 				username = $('#username').val(),
@@ -186,7 +220,7 @@
 					data: JSON.stringify(data),
 					contentType: 'application/json',
 					url: '/user/update/email',
-					success: function(res) {
+					success: function (res) {
 						console.log(res)
 					}
 				});
@@ -200,7 +234,7 @@
 					data: JSON.stringify(data),
 					contentType: 'application/json',
 					url: '/user/update/username',
-					success: function(res) {
+					success: function (res) {
 						console.log(res)
 					}
 				});
@@ -227,16 +261,16 @@
 
 		});
 
-		$('.plus').on('click', function() {
+		$('.plus').on('click', function () {
 			$('input:file').click();
 		});
 
-		$('input:file').change(function(e) {
+		$('input:file').change(function (e) {
 			var file = event.target.files[0];
 			// console.log(file);
 			var reader = new FileReader();
 
-			reader.onload = function(e) {
+			reader.onload = function (e) {
 				uploadCrop.croppie('bind', {
 					url: e.target.result
 				})
@@ -246,10 +280,10 @@
 			// reader
 		})
 
-		$('.btn-crop').on('click', function() {
+		$('.btn-crop').on('click', function () {
 			uploadCrop.croppie('result', {
 				type: 'base64'
-			}).then(function(g) {
+			}).then(function (g) {
 				// html is div (overflow hidden)
 				console.log(g);
 				$('.avatar').attr('src', g);
@@ -259,4 +293,5 @@
 			});
 		})
 	});
+
 </script>
