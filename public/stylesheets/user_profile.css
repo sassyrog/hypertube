@@ -1,3 +1,177 @@
-.container {
-    background: yellow;
+body {
+    background-color: black;
+}
+
+* {
+    font-family: Consolas !important;
+}
+
+body i {
+    font-family: 'FontAwesome' !important;
+}
+
+.fa-plus:before {
+    font-style: normal;
+    position: absolute;
+    bottom: 0;
+    font-size: 1.5rem;
+}
+
+.mx-auto {
+    padding-right: 0;
+    padding-left: 0;
+    bottom: 2vw;
+}
+
+.col-sm-9 .col-md-7 .col-lg-5 {}
+
+.btn-group-lg>.btn, .btn-lg {
+    font-size: 1rem;
+}
+
+.middle-card {
+    background-color: black;
+    box-shadow: inset 0 0 10px #ff9900;
+}
+
+.card {
+    margin-top: 20px;
+    padding: 30px;
+    -webkit-border-top-left-radius: 5px;
+    -moz-border-top-left-radius: 5px;
+    border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-top-right-radius: 5px;
+    border-top-right-radius: 5px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.col-lg-6 {
+    max-width: none !important;
+}
+
+.card.hovercard {
+    position: relative;
+    padding-top: 0;
+    overflow: hidden;
+    text-align: center;
+    background-color: black;
+    height: 160px;
+    -moz-box-shadow: inset 0 0 10px #ff9900;
+    -webkit-box-shadow: inset 0 0 10px #ff9900;
+    box-shadow: inset 0 0 10px #ff9900;
+}
+
+.card.hovercard .useravatar {
+    position: absolute;
+    top: 15px;
+    left: 0;
+    right: 0;
+}
+
+.card.hovercard .useravatar img {
+    width: 100px;
+    height: 100px;
+    max-width: 100px;
+    max-height: 100px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    border: 2px solid #ff9900;
+    background-color: #ff9900;
+}
+
+.card.hovercard .card-info {
+    position: absolute;
+    background-color: #ff9900;
+    font-weight: bold;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+}
+
+.tab-content {
+    margin-top: 1vw;
+}
+
+.avatar {
+    vertical-align: middle;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.form-control:disabled, .form-control:disabled, .form-control:disabled {
+    background-color: #FFC773;
+}
+
+#submit {
+    background-color: forestgreen;
+}
+
+.my-5 {
+    margin-top: 0rem !important;
+}
+
+.form-control {
+    background-color: #FFC773;
+}
+
+.alert-danger {
+    font-size: 12px;
+}
+
+.avatar-cont {
+    position: relative;
+}
+
+.card-signin {
+    border: 0;
+}
+
+.card-signin .card-title {
+    margin-bottom: 2rem;
+    font-weight: 300;
+    font-size: 1.5rem;
+}
+
+.btn-primary {
+    color: #FF9900;
+    border: 0;
+    background-color: black;
+}
+
+.btn-primary:hover {
+    color: #FF9900;
+    background-color: #262626;
+}
+
+.card-signin .card-body {
+    background-color: #FF9900;
+    padding: 2rem;
+}
+
+.my-5 {
+    background-color: #ff9900;
+}
+
+.form-signin {
+    width: 100%;
+    font-size: 80%;
+    border-radius: 5rem;
+    letter-spacing: .1rem;
+    font-weight: bold;
+    padding: 1rem;
+    transition: all 0.2s;
+}
+
+.input-group {
+    margin-bottom: 0.4rem;
+}
+
+.input-group-addon {
+    display: -webkit-inline-box;
+    background-color: black;
 }
