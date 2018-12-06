@@ -107,6 +107,10 @@
 
 </div>
 
+<div class="col-lg-5 mx-auto crop-container">
+	<button class="btn btn-primary btn-crop" type="button" name="button">Done</button>
+</div>
+
 {{!-- <div style="width:500px;height:500px;background-color:red" id="upload-demo" class="">
 </div>
 
@@ -117,6 +121,18 @@
 {{!-- <img src="/images/logo.png" width="300" height="300" alt="" class="the_img"> --}}
 
 <script>
+	var uploadCrop;
+
+	uploadCrop = $('.crop-container').croppie({
+		viewport: {
+			width: 200,
+			height: 200,
+			type: 'square',
+		},
+		enableExif: true,
+		showZoomer: false,
+	});
+
 	$('.nav-item').on('click', function() {
 		$('.nav-item').removeClass('active');
 		$(this).addClass('active');
@@ -221,43 +237,26 @@
 			var reader = new FileReader();
 
 			reader.onload = function(e) {
-				$('.avatar').attr('src', e.target.result);
+				uploadCrop.croppie('bind', {
+					url: e.target.result
+				})
+				$('.crop-container').css('display', 'block');
 			}
 			reader.readAsDataURL(file);
 			// reader
 		})
 
-		// 	var uploadCrop;
-		//
-		//
-		//
-		// 	uploadCrop = $('#upload-demo').croppie({
-		// 		viewport: {
-		// 			width: 200,
-		// 			height: 200,
-		// 			type: 'square'
-		// 		},
-		// 		enableExif: true,
-		// 		showZoomer: false
-		// 	});
-		//
-		//
-		// 	uploadCrop.croppie('bind', {
-		// 		url: '/images/logo.png'
-		// 	})
-		//
-		// 	$('button').on('click', function() {
-		// 		uploadCrop.croppie('result', {
-		// 			type: 'base64'
-		// 		}).then(function(g) {
-		// 			// html is div (overflow hidden)
-		// 			console.log(g);
-		// 			$('#the_img').attr('src', g);
-		// 			// with img positioned inside.
-		// 		});
-		// 	})
-		//
-		// 	function saveImg() {}
-		//
+		$('.btn-crop').on('click', function() {
+			uploadCrop.croppie('result', {
+				type: 'base64'
+			}).then(function(g) {
+				// html is div (overflow hidden)
+				console.log(g);
+				$('.avatar').attr('src', g);
+				$('.crop-container').css('display', 'none');
+
+				// with img positioned inside.
+			});
+		})
 	});
 </script>

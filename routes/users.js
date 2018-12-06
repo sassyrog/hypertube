@@ -89,20 +89,13 @@ router.post('/register', function(req, res) {
                                 lastname: lastname,
                                 username: username,
                                 email: email,
-                                password: password1
+                                password: password1,
+                                profile_img: '/images/avatar.png'
                             });
 
-                            fs.readFile('./public/images/avatar.png', (err, data) => {
-                                let base64 = data.toString('base64');
-
-                                let burger = new Buffer(base64, 'base64');
-
-                                newUser.profile_img = burger;
-                                User.createUser(newUser, function(err, user) {
-                                    if (err) throw err;
-                                });
+                            User.createUser(newUser, function(err, user) {
+                                if (err) throw err;
                             });
-
                             req.flash('success_msg', 'You are registered and can now login');
                             res.redirect('/users/login');
                         }

@@ -10,6 +10,19 @@ body i {
     font-family: 'FontAwesome' !important;
 }
 
+.crop-container {
+    margin: auto;
+    background-color: red;
+    height: 500px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 2;
+    display: none;
+}
+
 .fa-plus:before {
     font-style: normal;
     position: absolute;
