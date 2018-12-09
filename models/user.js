@@ -22,8 +22,11 @@ const UserSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    movies: [String],
-    profile_img: Buffer
+    movies: [{
+        title: String,
+        poster: String
+    }],
+    profile_img: String
 });
 
 const User = module.exports = mongoose.model('User', UserSchema);

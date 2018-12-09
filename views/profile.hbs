@@ -7,20 +7,18 @@
 
 <div class="col-lg-6 col-sm-6">
 	<div class="card hovercard">
-		<div class="useravatar">
-			<img alt="" src="/images/avatar.png">
+		<div class="back">
+			<i class="fas fa-arrow-left"></i>
 		</div>
-		<div class="card-info"> <span class="card-title">Pamela Anderson</span>
+		<div class="useravatar">
+			<img alt="" {{#if pic}} src="{{pic}}" {{else}} src="/images/avatar.png" {{/if}}>
+		</div>
+		<div class="card-info"> <span class="card-title"> &nbsp {{#ifCond firstname '&&' lastname}} {{firstname}} {{lastname}} {{/ifCond}}</span>
 
 		</div>
 	</div>
 
 	<div class="middle-card card text-center">
-		{{#if mail}}
-			<div id="errors" class="alert alert-danger" role="alert">{{mail}}</div>
-		{{else if user}}
-			<div id="errors" class="alert alert-danger" role="alert">{{user}}</div>
-		{{/if}}
 		{{#if errors}}
 			<div id="errors" class="alert alert-danger" role="alert">
 				{{#each errors}}
@@ -28,26 +26,31 @@
 				{{/each}}
 			</div>
 		{{/if}}
-		<div id="err_msg" style="display:none" class="alert alert-danger" role="alert"> </div>
+		{{#if success_msg}}
+			<div id="errors" class="alert alert-success" role="alert">
+				{{success_msg}}
+			</div>
+		{{/if}}
+		<div id="err_msg" style="display:none" class="alert alert-danger" role="alert"></div>
 		<div class="card-header">
 			<ul class="nav nav-tabs card-header-tabs">
 				<li class="watched nav-item nav-link active">
 					watched movies
 				</li>
-				<li class="upadte-profile nav-item nav-link">
+				<li class="upadate-profile nav-item nav-link">
 					upadte profile
 				</li>
-				<li class="nav-item nav-link">
-				</li>
+				{{!-- <li class="nav-item nav-link">
+				</li> --}}
 			</ul>
 		</div>
 
 		<div class="card-body">
 			<div class="card card-signin my-5">
-				<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-					<form id="form" class="form-signin" method="post" action="/user/update">
+				<div class="col-sm-9 col-md-7 col-lg-5 mx-auto the-form" style="display:none">
+					<form id="form" class="form-signin">
 						<div class="avatar-cont text-center">
-							<img src="/images/avatar.png" alt="Avatar" class="avatar">
+							<img {{#if pic}} src="{{pic}}" {{/if}} alt="Avatar" class="avatar">
 							<i class="fas fa-plus plus"></i>
 							<input type="file" name="pic" accept="image/*" style="display:none;">
 						</div>
@@ -57,7 +60,7 @@
 
 						<div class="input-group">
 							<span class="input-group-addon"><input type="checkbox" value="firstname"></span>
-							<input type="text" name="firstname" id="firstname" class="form-control" placeholder="firstname" {{#if firstname}} value="{{firstname}}" {{/if}}>
+							<input type="text" name="firstname" id="firstname" class="form-control" disabled="disabled" placeholder="firstname" {{#if firstname}} value="{{firstname}}" {{/if}}>
 						</div>
 
 						<!-- lastname -->
@@ -94,20 +97,29 @@
 						</div>
 
 
-						<button id="submit" class="btn btn-lg btn-primary btn-block" type="submit"> <span>save changes</span> </button>
+						<button id="submit" class="btn btn-lg btn-primary btn-block" type="button"> <span>save changes</span> </button>
+						{{!-- <button id="submit" class="btn btn-lg btn-primary btn-block" type="submit"> <span>save changes</span> </button> --}}
 
 						<a href="/home" class="btn-block"><button id="cancel" class="btn btn-lg btn-primary btn-block" type="button"> <span>cancel</span> </button></a>
 						<input type="text" style="display:none" name="" value="">
 					</form>
 				</div>
 				{{!-- </div> --}}
+
+				<div class="card my-5 the-movies">
+					{{#each movies}}
+						<div class="watched-movie-card" style="background-image:url('{{this.poster}}')">
+						</div>
+					{{/each}}
+				</div>
+
 			</div>
 		</div>
 	</div>
 
 </div>
 
-<div class="col-lg-5 mx-auto crop-container">
+<div class="col-lg-5 mx-auto crop-container text-center">
 	<button class="btn btn-primary btn-crop" type="button" name="button">Done</button>
 </div>
 
@@ -119,6 +131,12 @@
 <p></p> --}}
 {{!-- <img src="" alt="" id="the_img"> --}}
 {{!-- <img src="/images/logo.png" width="300" height="300" alt="" class="the_img"> --}}
+
+<script id="entry-template" type="text/x-handlebars-template">
+	<div id="errors" class="alert alert-success" role="alert">
+		\{{success_msg}}
+	</div>
+</script>
 
 <script>
 	var uploadCrop;
@@ -136,12 +154,36 @@
 	$('.nav-item').on('click', function() {
 		$('.nav-item').removeClass('active');
 		$(this).addClass('active');
-		if ($(this).hasClass('class-1')) {
-			alert('yes 1');
+		if ($(this).hasClass('upadate-profile')) {
+			$('.the-form').css('display', 'block');
+			$('.the-movies').css('display', 'none');
+		} else {
+			$('.the-form').css('display', 'none');
+			$('.the-movies').css('display', 'block');
 		}
 	})
 
+	$('.back').on('click', function() {
+		window.history.back();
+	})
+
 	$('document').ready(function() {
+
+		console.log('{{#each movies}}<li class="err_li">{{this.title}}</li>{{/each}}');
+
+		var arr = [];
+		arr['firstname'] = '{{firstname}}';
+		arr['lastname'] = '{{lastname}}';
+		arr['username'] = '{{username}}';
+		arr['email'] = '{{email}}';
+		arr['pic'] = '{{pic}}';
+
+		// var arr = [];
+		// arr['firstname'] = 'roger';
+		// arr['lastname'] = 'ndaba';
+		// arr['username'] = 'rogerndaba';
+		// arr['email'] = 'rogerndaba@outlook.com';
+		// arr['pic'] = '/images/avatar.png';
 
 		$('input:checkbox').on('click', function() {
 			if ($(this).prop('checked')) {
@@ -155,16 +197,17 @@
 				if ($(this).val() == 'password') {
 					$('#' + $(this).val() + '1').attr('disabled', true);
 					$('#' + $(this).val() + '2').attr('disabled', true);
-					// $('#' + $(this).val() + '1').val('');
-					// $('#' + $(this).val() + '2').val('');
+					$('#' + $(this).val() + '1').val('');
+					$('#' + $(this).val() + '2').val('');
 				} else {
 					$('#' + $(this).val()).attr('disabled', true);
-					// $('#' + $(this).val()).val(arr[$(this).val()]);
+					$('#' + $(this).val()).val(arr[$(this).val()]);
 				}
 			}
 		})
 
 		$('.form-control').on('input', function() {
+			var track = 0;
 			var firstname = $('#firstname').val(),
 				lastname = $('#lastname').val(),
 				username = $('#username').val(),
@@ -178,7 +221,6 @@
 
 
 			if (this.name === 'email' && email && email.match(regem)) {
-				console.log(this.value);
 				var data = {};
 				data.email = this.value;
 				$.ajax({
@@ -187,12 +229,16 @@
 					contentType: 'application/json',
 					url: '/user/update/email',
 					success: function(res) {
-						console.log(res)
+						// console.log(res)
+						if (res.toString() == 'taken') {
+							$('#err_msg').css('display', 'block');
+							$('#err_msg').html('email already taken');
+						}
+						track = 1;
 					}
 				});
 			}
 			if (this.name === 'username' && username && username.match(regU)) {
-				console.log(this.value);
 				var data = {};
 				data.username = this.value;
 				$.ajax({
@@ -201,7 +247,12 @@
 					contentType: 'application/json',
 					url: '/user/update/username',
 					success: function(res) {
-						console.log(res)
+						// console.log(res)
+						if (res.toString() == 'taken') {
+							$('#err_msg').css('display', 'block');
+							$('#err_msg').html('username already taken');
+						}
+						track = 1;
 					}
 				});
 			}
@@ -216,7 +267,7 @@
 			}
 			if (p1 && p1.length < 6)
 				tex += '- password too short<br>';
-			if (p2 && !(p1 == p2))
+			if (!(p1 == p2))
 				tex += '- passwords don\'t match<br>';
 			if (tex) {
 				$('#err_msg').css('display', 'block');
@@ -224,7 +275,61 @@
 				$('#err_msg').css('display', 'none');
 			}
 			$('#err_msg').html(tex);
+		});
 
+		i = 0;
+		$('#submit').on('click', function() {
+			if (!$('#err_msg').html().trim()) {
+				var dataJsn = {};
+				if ($('.avatar').attr('src') != arr['pic']) {
+					var key = 'pic';
+					var value = $('.avatar').attr('src');
+					dataJsn[key] = value;
+					console.log(dataJsn);
+				}
+				$('input:checkbox').each(function() {
+					if ($(this).prop('checked')) {
+						if (this.value == 'password') {
+							if ($($('#' + this.value + '1')).val() && $($('#' + this.value + '2')).val()) {
+								var key = this.value;
+								var value = $($('#' + this.value + '1')).val();
+								dataJsn[key] = value;
+							}
+						} else {
+							if ($($('#' + this.value)).val()) {
+								var key = this.value;
+								var value = $($('#' + this.value)).val();
+								dataJsn[key] = value;
+							}
+						}
+					}
+				});
+				// console.log($('.avatar').attr('src'));
+				// if ($('#pic').val())
+				if (Object.keys(dataJsn).length != 0) {
+					// console.log(dataJsn);
+					$.ajax({
+						type: 'POST',
+						data: JSON.stringify(dataJsn),
+						contentType: 'application/json',
+						url: '/user/update',
+						success: function(res) {
+							var source = $('#entry-template').html();
+							var template = Handlebars.compile(source);
+
+							var htm = template({
+								success_msg: "changes saved"
+							});
+
+							$('.middle-card').prepend(htm);
+							setInterval(function() {
+								$(location).attr('href', '/user/profile')
+							}, 1500);
+							console.log(htm);
+						}
+					})
+				}
+			}
 		});
 
 		$('.plus').on('click', function() {
@@ -251,7 +356,7 @@
 				type: 'base64'
 			}).then(function(g) {
 				// html is div (overflow hidden)
-				console.log(g);
+				// console.log(g);
 				$('.avatar').attr('src', g);
 				$('.crop-container').css('display', 'none');
 

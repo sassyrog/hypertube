@@ -26,10 +26,11 @@ router.get('/', function(req, res, next) {
 
 router.get('/profile/update', (req, res) => {
     res.render('profile_update', {
-        // firstname: req.user.firstname,
-        // lastname: req.user.lastname,
-        // username: req.user.username,
-        // email: req.user.email
+        firstname: req.user.firstname,
+        lastname: req.user.lastname,
+        username: req.user.username,
+        email: req.user.email,
+        pic: req.user.profile_img
     });
 })
 
@@ -38,8 +39,21 @@ router.get('/profile/update', (req, res) => {
 // });
 
 
-router.get('/user/profile', (req, res) => {
-    res.render('profile');
+router.get('/user/profile', loggedIn, (req, res) => {
+    var info = req.session.passport.user;
+    if (info) {
+        res.render('profile', {
+            title: 'user profile',
+            firstname: info.firstname,
+            lastname: info.lastname,
+            username: info.username,
+            email: info.email,
+            pic: info.profile_img,
+            movies: info.movies
+        });
+    } else {
+        res.render('profile');
+    }
 })
 
 router.get('/reset', (req, res) => {
@@ -52,11 +66,20 @@ router.get('/login', function(req, res) {
     });
 });
 
-router.get('/home', function(req, res) {
-    // console.log(req.user);
-    res.render('home', {
-        title: 'home'
-    });
+router.get('/home', loggedIn, function(req, res) {
+    var info = req.session.passport.user;
+    if (info) {
+        res.render('home', {
+            title: 'home',
+            firstname: info.firstname,
+            lastname: info.lastname,
+            username: info.username,
+            email: info.email,
+            pic: info.profile_img
+        });
+    } else {
+        res.render('home');
+    }
 });
 
 router.get('/test', function(req, res) {
@@ -71,7 +94,9 @@ router.get('/logout', function(req, res) {
 });
 
 router.get('/register', function(req, res) {
-    res.render('register');
+    res.render('register', {
+        title: 'registration'
+    });
 });
 
 router.get('/auth/github',
