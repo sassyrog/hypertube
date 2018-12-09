@@ -5,10 +5,45 @@ body {
 * {
     font-family: Consolas !important;
     text-decoration: none !important;
+    -webkit-transition: 300ms;
+    transition: 300ms;
 }
 
 body i {
     font-family: 'FontAwesome' !important;
+}
+
+meter {
+    position: relative;
+    width: 100%;
+    background: none;
+    background-color: rgba(255, 255, 255, 0.6);
+    border: 1px solid black;
+}
+
+meter::-webkit-meter-bar {
+    background: none;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+meter[value="1"]::-webkit-meter-optimum-value {
+    background: grey;
+}
+
+meter[value="2"]::-webkit-meter-optimum-value {
+    background: red;
+}
+
+meter[value="3"]::-webkit-meter-optimum-value {
+    background: yellow;
+}
+
+meter[value="4"]::-webkit-meter-optimum-value {
+    background: orange;
+}
+
+meter[value="5"]::-webkit-meter-optimum-value {
+    background: green;
 }
 
 .fa-arrow-left {
@@ -46,6 +81,11 @@ body i {
     /* background: chartreuse; */
     margin-top: 2vw;
     margin-left: -1vw;
+    z-index: 2;
+}
+
+.back:hover {
+    transform: scale(1.3);
 }
 
 .crop-container {

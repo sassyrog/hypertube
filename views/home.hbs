@@ -29,6 +29,11 @@
 		{{!-- <div class="profile_icon"></div> --}}
 	</nav>
 	<div class="container">
+		{{#if success_msg}}
+			<div id="errors" class="alert alert-success text-center" role="alert">{{success_msg}}</div>
+		{{else if error}}
+			<div id="errors" class="alert alert-danger text-center" role="alert">{{error}}</div>
+		{{/if}}
 		<form id="search_form">
 			<div class="row">
 				<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
@@ -136,6 +141,11 @@
 	}
 
 	$('document').ready(function() {
+
+		setInterval(function() {
+			$('.alert').fadeOut();
+		}, 5000);
+
 		makeMovieCall();
 
 		$('#search_form').css({

@@ -32,6 +32,7 @@ module.exports = function(passport) {
                     return done(null, user);
                 } else {
                     return done(null, false, {
+                        username: user.username,
                         message: 'wrong password my broer'
                     });
                 }
@@ -47,6 +48,7 @@ module.exports = function(passport) {
             callbackURL: "http://localhost:8080/auth/github/callback"
         },
         function(accessToken, refreshToken, profile, done) {
+            // console.log(profile);
             return done(null, profile);
         }
     ));
@@ -60,6 +62,7 @@ module.exports = function(passport) {
             callbackURL: "http://localhost:8080/auth/google/callback"
         },
         function(accessToken, refreshToken, profile, done) {
+            // console.log(profile);
             return done(null, profile);
         }
     ));
@@ -73,6 +76,7 @@ module.exports = function(passport) {
             callbackURL: "http://localhost:8080/auth/facebook/callback"
         },
         function(accessToken, refreshToken, profile, done) {
+            // console.log(profile);
             done(null, profile);
         }
     ));
@@ -86,15 +90,19 @@ module.exports = function(passport) {
             callbackURL: "http://localhost:8080/auth/42/callback"
         },
         function(accessToken, refreshToken, profile, cb) {
+            // console.log(profile);
             return cb(null, profile);
         }
     ));
 
     passport.serializeUser(function(user, done) {
+        // console.log(user);
         done(null, user);
     });
 
     passport.deserializeUser(function(user, done) {
+        // console.log(user);
+
         done(null, user);
     });
 }

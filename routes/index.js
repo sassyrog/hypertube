@@ -60,7 +60,14 @@ router.get('/reset', (req, res) => {
     res.render('reset_form');
 })
 
-router.get('/login', function(req, res) {
+router.get('/login', (req, res, next) => {
+    if (req.user) {
+        req.flash('success_msg', 'already logged in')
+        res.redirect('/home')
+    } else {
+        next();
+    }
+}, function(req, res) {
     res.render('login', {
         title: 'login'
     });
@@ -87,8 +94,10 @@ router.get('/test', function(req, res) {
     res.render('test');
 });
 
-router.get('/logout', function(req, res) {
-    req.session.destroy(function(err) {
+router.get('/logout', async function(req, res) {
+    req.session.destroy(async function(err) {
+        if (err) return next(err)
+        await req.logout()
         res.redirect('/');
     });
 });
