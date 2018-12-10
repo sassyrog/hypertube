@@ -8,6 +8,45 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 const FortyTwoStrategy = require('passport-42').Strategy;
 var session = require('express-session');
 
+var ignoreCase = require('ignore-case');
+
+function createUserSocial(username, firstname, email, , callback, callback2, lastname = 'noSurname', image = '/images/avatar.png', password) {
+    var newUser = new User({
+        firstname: firstname,
+        lastname: lastname,
+        username: username,
+        email: email,
+        profile_img: image
+    })
+    hashPromise = new Promise((resolve, reject) => {
+        bcrypt.genSalt(10, function(err, salt) {
+            bcrypt.hash(newUser.password, salt, function(err, hash) {
+                if (err)
+                    reject(err)
+                else {
+                    newUser.password = hash;
+                    resolve(hash)
+                }
+            });
+        });
+    })
+
+    hashPromise.then(() => {
+        User.findOne({
+            email: {
+                "$regex": "^" + email + "\\b",
+                "$options": "i"
+            }
+        }, (err, respEmail) => {
+            if (!respEmail) {
+                newUser.save(callback)
+                console.log(newUser);
+            } else {
+                callback2;
+            }
+        })
+    })
+}
 
 
 module.exports = function(passport) {
@@ -48,8 +87,17 @@ module.exports = function(passport) {
             callbackURL: "http://localhost:8080/auth/github/callback"
         },
         function(accessToken, refreshToken, profile, done) {
-            // console.log(profile);
-            return done(null, profile);
+            var info = profile._json;
+            //
+            // var newUser = new User({
+            //     firstname: info.name,
+            //     username: info.login + info.id + '_git',
+            //     email: info.email,
+            //     profile_img: info.avatar_url
+            // })
+            createUserSocial(info.login + info.id + '_git',
+                info.name, )
+            // function createUserSocial(username, firstname, lastname = 'noSurname', email, image = '/images/avatar.png', password, callback, callback2) {
         }
     ));
 

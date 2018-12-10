@@ -34,6 +34,11 @@ db.once('open', function() {
     console.log(chalk.yellow('Connected to MongoDB'));
 });
 
+
+
+// console.log(rand(15));
+// console.log((+new Date).toString(36).slice(-12));
+
 // Check for DB errors
 db.on('error', function(err) {
     console.log(err);

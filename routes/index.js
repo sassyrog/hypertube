@@ -56,7 +56,14 @@ router.get('/user/profile', loggedIn, (req, res) => {
     }
 })
 
-router.get('/reset', (req, res) => {
+router.get('/reset', (req, res, next) => {
+    if (req.user) {
+        req.flash('success_msg', 'already logged in')
+        res.redirect('/home')
+    } else {
+        next();
+    }
+}, (req, res) => {
     res.render('reset_form');
 })
 
