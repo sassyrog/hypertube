@@ -3,6 +3,39 @@
     --input-padding-y: .75rem;
 }
 
+meter {
+    position: relative;
+    width: 100%;
+    background: none;
+    background-color: rgba(255, 255, 255, 0.6);
+    border: 1px solid black;
+}
+
+meter::-webkit-meter-bar {
+    background: none;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+meter[value="1"]::-webkit-meter-optimum-value {
+    background: grey;
+}
+
+meter[value="2"]::-webkit-meter-optimum-value {
+    background: red;
+}
+
+meter[value="3"]::-webkit-meter-optimum-value {
+    background: yellow;
+}
+
+meter[value="4"]::-webkit-meter-optimum-value {
+    background: orange;
+}
+
+meter[value="5"]::-webkit-meter-optimum-value {
+    background: green;
+}
+
 body {
     background: black;
 }
@@ -21,6 +54,10 @@ a {
 
 .form-control {
     background-color: #FFC773;
+}
+
+.alert {
+    font-size: smaller;
 }
 
 .alert-danger {

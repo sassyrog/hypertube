@@ -4,10 +4,101 @@ body {
 
 * {
     font-family: Consolas !important;
+    text-decoration: none !important;
+    -webkit-transition: 300ms;
+    transition: 300ms;
 }
 
 body i {
     font-family: 'FontAwesome' !important;
+}
+
+meter {
+    position: relative;
+    width: 100%;
+    background: none;
+    background-color: rgba(255, 255, 255, 0.6);
+    border: 1px solid black;
+}
+
+meter::-webkit-meter-bar {
+    background: none;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+meter[value="1"]::-webkit-meter-optimum-value {
+    background: grey;
+}
+
+meter[value="2"]::-webkit-meter-optimum-value {
+    background: red;
+}
+
+meter[value="3"]::-webkit-meter-optimum-value {
+    background: yellow;
+}
+
+meter[value="4"]::-webkit-meter-optimum-value {
+    background: orange;
+}
+
+meter[value="5"]::-webkit-meter-optimum-value {
+    background: green;
+}
+
+.fa-arrow-left {
+    font-style: normal;
+    font-size: 30px;
+    color: #ff9900;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    /* remove scrollbar space */
+    background: transparent;
+    /* optional: just make scrollbar invisible */
+}
+
+.watched-movie-card {
+    margin-top: 2vw;
+    margin-left: 2vw;
+    background-size: cover;
+    width: 200px;
+    height: 300px;
+    background-repeat: no-repeat;
+    /* border: 1px solid #FF9900; */
+    padding: 0;
+    display: -webkit-inline-box;
+    border-radius: 4px;
+    /* border-top-left-radius: 10px; */
+    /* border-top-right-radius: 10px; */
+}
+
+.back {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    /* background: chartreuse; */
+    margin-top: 2vw;
+    margin-left: -1vw;
+    z-index: 2;
+}
+
+.back:hover {
+    transform: scale(1.3);
+}
+
+.crop-container {
+    margin: auto;
+    background-color: #E88C00;
+    height: 500px !important;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 2;
+    display: none;
 }
 
 .fa-plus:before {
@@ -32,6 +123,12 @@ body i {
 .middle-card {
     background-color: black;
     box-shadow: inset 0 0 10px #ff9900;
+}
+
+.the-movies {
+    overflow-y: scroll;
+    display: inline-block;
+    background-color: #E88C00 !important;
 }
 
 .card {
@@ -112,6 +209,7 @@ body i {
 }
 
 .my-5 {
+    height: 700px;
     margin-top: 0rem !important;
 }
 
@@ -128,7 +226,12 @@ body i {
 }
 
 .card-signin {
-    border: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.card-header {
+    background-color: #ff9900;
 }
 
 .card-signin .card-title {

@@ -1,18 +1,15 @@
 <link rel="stylesheet" href="/stylesheets/login.css">
 <link rel="stylesheet" href="/stylesheets/bootstrap-social.css">
-
+{{#if title}}
+	<title>{{title}}</title>
+{{/if}}
 <div class="container">
 	<div class="row">
 		<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-			{{#if error}}
-				<div id="errors" class="alert alert-danger" role="alert">
-					{{error}}
-				</div>
-			{{/if}}
 			{{#if success_msg}}
-				<div id="errors" class="alert alert-success" role="alert">
-					{{success_msg}}
-				</div>
+				<div id="errors" class="alert alert-success" role="alert">{{success_msg}}</div>
+			{{else if error}}
+				<div id="errors" class="alert alert-danger" role="alert">{{error}}</div>
 			{{/if}}
 			<div class="card card-signin my-5">
 				<div class="card-body">
