@@ -10,7 +10,7 @@ var session = require('express-session');
 
 var ignoreCase = require('ignore-case');
 
-function createUserSocial(username, firstname, email, , callback, callback2, lastname = 'noSurname', image = '/images/avatar.png', password) {
+function createUserSocial(username, firstname, lastname, email, callback, callback2, image = '/images/avatar.png') {
     var newUser = new User({
         firstname: firstname,
         lastname: lastname,
@@ -42,7 +42,7 @@ function createUserSocial(username, firstname, email, , callback, callback2, las
                 newUser.save(callback)
                 console.log(newUser);
             } else {
-                callback2;
+                callback2(respEmail);
             }
         })
     })
@@ -88,15 +88,19 @@ module.exports = function(passport) {
         },
         function(accessToken, refreshToken, profile, done) {
             var info = profile._json;
-            //
-            // var newUser = new User({
-            //     firstname: info.name,
-            //     username: info.login + info.id + '_git',
-            //     email: info.email,
-            //     profile_img: info.avatar_url
-            // })
-            createUserSocial(info.login + info.id + '_git',
-                info.name, )
+            createUserSocial(
+                info.login + info.id + '_git',
+                info.name,
+                'noSurname',
+                info.email, (err, user) => {
+                    if (err) throw (err);
+                    done(null, user);
+                },
+                (value) => {
+                    done(null, value);
+                },
+                info.avatar_url
+            );
             // function createUserSocial(username, firstname, lastname = 'noSurname', email, image = '/images/avatar.png', password, callback, callback2) {
         }
     ));
@@ -110,8 +114,26 @@ module.exports = function(passport) {
             callbackURL: "http://localhost:8080/auth/google/callback"
         },
         function(accessToken, refreshToken, profile, done) {
+
+            var info = profile._json;
+
+            createUserSocial(
+                info.name.givenName + info.id + '_g',
+                info.name.givenName,
+                info.name.familyName,
+                info.emails[0].value,
+                (err, user) => {
+                    if (err) throw (err);
+                    done(null, user);
+                },
+                (value) => {
+                    done(null, value);
+                },
+                info.image.url + '0'
+            );
+
             // console.log(profile);
-            return done(null, profile);
+            // return done(null, profile);
         }
     ));
 
@@ -121,14 +143,38 @@ module.exports = function(passport) {
     passport.use(new FacebookStrategy({
             clientID: '1407329682731096',
             clientSecret: '6c9720d3ae55ff163c11a0b3ec2d1056',
-            callbackURL: "http://localhost:8080/auth/facebook/callback"
+            callbackURL: "http://localhost:8080/auth/facebook/callback",
+            // passReqToCallback: true,
+            profileFields: ['id', 'email', 'link', 'locale', 'name',
+                'timezone', 'updated_time', 'verified', 'displayName'
+            ]
         },
         function(accessToken, refreshToken, profile, done) {
+
+            var info = profile._json;
+
+            if (!info.email) {
+                return done(null, false, {
+                    message: 'facebook account is not linked to email address'
+                });
+            }
+            createUserSocial(
+                info.first_name + info.id + '_fb',
+                info.first_name,
+                info.last_name,
+                info.email,
+                (err, user) => {
+                    if (err) throw (err);
+                    done(null, user);
+                },
+                (value) => {
+                    done(null, value);
+                }
+            );
             // console.log(profile);
-            done(null, profile);
+            // done(null, profile);
         }
     ));
-
     //////////////////////// INTRA42 STRATEGY //////////////////////////////////////
 
 
@@ -138,8 +184,23 @@ module.exports = function(passport) {
             callbackURL: "http://localhost:8080/auth/42/callback"
         },
         function(accessToken, refreshToken, profile, cb) {
-            // console.log(profile);
-            return cb(null, profile);
+            var info = profile._json;
+
+            img = info.image_url.substring(0, 30) + 'large_' + info.login + '.jpg';
+            createUserSocial(
+                info.login + info.id + '_42',
+                info.first_name,
+                info.last_name,
+                info.email,
+                (err, user) => {
+                    if (err) throw (err);
+                    cb(null, user);
+                },
+                (value) => {
+                    cb(null, value);
+                },
+                img
+            );
         }
     ));
 

@@ -313,7 +313,7 @@
 				// console.log($('.avatar').attr('src'));
 				// if ($('#pic').val())
 				if (Object.keys(dataJsn).length != 0) {
-					// console.log(dataJsn);
+					console.log(dataJsn);
 					$.ajax({
 						type: 'POST',
 						data: JSON.stringify(dataJsn),
@@ -328,9 +328,9 @@
 							});
 
 							$('.middle-card').prepend(htm);
-							setInterval(function() {
-								$(location).attr('href', '/user/profile')
-							}, 1500);
+							// setInterval(function() {
+							// 	$(location).attr('href', '/user/profile')
+							// }, 1500);
 							console.log(htm);
 						}
 					})

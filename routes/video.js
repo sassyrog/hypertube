@@ -54,7 +54,6 @@ app.get('/', loggedIn, function(req, res) {
                                         user.save((err) => {
                                             if (err)
                                                 console.log(err);
-                                            req.session.destroy(function(err) {});
 
                                         })
                                     }
