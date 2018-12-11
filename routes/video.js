@@ -101,6 +101,8 @@ app.get('/', loggedIn, function(req, res) {
                 res.render('login') //we need to do something when the YTS doesn't have the movie
             } else {
                 req.session.magnetURI = value
+                // console.log(value);
+                
                 res.render('video')
             }
         });
