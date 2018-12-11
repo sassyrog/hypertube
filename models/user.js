@@ -1,6 +1,13 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 // User Schema
+
+function rand(length, current) {
+    current = current ? current : '';
+    return length ? rand(--length, "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz".charAt(Math.floor(Math.random() * 60)) + current) : current;
+}
+
+
 const UserSchema = mongoose.Schema({
     firstname: {
         type: String,
@@ -8,7 +15,7 @@ const UserSchema = mongoose.Schema({
     },
     lastname: {
         type: String,
-        required: true
+        default: 'noSurname'
     },
     username: {
         type: String,
@@ -20,10 +27,14 @@ const UserSchema = mongoose.Schema({
     },
     password: {
         type: String,
-        required: true
+        default: rand(20)
+
     },
-    movies: [String],
-    profile_img: Buffer
+    movies: [{
+        title: String,
+        poster: String
+    }],
+    profile_img: String
 });
 
 const User = module.exports = mongoose.model('User', UserSchema);
@@ -36,3 +47,5 @@ module.exports.createUser = function(newUser, callback) {
         });
     });
 }
+
+module.exports.Rand = rand;

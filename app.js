@@ -36,6 +36,11 @@ db.once('open', function() {
     console.log(chalk.yellow('Connected to MongoDB'));
 });
 
+
+
+// console.log(rand(15));
+// console.log((+new Date).toString(36).slice(-12));
+
 // Check for DB errors
 db.on('error', function(err) {
     console.log(err);
@@ -46,6 +51,35 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+var hbs = require('hbs');
+
+hbs.registerHelper('ifCond', function(v1, operator, v2, options) {
+
+    switch (operator) {
+        case '==':
+            return (v1 == v2) ? options.fn(this) : options.inverse(this);
+        case '===':
+            return (v1 === v2) ? options.fn(this) : options.inverse(this);
+        case '!=':
+            return (v1 != v2) ? options.fn(this) : options.inverse(this);
+        case '!==':
+            return (v1 !== v2) ? options.fn(this) : options.inverse(this);
+        case '<':
+            return (v1 < v2) ? options.fn(this) : options.inverse(this);
+        case '<=':
+            return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+        case '>':
+            return (v1 > v2) ? options.fn(this) : options.inverse(this);
+        case '>=':
+            return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+        case '&&':
+            return (v1 && v2) ? options.fn(this) : options.inverse(this);
+        case '||':
+            return (v1 || v2) ? options.fn(this) : options.inverse(this);
+        default:
+            return options.inverse(this);
+    }
+});
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -61,6 +95,9 @@ app.use(session({
     saveUninitialized: true,
     proxy: true
 }));
+
+app.use(expressValidator()), require('./config/passport')(passport);
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -88,23 +125,27 @@ app.use(function(req, res, next) {
 //         // stream is readable stream to containing the file content
 //     });
 // });
-//
-// const query = require('yify-search');
 
+// const query = require('yify-search');
+//
 // query.search('big hero 6', (error, result) => {
 //     console.log(result);
 // })
 
 
 app.use(bodyParser.urlencoded({
-    extended: false
+    extended: false,
+    limit: '50mb',
+    parameterLimit: 50000
 }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({
+    limit: '50mb',
+    parameterLimit: 50000
+}));
 
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(expressValidator()), require('./config/passport')(passport);
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

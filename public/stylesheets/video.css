@@ -44,7 +44,11 @@ i:hover {
 }
 
 h4 {
-	color: black !important;
+    color: black !important;
+}
+
+.img-circle {
+    background-color: #ff9900;
 }
 
 .post .post-description .stats .stat-item {
@@ -73,6 +77,8 @@ h4 {
     border-right: 1px solid #FF9900 !important;
     background-color: rgb(39, 39, 39) !important;
     overflow: auto;
+    position: relative;
+    margin-bottom: 2vw;
 }
 
 .col-sm-8 {
@@ -225,10 +231,14 @@ h4 {
 .name-b {
     color: #FF9900;
 }
+
 ::-webkit-scrollbar {
-    width: 0px;  /* remove scrollbar space */
-    background: transparent;  /* optional: just make scrollbar invisible */
+    width: 0px;
+    /* remove scrollbar space */
+    background: transparent;
+    /* optional: just make scrollbar invisible */
 }
+
 /* .comment_form {
 
 } */
@@ -237,7 +247,6 @@ h4 {
     font-weight: bold;
     background-color: #FF9900;
 }
-
 
 .navbar-toggleable-md .navbar-nav .nav-link {
     padding-left: 1.5rem;
@@ -257,12 +266,11 @@ h4 {
 .containers {
     position: relative;
     z-index: 0;
-
 }
 
 .col-lg-4 {
-	margin: auto;
-	}
+    margin: auto;
+}
 
 .collapse {
     background-color: #ff9900;

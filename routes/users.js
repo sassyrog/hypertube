@@ -110,7 +110,9 @@ router.post('/register', function(req, res) {
 
 
 router.get('/login', function(req, res) {
-    res.render('login');
+    res.render('login', {
+        title: 'login'
+    });
 });
 
 // Login Process
@@ -126,14 +128,6 @@ router.post('/login',
     }
 );
 
-// router.get('/auth/github/callback',
-//     passport.authenticate('github', {
-//         failureRedirect: '/login'
-//     }),
-//
-//     function(req, res) {
-//         res.redirect('/home');
-//     });
 
 
 module.exports = router;

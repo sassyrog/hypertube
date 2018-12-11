@@ -25,6 +25,11 @@ $(window).on("load", function() {
             tex += '- email should have formart login@domain.ext<br>';
         if (p1 && p1.length < 6)
             tex += '- password too short<br>';
+        var level = sMeter(p1, '#strength');
+        if (p1 && level < 3)
+            tex += '- password too weak: you can do better<br>';
+        if (level == 3)
+            tex += '- password still weak<br>';
         if (p2 && !(p1 == p2))
             tex += '- passwords don\'t match<br>';
         if (tex) {

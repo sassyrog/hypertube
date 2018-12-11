@@ -8,6 +8,45 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 const FortyTwoStrategy = require('passport-42').Strategy;
 var session = require('express-session');
 
+var ignoreCase = require('ignore-case');
+
+function createUserSocial(username, firstname, lastname, email, callback, callback2, image = '/images/avatar.png') {
+    var newUser = new User({
+        firstname: firstname,
+        lastname: lastname,
+        username: username,
+        email: email,
+        profile_img: image
+    })
+    hashPromise = new Promise((resolve, reject) => {
+        bcrypt.genSalt(10, function(err, salt) {
+            bcrypt.hash(newUser.password, salt, function(err, hash) {
+                if (err)
+                    reject(err)
+                else {
+                    newUser.password = hash;
+                    resolve(hash)
+                }
+            });
+        });
+    })
+
+    hashPromise.then(() => {
+        User.findOne({
+            email: {
+                "$regex": "^" + email + "\\b",
+                "$options": "i"
+            }
+        }, (err, respEmail) => {
+            if (!respEmail) {
+                newUser.save(callback)
+                console.log(newUser);
+            } else {
+                callback2(respEmail);
+            }
+        })
+    })
+}
 
 
 module.exports = function(passport) {
@@ -32,6 +71,7 @@ module.exports = function(passport) {
                     return done(null, user);
                 } else {
                     return done(null, false, {
+                        username: user.username,
                         message: 'wrong password my broer'
                     });
                 }
@@ -47,7 +87,21 @@ module.exports = function(passport) {
             callbackURL: "http://localhost:8080/auth/github/callback"
         },
         function(accessToken, refreshToken, profile, done) {
-            return done(null, profile);
+            var info = profile._json;
+            createUserSocial(
+                info.login + info.id + '_git',
+                info.name,
+                'noSurname',
+                info.email, (err, user) => {
+                    if (err) throw (err);
+                    done(null, user);
+                },
+                (value) => {
+                    done(null, value);
+                },
+                info.avatar_url
+            );
+            // function createUserSocial(username, firstname, lastname = 'noSurname', email, image = '/images/avatar.png', password, callback, callback2) {
         }
     ));
 
@@ -60,7 +114,26 @@ module.exports = function(passport) {
             callbackURL: "http://localhost:8080/auth/google/callback"
         },
         function(accessToken, refreshToken, profile, done) {
-            return done(null, profile);
+
+            var info = profile._json;
+
+            createUserSocial(
+                info.name.givenName + info.id + '_g',
+                info.name.givenName,
+                info.name.familyName,
+                info.emails[0].value,
+                (err, user) => {
+                    if (err) throw (err);
+                    done(null, user);
+                },
+                (value) => {
+                    done(null, value);
+                },
+                info.image.url + '0'
+            );
+
+            // console.log(profile);
+            // return done(null, profile);
         }
     ));
 
@@ -70,13 +143,38 @@ module.exports = function(passport) {
     passport.use(new FacebookStrategy({
             clientID: '1407329682731096',
             clientSecret: '6c9720d3ae55ff163c11a0b3ec2d1056',
-            callbackURL: "http://localhost:8080/auth/facebook/callback"
+            callbackURL: "http://localhost:8080/auth/facebook/callback",
+            // passReqToCallback: true,
+            profileFields: ['id', 'email', 'link', 'locale', 'name',
+                'timezone', 'updated_time', 'verified', 'displayName'
+            ]
         },
         function(accessToken, refreshToken, profile, done) {
-            done(null, profile);
+
+            var info = profile._json;
+
+            if (!info.email) {
+                return done(null, false, {
+                    message: 'facebook account is not linked to email address'
+                });
+            }
+            createUserSocial(
+                info.first_name + info.id + '_fb',
+                info.first_name,
+                info.last_name,
+                info.email,
+                (err, user) => {
+                    if (err) throw (err);
+                    done(null, user);
+                },
+                (value) => {
+                    done(null, value);
+                }
+            );
+            // console.log(profile);
+            // done(null, profile);
         }
     ));
-
     //////////////////////// INTRA42 STRATEGY //////////////////////////////////////
 
 
@@ -86,16 +184,34 @@ module.exports = function(passport) {
             callbackURL: "http://localhost:8080/auth/42/callback"
         },
         function(accessToken, refreshToken, profile, cb) {
-            return cb(null, profile);
+            var info = profile._json;
+
+            img = info.image_url.substring(0, 30) + 'large_' + info.login + '.jpg';
+            createUserSocial(
+                info.login + info.id + '_42',
+                info.first_name,
+                info.last_name,
+                info.email,
+                (err, user) => {
+                    if (err) throw (err);
+                    cb(null, user);
+                },
+                (value) => {
+                    cb(null, value);
+                },
+                img
+            );
         }
     ));
 
     passport.serializeUser(function(user, done) {
-        console.log(user);
+        // console.log(user);
         done(null, user);
     });
 
     passport.deserializeUser(function(user, done) {
+        // console.log(user);
+
         done(null, user);
     });
 }
