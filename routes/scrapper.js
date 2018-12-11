@@ -1,28 +1,37 @@
 var express = require('express');
 var router = express.Router();
 const rp = require('request-promise');
-const $ = require('cheerio');
+var cheerio = require('cheerio'),
+		cheerioTableparser = require('cheerio-tableparser'),
+		$,
+		data;
 const url = 'http://www.legittorrents.info/index.php?page=torrents&active=1&category=1&order=7&by=1';
 
-const potusParse = function(url) {
-  return rp(url)
-    .then(function(html) {
-      return {
-        title: $('.lista', html).text(),
-        info_hash: $('.lista', html).text(),
-      };
-    })
-    .catch(function(err) {
-      //handle error
-    });
-};
+// const potusParse = function(url) {
+//   return rp(url)
+//     .then(function(html) {
+//       return {
+//         title: $('.lista', html).text(),
+//         info_hash: $('.lista', html).text(),
+//       };
+//     })
+//     .catch(function(err) {
+//       //handle error
+//     });
+// };
 
 router.get('/', function(req, res) {
 
 	rp(url)
 		.then(function(html) {
 			//success!
-			console.log($(".lista tr:eq(9)").html);
+			$ = cheerio.load(html);
+			cheerioTableparser($);
+			data = $("td.lista").eq(1).find('a').attr('href');
+			data = "http://www.legittorrents.info/" +  data;
+			console.log(data);
+			// console.log($('.lista').find('td').length);
+			// console.log($(".lista tr").text);
 			// const wikiUrls = [];
 			// for (let i = 0; i < 45; i++) {
 			// 	wikiUrls.push($('lista > a', html)[i].attribs.href);
@@ -32,7 +41,7 @@ router.get('/', function(req, res) {
 			// 		return potusParse('https://en.wikipedia.org' + url);
 			// 	})
 			// );
-			res.send("OK!");
+			res.send(html);
 		})
 		// .then(function(presidents) {
 		// 	console.log(presidents);
