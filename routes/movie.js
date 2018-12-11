@@ -12,16 +12,17 @@ router.post('/default', (req, response) => {
 				if (res.results[i].poster_path === null || res.results[i].backdrop_path === null)
 					continue;
 				gg = gg +
-				'<div class="movie-card" onclick="func(this)">\n' +
-					'<div class="movie-card-cover">\n' +
-						'<div class="movie-header" style="background-image: url(\'https://image.tmdb.org/t/p/w500' + res.results[i].poster_path + '\')">\n' +
-							'<div class="header-icon-container">\n' +
-								'<div class="movie-title">' + res.results[i].title +
-								'</div>'+
+					'<div class="movie-card" onclick="func(this)">\n' +
+						'<div class="movie-card-cover">\n' +
+							'<div class="movie-header" style="background-image: url(\'https://image.tmdb.org/t/p/w500' + res.results[i].poster_path + '\')">\n' +
+								'<div class="header-icon-container">\n' +
+									'<div class="movie-title">' + res.results[i].title + 
+									'</div>' +
+									'<span class="movie-year">(' + res.results[i].release_date.substring(0, 4) + ')</span>' +
+								'</div>' +
 							'</div>' +
 						'</div>' +
-					'</div>' +
-				'</div>';
+					'</div>';
 			}
 		}
 		response.send(gg);
@@ -35,20 +36,21 @@ router.post('/search', (req, response) => {
 			query: req.body.search
 		}, (err, res) => {
 			if (res.results.length != 0) {
-				for (i = 0; i < res.results.length ; i++) {
+				for (i = 0; i < res.results.length; i++) {
 					if (res.results[i].poster_path === null || res.results[i].backdrop_path === null)
 						continue;
 					yy = yy +
-					'<div class="movie-card" onclick="func(this)">\n' +
-					'<div class="movie-card-cover">\n' +
-					'<div class="movie-header" style="background-image: url(\'https://image.tmdb.org/t/p/w500' + res.results[i].poster_path + '\')">\n' +
-					'<div class="header-icon-container">\n' +
-					'<div class="movie-title">' + res.results[i].title +
-					'</div>'+
-					'</div>' +
-					'</div>' +
-					'</div>' +
-					'</div>';
+						'<div class="movie-card" onclick="func(this)">\n' +
+						'<div class="movie-card-cover">\n' +
+						'<div class="movie-header" style="background-image: url(\'https://image.tmdb.org/t/p/w500' + res.results[i].poster_path + '\')">\n' +
+						'<div class="header-icon-container">\n' +
+						'<div class="movie-title">' + res.results[i].title + "<br>" + 
+						'<span class="movie-year">(' + res.results[i].release_date.substring(0, 4) + ')</span>' +
+						'</div>' +
+						'</div>' +
+						'</div>' +
+						'</div>' +
+						'</div>';
 				}
 			}
 			console.log('body: ' + JSON.stringify(req.body));

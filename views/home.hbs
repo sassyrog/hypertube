@@ -144,12 +144,13 @@
 
 	$('document').ready(function() {
 
-		setInterval(function() {
-			$('.alert').fadeOut();
-		}, 5000);
+//		setInterval(function() {
+//			$('.alert').fadeOut();
+//		}, 5000);
 
 		makeMovieCall();
-
+		console.log(window.sessionStorage);
+		
 		$('#search_form').css({
 			'display': 'none',
 			'transition': '600ms',
