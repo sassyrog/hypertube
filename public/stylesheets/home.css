@@ -260,6 +260,7 @@ a:hover {
     position: relative;
     top: 50%;
     border-radius: 10px;
+    text-align: center;
 }
 
 .player {
@@ -333,13 +334,25 @@ a:hover {
     width: 100%;
 }
 
+.movie-year {
+    padding: 10px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    color: #ffffff;
+    font-size: 0.7rem;
+    font-weight: bold;
+    position: absolute;
+    /* text-align: center; */
+}
+
 .movie-title {
     padding: 10px;
     color: #ff9900;
     font-size: 1.1rem;
     font-weight: bold;
     position: relative;
-    top: 70%;
+    top: 60%;
     text-align: center;
 }
 

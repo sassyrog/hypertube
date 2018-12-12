@@ -2,6 +2,30 @@ body {
     background-color: black !important;
 }
 
+.drop-box {
+    display: none;
+    height : 0px;
+    transition: all 0.8s;
+    -webkit-transition: all 0.8s;
+    border: 1px solid #FF9900 ;
+    background-color: #FF9900 ;
+    color: #454545;
+}
+
+.middle-card {
+    border: 0;
+}
+
+.btn-drop {
+    border:0 !important;
+    background-color: #FF9900 !important;
+    color: #454545;
+}
+
+.input-group {
+    border-radius: 0;
+}
+
 i {
     border: 1px solid #FF9900;
     border-width: 0 3px 3px 0;
@@ -208,7 +232,6 @@ h4 {
 .post .post-footer .comments-list .comment .comment-heading .time {
     font-size: 12px;
     color: #aaa;
-    margin-top: 0;
     display: inline;
 }
 

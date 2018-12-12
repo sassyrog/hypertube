@@ -14,7 +14,7 @@
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav">
 				<li class="nav-item active">
-					<a class="nav-link" href="/logout">logout<span class="sr-only">(current)</span></a>
+					<a class="nav-link" href="/logout">Logout<span class="sr-only">(current)</span></a>
 				</li>
 			</ul>
 			<ul class="navbar-nav">
@@ -144,12 +144,13 @@
 
 	$('document').ready(function() {
 
-		setInterval(function() {
-			$('.alert').fadeOut();
-		}, 5000);
+//		setInterval(function() {
+//			$('.alert').fadeOut();
+//		}, 5000);
 
 		makeMovieCall();
-
+		console.log(window.sessionStorage);
+		
 		$('#search_form').css({
 			'display': 'none',
 			'transition': '600ms',

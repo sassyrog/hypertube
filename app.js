@@ -13,6 +13,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var videoRouter = require('./routes/video');
 const config = require('./config/database');
+const rp = require('request-promise');
+const url = 'https://en.wikipedia.org/wiki/List_of_Presidents_of_the_United_States';
 
 var http = require('http');
 
@@ -127,8 +129,8 @@ app.use(function(req, res, next) {
 // });
 
 // const query = require('yify-search');
-//
-// query.search('big hero 6', (error, result) => {
+
+// query.search('cars', (error, result) => {
 //     console.log(result);
 // })
 
@@ -234,16 +236,13 @@ app.use('/movie', searchRouter);
 
 app.use('/movie/info', require('./routes/movie_info'));
 
-
-app.use('/movie/info', require('./routes/movie_info'));
-
 app.use('/user/update', require('./routes/update'));
 
 app.use('/forgot/password', require('./routes/password_reset'));
 
-app.use('/comments', require('./routes/comments'))
+app.use('/comments', require('./routes/comments'));
 
-
+app.use('/scrapper', require('./routes/scrapper'));
 
 
 
