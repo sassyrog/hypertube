@@ -22,7 +22,7 @@ router.post('/default', (req, response) => {
 
 	console.log(req.body);
 	
-	mdb.miscPopularMovies({page: '2'}, (err, res) => {
+	mdb.miscPopularMovies({page: req.body.page}, (err, res) => {
 		var obj = res.results;
 		for (i = 0; i < obj.length; i++) {
 			obj[i].date = parseInt(obj[i].release_date.replace(/-/g, ''), 10)
