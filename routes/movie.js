@@ -20,28 +20,35 @@ router.post('/default', (req, response) => {
 	
 	var gg = '';
 
-	mdb.miscPopularMovies({}, (err, res) => {
-
-		// console.log();
-		if (req.body.filter == 'title') {
-			res.results.sort(dynamicSort(req.body.filter));
-		} else {
-			res.results.sort(dynamicSort('-' + req.body.filter));
+	console.log(req.body);
+	
+	mdb.miscPopularMovies({page: '2'}, (err, res) => {
+		var obj = res.results;
+		for (i = 0; i < obj.length; i++) {
+			obj[i].date = parseInt(obj[i].release_date.replace(/-/g, ''), 10)
 		}
 
-		if (res.results.length != 0) {
-			console.log(res.results[0].release_date);
-			for (i = 0; i < res.results.length; i++) {
-				if (res.results[i].poster_path === null || res.results[i].backdrop_path === null)
+		console.log(obj);
+		
+		if (req.body.filter == 'title') {
+			obj.sort(dynamicSort(req.body.filter));
+		} else {
+			obj.sort(dynamicSort('-' + req.body.filter));
+		}
+
+		if (obj.length != 0) {
+			console.log(obj[0].release_date);
+			for (i = 0; i < obj.length; i++) {
+				if (obj[i].poster_path === null || obj[i].backdrop_path === null)
 					continue;
 				gg = gg +
 					'<div class="movie-card" onclick="func(this)">\n' +
 						'<div class="movie-card-cover">\n' +
-							'<div class="movie-header" style="background-image: url(\'https://image.tmdb.org/t/p/w500' + res.results[i].poster_path + '\')">\n' +
+							'<div class="movie-header" style="background-image: url(\'https://image.tmdb.org/t/p/w500' + obj[i].poster_path + '\')">\n' +
 								'<div class="header-icon-container">\n' +
-									'<div class="movie-title">' + res.results[i].title + 
+									'<div class="movie-title">' + obj[i].title + 
 									'</div>' +
-									'<span class="movie-year">(' + res.results[i].release_date.substring(0, 4) + ')</span>' +
+									'<span class="movie-year">(' + obj[i].release_date.substring(0, 4) + ')</span>' +
 								'</div>' +
 							'</div>' +
 						'</div>' +
@@ -58,18 +65,19 @@ router.post('/search', (req, response) => {
 		mdb.searchMovie({
 			query: req.body.search
 		}, (err, res) => {
-			if (res.results.length != 0) {
-				for (i = 0; i < res.results.length; i++) {
-					if (res.results[i].poster_path === null || res.results[i].backdrop_path === null)
+			var obj = res.results;
+			if (obj.length != 0) {
+				for (i = 0; i < obj.length; i++) {
+					if (obj[i].poster_path === null || obj[i].backdrop_path === null)
 						continue;
 					yy = yy +
 					'<div class="movie-card" onclick="func(this)">\n' +
 						'<div class="movie-card-cover">\n' +
-							'<div class="movie-header" style="background-image: url(\'https://image.tmdb.org/t/p/w500' + res.results[i].poster_path + '\')">\n' +
+							'<div class="movie-header" style="background-image: url(\'https://image.tmdb.org/t/p/w500' + obj[i].poster_path + '\')">\n' +
 								'<div class="header-icon-container">\n' +
-									'<div class="movie-title">' + res.results[i].title + 
+									'<div class="movie-title">' + obj[i].title + 
 									'</div>' +
-									'<span class="movie-year">(' + res.results[i].release_date.substring(0, 4) + ')</span>' +
+									'<span class="movie-year">(' + obj[i].release_date.substring(0, 4) + ')</span>' +
 								'</div>' +
 							'</div>' +
 						'</div>' +
