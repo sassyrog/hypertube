@@ -13,13 +13,24 @@ body {
 }
 
 .middle-card {
-    border: 0;
+    padding-top: 10px;
+    border: 0 !important;
+    outline-color: none !important;
+    background-color: black !important;
 }
 
 .btn-drop {
-    border: 0 !important;
-    background-color: #FF9900 !important;
+    border: 1px solid #FF9900;
+    background-color: #FF9900;
+    padding: 10px;
     color: #454545;
+    transition: all 0.4s;
+}
+
+.btn-drop:hover {
+    border: 1px solid #FF9900 !important;
+    background-color: black !important;
+    color: white !important;
 }
 
 .input-group {
@@ -94,6 +105,7 @@ i:hover {
 
 * {
     font-family: Consolas;
+    outline: none !important;
 }
 
 .comment-btn {

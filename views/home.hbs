@@ -7,10 +7,12 @@
 {{!-- <img src="https://lh6.googleusercontent.com/-HqHY9fF8vkU/AAAAAAAAAAI/AAAAAAAAG0w/d9gECEX85PY/photo.jpg?sz=500" alt=""> --}}
 <div class="head">
 	<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-		<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+		<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav"
+		 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		<a class="navbar-brand" href="/user/profile"><img {{#if pic}} src="{{pic}}" {{else}} src="/images/avatar.png" {{/if}} width="40" height="40" class="d-inline-block align-top" alt=""></a>
+		<a class="navbar-brand" href="/user/profile"><img {{#if pic}} src="{{pic}}" {{else}} src="/images/avatar.png" {{/if}}
+			 width="40" height="40" class="d-inline-block align-top" alt=""></a>
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav">
 				<li class="nav-item active">
@@ -47,6 +49,17 @@
 		</form>
 	</div>
 </div>
+
+<div class="dropdown_1">
+	<button class="btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		Sort By <div class="arrow-down"></div>
+	</button>
+	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+		<div class="dropdown-item" value="date">Release Date</div>
+		<div class="dropdown-item" value="title">Title</div>
+		<div class="dropdown-item" value="vote-average">Rating</div>
+	</div>
+</div>
 <div class="containers">
 	<div class="gala">
 	</div>
@@ -67,22 +80,44 @@
 		<p class="overview"></p>
 	</div>
 </div>
+<footer class="text-white mt-4">
+    <div class="container-fluid py-3">
+        <div class="row">
+            <div class="col-md-3">
+                <h5>Footer</h5></div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">I stay at the bottom of the viewport! <span class="small"><br>Unless the page content pushes me further.</span></div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3 text-right small align-self-end">©2017 Brand, Inc.</div>
+        </div>
+    </div>
+</footer>
 <script>
 	var i = 0;
 
-	function makeMovieCall() {
+	function makeMovieCall(filter = 'none') {
 		var data = {};
+
+		data.filter = filter;
 		$.ajax({
 			type: 'POST',
 			data: JSON.stringify(data),
 			contentType: 'application/json',
 			url: '/movie/default',
-			success: function(res) {
-				// console.log(res);
+			success: function (res) {
 				$('.gala').html(res);
 			}
 		});
 	}
+
+	$('.dropdown-item').on('click', function() {
+			makeMovieCall(''+ $(this).attr('value'));
+	})
+
 
 	function func(e) {
 		var year = $(e).find($('.year')).html(),
@@ -96,7 +131,7 @@
 			data: JSON.stringify(data),
 			contentType: 'application/json',
 			url: '/movie/info',
-			success: function(res) {
+			success: function (res) {
 				console.log(res);
 
 				$('.box').css({
@@ -142,15 +177,14 @@
 		});
 	}
 
-	$('document').ready(function() {
+	$('document').ready(function () {
 
-//		setInterval(function() {
-//			$('.alert').fadeOut();
-//		}, 5000);
+		setInterval(function () {
+			$('.alert').fadeOut();
+		}, 1000);
 
 		makeMovieCall();
-		console.log(window.sessionStorage);
-		
+
 		$('#search_form').css({
 			'display': 'none',
 			'transition': '600ms',
@@ -159,7 +193,7 @@
 			'height': '0px',
 		});
 
-		$('#cancel').on('click', function() {
+		$('#cancel').on('click', function () {
 			$('.movie-desc').css({
 				'display': 'none',
 			});
@@ -175,7 +209,7 @@
 			});
 		})
 
-		$('#search_btn').on('click', function() {
+		$('#search_btn').on('click', function () {
 			if (i == 0) {
 				$('#search_form').css({
 					'display': 'block',
@@ -195,7 +229,7 @@
 			}
 		});
 
-		document.getElementById("search").addEventListener("input", function() {
+		document.getElementById("search").addEventListener("input", function () {
 			if ($('#search').val() === '') {
 				makeMovieCall();
 			} else {
@@ -206,7 +240,7 @@
 					data: JSON.stringify(data),
 					contentType: 'application/json',
 					url: '/movie/search',
-					success: function(res) {
+					success: function (res) {
 						console.log(res);
 						$('.gala').html(res);
 					}
@@ -214,4 +248,5 @@
 			}
 		});
 	});
+
 </script>

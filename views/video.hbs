@@ -44,7 +44,7 @@
 		<p></p>
 
 		<div class="middle-card card text-center">
-			<button type="button" class="btn btn-primary btn-drop">More Info...</button>
+			<button type="button" class="btn-drop">More Info...</button>
 			<div class="drop-box">
 				<div class="card-header">
 					<ul class="nav nav-tabs card-header-tabs">
@@ -97,6 +97,7 @@
 	var i = 1;
 	var query;
 
+
 	window.onscroll = function() {
 		scrollFunction()
 	};
@@ -105,7 +106,7 @@
 		if (i) {
 			$('.drop-box').css({
 				'display': 'block',
-				'height': '700px'
+				'height': '700px',
 			})
 			i--;
 		} else {
@@ -115,6 +116,9 @@
 			})
 			i++;
 		}
+		$('.drop-box').css({
+			'transition': 'all 0.8s'
+		})
 	})
 
 
@@ -166,7 +170,6 @@
 				$('.the-movies').css('display', 'block');
 			}
 		})
-
 		$('#myBtn').css({
 			'display': 'none',
 		});
