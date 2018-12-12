@@ -7,6 +7,19 @@ body {
     height : 0px;
     transition: all 0.8s;
     -webkit-transition: all 0.8s;
+    border: 1px solid #FF9900 ;
+    background-color: #FF9900 ;
+    color: #454545;
+}
+
+.middle-card {
+    border: 0;
+}
+
+.btn-drop {
+    border:0 !important;
+    background-color: #FF9900 !important;
+    color: #454545;
 }
 
 .input-group {
