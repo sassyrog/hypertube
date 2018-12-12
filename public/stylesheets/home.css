@@ -2,6 +2,10 @@ body {
     background-color: black;
 }
 
+.dropdown {
+    position: absolute;
+}
+
 .form-control {
     outline-color: #ff9900;
 }
@@ -175,13 +179,14 @@ body i {
 
 .btn {
     background-color: black;
-    /* color: #ff9900; */
+    color: white;
     border: 2px solid #ff9900;
 }
 
 .btn:hover {
-    background: black;
-    border: 2px solid #ff9900;
+    background-color: #ff9900;
+    border: 2px solid white;
+    color: black;
 }
 
 * {
@@ -320,7 +325,7 @@ a:hover {
 
 .container {
     height: 0px;
-    top: 6px;
+    top: 2px;
     right: 0;
     left: 0;
 }
@@ -328,6 +333,8 @@ a:hover {
 #search_form {
     height: 20px;
 }
+
+
 
 .movie-content-header, .movie-info {
     display: table;

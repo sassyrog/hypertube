@@ -47,6 +47,16 @@
 		</form>
 	</div>
 </div>
+<div class="dropdown">
+  <button class="btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Sort By
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <div class="dropdown-item" >Release Date</div>
+    <div class="dropdown-item" >Another action</div>
+    <div class="dropdown-item" href="#">Something else here</div>
+  </div>
+</div>
 <div class="containers">
 	<div class="gala">
 	</div>
@@ -70,15 +80,17 @@
 <script>
 	var i = 0;
 
-	function makeMovieCall() {
+	function makeMovieCall(filter = 'none') {
 		var data = {};
+
+		data.filter = 'title';
 		$.ajax({
 			type: 'POST',
 			data: JSON.stringify(data),
 			contentType: 'application/json',
 			url: '/movie/default',
 			success: function(res) {
-				// console.log(res);
+				//console.log(res);
 				$('.gala').html(res);
 			}
 		});
@@ -144,12 +156,11 @@
 
 	$('document').ready(function() {
 
-//		setInterval(function() {
-//			$('.alert').fadeOut();
-//		}, 5000);
+		setInterval(function() {
+			$('.alert').fadeOut();
+		}, 1000);
 
 		makeMovieCall();
-		console.log(window.sessionStorage);
 		
 		$('#search_form').css({
 			'display': 'none',
