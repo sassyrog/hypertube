@@ -2,6 +2,18 @@ body {
     background-color: black;
 }
 
+.body-wrapper {
+    min-height: 86%;
+}
+
+.col-md-6 {
+    font-size: small;
+}
+
+.small {
+    font-size: 65%;
+}
+
 .loader {
     display: none;
     position: fixed;
@@ -23,9 +35,19 @@ body {
     margin: auto;
 }
 
-.fas, .fa-spinner, .fa-spin {
+.fa-spinner, .fa-spin {
     color: #ff9900;
     font-size: 100% !important;
+}
+
+.btn-group>.btn:first-child {
+    margin-left: 0;
+    padding-bottom: 0;
+}
+
+.btn-group {
+    padding-top: 80px;
+    transition: 'none';
 }
 
 .page-link:hover {
@@ -73,7 +95,7 @@ body {
 }
 
 .footer {
-    height: 150px;
+    height: 10%;
     background: rgba(133, 133, 133, 0.507);
     z-index: 2;
     width: 100%;
@@ -305,7 +327,7 @@ a:hover {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    padding-top: 70px;
+    padding-top: 0px;
     padding-bottom: 20px;
 }
 
@@ -409,6 +431,7 @@ a:hover {
 }
 
 #search_form {
+    padding-top: 10px;
     height: 20px;
 }
 

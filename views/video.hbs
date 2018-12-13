@@ -1,6 +1,8 @@
 {{#if title}}
 	<title>{{title}}</title>
 {{/if}}
+<link rel="stylesheet" href="/stylesheets/croppie.css" />
+<script src="/javascripts/croppie.js"></script>
 <link rel="stylesheet" href="/stylesheets/video.css">
 
 
@@ -24,6 +26,9 @@
 			</ul>
 		</div>
 	</nav>
+	<div class="back">
+		<i class="fas fa-arrow-left"></i>
+	</div>
 </div>
 
 {{!-- <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
@@ -59,9 +64,6 @@
 					<ul class="nav nav-tabs card-header-tabs">
 						<li class="watched nav-item nav-link active">
 							movie cast
-						</li>
-						<li class="upadate-profile nav-item nav-link">
-							upadte profile
 						</li>
 						{{!-- <li class="nav-item nav-link">
 					</li> --}}
@@ -145,13 +147,10 @@
 		})
 	})
 
-
 	function getComments(title, year) {
 		var data = {};
-
 		data.title = title;
 		data.year = year;
-
 		$.ajax({
 			type: 'POST',
 			data: JSON.stringify(data),
@@ -199,24 +198,13 @@
 		});
 
 		getComments(query.title, query.year);
-		//console.log(query);
 		player.poster('https://image.tmdb.org/t/p/w1280' + query.poster);
 
 		$('.vid_desc').find('h2').html(query.title);
 		$('.vid_desc').find('p').html(query.desc);
-
-		//		Make fullscrenn border 0px;
-
-		//		if (window.innerHeight == screen.height) {
-		//			console.log("Comparison works");
-		//			$('#videoPlayer').css({
-		//				'border': '0px',
-		//			});
-		//		}
 	})
 
 	$('.comment-btn').on('click', function() {
-
 		if ($('.comment').val() != '') {
 			var data = {};
 			data.comment = $('.comment').val();
@@ -228,14 +216,11 @@
 				contentType: 'application/json',
 				url: '/comments',
 				success: function(res) {
-					//					$('.com-boxes').html(res);
 				}
 			})
 			getComments();
 		}
 	})
-
-
 	function scrollFunction() {
 		if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
 			document.getElementById("myBtn").style.display = "block";
@@ -243,4 +228,9 @@
 			document.getElementById("myBtn").style.display = "none";
 		}
 	}
+
+	$('.back').on('click', function() {
+		window.location.href = '/home';
+	})
+
 </script>

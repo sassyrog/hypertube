@@ -80,20 +80,20 @@ router.get('/login', (req, res, next) => {
     });
 });
 
-router.get('/home', function(req, res) {
-    // var info = req.session.passport.user;
-    // if (info) {
-    //     res.render('home', {
-    //         title: 'home',
-    //         firstname: info.firstname,
-    //         lastname: info.lastname,
-    //         username: info.username,
-    //         email: info.email,
-    //         pic: info.profile_img
-    //     });
-    // } else {
+router.get('/home', loggedIn, function(req, res) {
+    var info = req.session.passport.user;
+    if (info) {
+        res.render('home', {
+            title: 'home',
+            firstname: info.firstname,
+            lastname: info.lastname,
+            username: info.username,
+            email: info.email,
+            pic: info.profile_img
+        });
+    } else {
     res.render('home');
-    // }
+    }
 });
 
 router.get('/test', function(req, res) {
