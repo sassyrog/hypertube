@@ -22,7 +22,7 @@ app.get('/', loggedIn, function(req, res) {
     var id = req.session.passport.user._id;
 
     if (req.query.info) {
-		var subtitlesArr = {};
+		var subtitlesArr = []
         var buf = new Buffer.from(req.query.info, 'base64').toString("ascii")
         var param_str = buf.split("&")
         var get_info = {}
@@ -49,7 +49,7 @@ app.get('/', loggedIn, function(req, res) {
                                 }).then(res => {
                                     console.log(res);
                                     res.forEach(function(sub) {
-                                        var subStats;
+                                        var subStats = []
                                         subStats["lang"] = sub.lang;
                                         subStats["langShort"] = sub.langShort;
                                         subStats["path"] = sub.path;
