@@ -41,7 +41,7 @@ body {
 }
 
 body i {
-    font-family: 'FontAwesome' !important;
+    font-family: 'Font Awesome 5 Free' !important;
 }
 
 a {
@@ -54,6 +54,7 @@ a {
 
 .form-control {
     background-color: #FFC773;
+    border: 0;
 }
 
 .alert {

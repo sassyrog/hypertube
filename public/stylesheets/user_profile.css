@@ -11,7 +11,7 @@ body {
 }
 
 body i {
-    font-family: 'FontAwesome' !important;
+    font-family: 'Font Awesome 5 Free' !important;
 }
 
 meter {
@@ -44,6 +44,44 @@ meter[value="4"]::-webkit-meter-optimum-value {
 
 meter[value="5"]::-webkit-meter-optimum-value {
     background: green;
+}
+
+.fa, .fas {
+    font-size: 25px;
+}
+
+.nav-item .tooltiptext {
+    visibility: hidden;
+    color: #fff;
+    text-align: center;
+    position: absolute;
+    z-index: 1;
+}
+
+.nav-item:hover .tooltiptext {
+    visibility: visible;
+}
+
+.speech-bubble {
+    position: relative;
+    background: #000000;
+    border-radius: .4em;
+    font-size: small;
+    padding: 5px;
+}
+
+.speech-bubble:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 14%;
+    width: 0;
+    height: 0;
+    border: 0.5em solid transparent;
+    border-bottom-color: #000000;
+    border-top: 0;
+    margin-left: -0.25em;
+    margin-top: -0.437em;
 }
 
 .fa-arrow-left {
