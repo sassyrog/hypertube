@@ -20,8 +20,6 @@ router.post('/default', (req, response) => {
 
     var gg = '';
 
-    console.log(req.body);
-
     mdb.miscPopularMovies({
         page: req.body.page
     }, (err, res) => {
@@ -39,7 +37,6 @@ router.post('/default', (req, response) => {
         }
 
         if (obj.length != 0) {
-            console.log(obj[0].release_date);
             for (i = 0; i < obj.length; i++) {
                 if (obj[i].poster_path === null || obj[i].backdrop_path === null)
                     continue;
