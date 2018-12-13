@@ -1,9 +1,11 @@
 <!-- Font Awesome -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://twitter.github.io/typeahead.js/js/handlebars.js"></script>
 <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
 <link rel="stylesheet" href="/stylesheets/home.css">
-{{!-- <script src="https://unpkg.com/tooltip.js/dist/tooltip.min.js"></script> --}}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://unpkg.com/popper.js/dist/umd/popper.min.js"></script>
+<script src="https://unpkg.com/tooltip@1.6.1/dist/Tooltip.min.js"></script>
 
 <div class="head">
 
@@ -188,14 +190,12 @@
 	}
 
 	$('document').ready(function() {
-		// 
-		// $(function() {
-		// 	$('[data-toggle="tooltip"]').each(function() {
-		// 		new Tooltip($(this), {
-		// 			placement: 'top',
-		// 		});
-		// 	})
-		// })
+
+		// const instance = new Tooltip(, {
+		// 	title: "Hey there",
+		// 	trigger: "click",
+		// });
+		// instance.show();
 
 		var page = 1;
 
