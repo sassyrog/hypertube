@@ -46,8 +46,6 @@
 	</div>
 </div>
 
-
-
 <div class="containers">
 	<div class="btn-group d-flex justify-content-center" id="sort-btn">
 		<button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -109,10 +107,8 @@
 </footer>
 <script>
 	var i = 0;
-
 	function makeMovieCall(filter = 'none', page = '1') {
 		var data = {};
-
 		data.filter = filter;
 		data.page = page;
 		$.ajax({
@@ -129,30 +125,29 @@
 		});
 	}
 
-
 	function func(e) {
 		var year = $(e).find($('.year')).html(),
 			title = $(e).find($('.movie-title')).html();
 		var data = {};
 		data.title = title;
-
 		$.ajax({
 			type: 'POST',
 			data: JSON.stringify(data),
 			contentType: 'application/json',
 			url: '/movie/info',
 			success: function(res) {
-
 				$('.box').css({
-					//					'background-image': 'url("https://image.tmdb.org/t/p/w500' + res.backdrop_path + '")'
 					'background-image': 'url("https://image.tmdb.org/t/p/w1280' + res.backdrop_path + '")'
 				})
+
 				$('.movie-desc').css({
 					'display': 'block',
 				});
-				$('.container').css({
+
+				$('#search_form').css({
 					'display': 'none',
 				});
+
 				$('.head').css({
 					'height': '100%'
 				});
@@ -170,36 +165,24 @@
 				}
 
 				$('.overview').html(res.overview);
-				$('.vid_desc').find('h1').html(res.title);
 
+				$('.vid_desc').find('h1').html(res.title);
 				var url = 'title=' + res.title +
 					'&poster=' + res.backdrop_path +
 					'&mdbID=' + res.id +
 					'&desc=' + res.overview +
 					'&year=' + res.release_date.substring(0, 4);
-
 				var newUrl = Base64.encode(url);
-
 
 				$('.movie_link').attr('href', '/video?info=' + newUrl);
 			}
 		});
 	}
-
+	
 	$('document').ready(function() {
-		// 
-		// $(function() {
-		// 	$('[data-toggle="tooltip"]').each(function() {
-		// 		new Tooltip($(this), {
-		// 			placement: 'top',
-		// 		});
-		// 	})
-		// })
-
 		var page = 1;
 
 		$('.page-item').on('click', function() {
-
 			if ($(this).attr('value') == "prev" && page > 1) {
 				page -= 1;
 				makeMovieCall('none', '' + page);
@@ -213,41 +196,11 @@
 			makeMovieCall('' + $(this).attr('value'), '' + page);
 		})
 
-
-
 		setInterval(function() {
 			$('.alert').fadeOut();
 		}, 1000);
 
 		makeMovieCall();
-
-		$('#search_form').css({
-			'display': 'none',
-			'transition': '600ms',
-		});
-		$('.head').css({
-			'height': '0px',
-		});
-
-		$('#cancel').on('click', function() {
-			$('.movie-desc').css({
-				'display': 'none',
-			});
-			$('.container').css({
-				'display': 'none',
-			});
-			$('.head').css({
-				'height': '0px',
-			});
-			$('.movie-desc').css({
-				'width': '0',
-				'height': '0'
-			});
-			$('#search_form').css({
-					'display': 'block',
-					'transition': '600ms',
-				});
-		})
 
 		$('#search_btn').on('click', function() {
 			if (i == 0) {
@@ -258,7 +211,7 @@
 					'height': '124px',
 				});
 				$('.btn-group').css ({
-				    'padding-top': '109px',
+					'padding-top': '109px',
 					'transition': 'none'
 				})
 				$('.btn-group>.btn:first-child').css ({
@@ -273,7 +226,7 @@
 					'height': '0px',
 				});
 				$('.btn-group').css ({
-				    'padding-top': '80px',
+					'padding-top': '80px',
 					'transition': 'none'
 				})
 				$('.btn-group>.btn:first-child').css ({
@@ -283,7 +236,36 @@
 			}
 		});
 
-		
+		$('#search_form').css({
+			'display': 'none',
+			'transition': '600ms',
+		});
+
+		$('.head').css({
+			'height': '0px',
+		});
+
+		$('#cancel').on('click', function() {
+			$('.movie-desc').css({
+				'display': 'none',
+			});
+			$('.head').css({
+				'height': '0px',
+			});
+			$('.movie-desc').css({
+				'width': '0',
+				'height': '0'
+			});
+			$('.btn-group').css ({
+				'padding-top': '80px',
+				'transition': 'none'
+			});
+			$('.btn-group>.btn:first-child').css ({
+				'display': 'block',
+			});
+			i = 0;
+		})
+
 		document.getElementById("search").addEventListener("input", function() {
 			if ($('#search').val() === '') {
 				makeMovieCall();

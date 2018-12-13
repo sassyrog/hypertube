@@ -80,7 +80,7 @@ router.get('/login', (req, res, next) => {
     });
 });
 
-router.get('/home', function(req, res) {
+router.get('/home', loggedIn, function(req, res) {
     var info = req.session.passport.user;
     if (info) {
         res.render('home', {
