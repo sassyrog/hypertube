@@ -23,7 +23,7 @@ router.post('/default', (req, response) => {
     console.log(req.body);
 
     mdb.miscPopularMovies({
-        page: '2'
+        page: req.body.page
     }, (err, res) => {
         var obj = res.results;
         for (i = 0; i < obj.length; i++) {
