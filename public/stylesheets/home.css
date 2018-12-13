@@ -2,6 +2,16 @@ body {
     background-color: black;
 }
 
+.btn-group>.btn:first-child {
+    margin-left: 0;
+    padding-bottom: 0;
+}
+
+.btn-group {
+    padding-top: 80px;
+    transition: 'none';
+}
+
 .page-link:hover {
     cursor: pointer;
 }
@@ -256,7 +266,7 @@ a:hover {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    padding-top: 70px;
+    padding-top: 0px;
     padding-bottom: 20px;
 }
 
@@ -360,6 +370,7 @@ a:hover {
 }
 
 #search_form {
+    padding-top: 10px;
     height: 20px;
 }
 

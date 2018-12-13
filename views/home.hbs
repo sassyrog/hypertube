@@ -44,8 +44,12 @@
 			</div>
 		</form>
 	</div>
+</div>
 
-	<div class="btn-group d-flex justify-content-center">
+
+
+<div class="containers">
+	<div class="btn-group d-flex justify-content-center" id="sort-btn">
 		<button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			Sort By
 		</button>
@@ -55,11 +59,6 @@
 			<div class="dropdown-item" value="vote-average">Rating</div>
 		</div>
 	</div>
-</div>
-
-
-
-<div class="containers">
 	<div class="gala">
 	</div>
 </div>
@@ -252,8 +251,15 @@
 					'display': 'block',
 				});
 				$('.head').css({
-					'height': '106px',
+					'height': '124px',
 				});
+				$('.btn-group').css ({
+				    'padding-top': '109px',
+					'transition': 'none'
+				})
+				$('.btn-group>.btn:first-child').css ({
+					'display': 'none',
+				})
 				i = 1;
 			} else {
 				$('#search_form').css({
@@ -262,10 +268,19 @@
 				$('.head').css({
 					'height': '0px',
 				});
+				$('.btn-group').css ({
+				    'padding-top': '80px',
+					'transition': 'none'
+				})
+				$('.btn-group>.btn:first-child').css ({
+					'display': 'block',
+				})
+
 				i = 0;
 			}
 		});
 
+		
 		document.getElementById("search").addEventListener("input", function() {
 			if ($('#search').val() === '') {
 				makeMovieCall();
