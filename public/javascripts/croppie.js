@@ -4,7 +4,7 @@
  * Foliotek
  * Version: 2.6.2
  *************************/
-(function (root, factory) {
+(function(root, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
         define(['exports'], factory);
@@ -15,20 +15,139 @@
         // Browser globals
         factory((root.commonJsStrict = {}));
     }
-}(this, function (exports) {
+}(this, function(exports) {
 
     /* Polyfills */
     if (typeof Promise !== 'function') {
         /*! promise-polyfill 3.1.0 */
-        !function(a){function b(a,b){return function(){a.apply(b,arguments)}}function c(a){if("object"!==typeof this)throw new TypeError("Promises must be constructed via new");if("function"!==typeof a)throw new TypeError("not a function");this._state=null,this._value=null,this._deferreds=[],i(a,b(e,this),b(f,this))}function d(a){var b=this;return null===this._state?void this._deferreds.push(a):void k(function(){var c=b._state?a.onFulfilled:a.onRejected;if(null===c)return void(b._state?a.resolve:a.reject)(b._value);var d;try{d=c(b._value)}catch(e){return void a.reject(e)}a.resolve(d)})}function e(a){try{if(a===this)throw new TypeError("A promise cannot be resolved with itself.");if(a&&("object"===typeof a||"function"===typeof a)){var c=a.then;if("function"===typeof c)return void i(b(c,a),b(e,this),b(f,this))}this._state=!0,this._value=a,g.call(this)}catch(d){f.call(this,d)}}function f(a){this._state=!1,this._value=a,g.call(this)}function g(){for(var a=0,b=this._deferreds.length;b>a;a++)d.call(this,this._deferreds[a]);this._deferreds=null}function h(a,b,c,d){this.onFulfilled="function"===typeof a?a:null,this.onRejected="function"===typeof b?b:null,this.resolve=c,this.reject=d}function i(a,b,c){var d=!1;try{a(function(a){d||(d=!0,b(a))},function(a){d||(d=!0,c(a))})}catch(e){if(d)return;d=!0,c(e)}}var j=setTimeout,k="function"===typeof setImmediate&&setImmediate||function(a){j(a,1)},l=Array.isArray||function(a){return"[object Array]"===Object.prototype.toString.call(a)};c.prototype["catch"]=function(a){return this.then(null,a)},c.prototype.then=function(a,b){var e=this;return new c(function(c,f){d.call(e,new h(a,b,c,f))})},c.all=function(){var a=Array.prototype.slice.call(1===arguments.length&&l(arguments[0])?arguments[0]:arguments);return new c(function(b,c){function d(f,g){try{if(g&&("object"===typeof g||"function"===typeof g)){var h=g.then;if("function"===typeof h)return void h.call(g,function(a){d(f,a)},c)}a[f]=g,0===--e&&b(a)}catch(i){c(i)}}if(0===a.length)return b([]);for(var e=a.length,f=0;f<a.length;f++)d(f,a[f])})},c.resolve=function(a){return a&&"object"===typeof a&&a.constructor===c?a:new c(function(b){b(a)})},c.reject=function(a){return new c(function(b,c){c(a)})},c.race=function(a){return new c(function(b,c){for(var d=0,e=a.length;e>d;d++)a[d].then(b,c)})},c._setImmediateFn=function(a){k=a},"undefined"!==typeof module&&module.exports?module.exports=c:a.Promise||(a.Promise=c)}(this);
+        ! function(a) {
+            function b(a, b) {
+                return function() {
+                    a.apply(b, arguments)
+                }
+            }
+
+            function c(a) {
+                if ("object" !== typeof this) throw new TypeError("Promises must be constructed via new");
+                if ("function" !== typeof a) throw new TypeError("not a function");
+                this._state = null, this._value = null, this._deferreds = [], i(a, b(e, this), b(f, this))
+            }
+
+            function d(a) {
+                var b = this;
+                return null === this._state ? void this._deferreds.push(a) : void k(function() {
+                    var c = b._state ? a.onFulfilled : a.onRejected;
+                    if (null === c) return void(b._state ? a.resolve : a.reject)(b._value);
+                    var d;
+                    try {
+                        d = c(b._value)
+                    } catch (e) {
+                        return void a.reject(e)
+                    }
+                    a.resolve(d)
+                })
+            }
+
+            function e(a) {
+                try {
+                    if (a === this) throw new TypeError("A promise cannot be resolved with itself.");
+                    if (a && ("object" === typeof a || "function" === typeof a)) {
+                        var c = a.then;
+                        if ("function" === typeof c) return void i(b(c, a), b(e, this), b(f, this))
+                    }
+                    this._state = !0, this._value = a, g.call(this)
+                } catch (d) {
+                    f.call(this, d)
+                }
+            }
+
+            function f(a) {
+                this._state = !1, this._value = a, g.call(this)
+            }
+
+            function g() {
+                for (var a = 0, b = this._deferreds.length; b > a; a++) d.call(this, this._deferreds[a]);
+                this._deferreds = null
+            }
+
+            function h(a, b, c, d) {
+                this.onFulfilled = "function" === typeof a ? a : null, this.onRejected = "function" === typeof b ? b : null, this.resolve = c, this.reject = d
+            }
+
+            function i(a, b, c) {
+                var d = !1;
+                try {
+                    a(function(a) {
+                        d || (d = !0, b(a))
+                    }, function(a) {
+                        d || (d = !0, c(a))
+                    })
+                } catch (e) {
+                    if (d) return;
+                    d = !0, c(e)
+                }
+            }
+            var j = setTimeout,
+                k = "function" === typeof setImmediate && setImmediate || function(a) {
+                    j(a, 1)
+                },
+                l = Array.isArray || function(a) {
+                    return "[object Array]" === Object.prototype.toString.call(a)
+                };
+            c.prototype["catch"] = function(a) {
+                return this.then(null, a)
+            }, c.prototype.then = function(a, b) {
+                var e = this;
+                return new c(function(c, f) {
+                    d.call(e, new h(a, b, c, f))
+                })
+            }, c.all = function() {
+                var a = Array.prototype.slice.call(1 === arguments.length && l(arguments[0]) ? arguments[0] : arguments);
+                return new c(function(b, c) {
+                    function d(f, g) {
+                        try {
+                            if (g && ("object" === typeof g || "function" === typeof g)) {
+                                var h = g.then;
+                                if ("function" === typeof h) return void h.call(g, function(a) {
+                                    d(f, a)
+                                }, c)
+                            }
+                            a[f] = g, 0 === --e && b(a)
+                        } catch (i) {
+                            c(i)
+                        }
+                    }
+                    if (0 === a.length) return b([]);
+                    for (var e = a.length, f = 0; f < a.length; f++) d(f, a[f])
+                })
+            }, c.resolve = function(a) {
+                return a && "object" === typeof a && a.constructor === c ? a : new c(function(b) {
+                    b(a)
+                })
+            }, c.reject = function(a) {
+                return new c(function(b, c) {
+                    c(a)
+                })
+            }, c.race = function(a) {
+                return new c(function(b, c) {
+                    for (var d = 0, e = a.length; e > d; d++) a[d].then(b, c)
+                })
+            }, c._setImmediateFn = function(a) {
+                k = a
+            }, "undefined" !== typeof module && module.exports ? module.exports = c : a.Promise || (a.Promise = c)
+        }(this);
     }
 
-    if ( typeof window.CustomEvent !== "function" ) {
-        (function(){
-            function CustomEvent ( event, params ) {
-                params = params || { bubbles: false, cancelable: false, detail: undefined };
-                var evt = document.createEvent( 'CustomEvent' );
-                evt.initCustomEvent( event, params.bubbles, params.cancelable, params.detail );
+    if (typeof window.CustomEvent !== "function") {
+        (function() {
+            function CustomEvent(event, params) {
+                params = params || {
+                    bubbles: false,
+                    cancelable: false,
+                    detail: undefined
+                };
+                var evt = document.createEvent('CustomEvent');
+                evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
                 return evt;
             }
             CustomEvent.prototype = window.Event.prototype;
@@ -38,16 +157,18 @@
 
     if (!HTMLCanvasElement.prototype.toBlob) {
         Object.defineProperty(HTMLCanvasElement.prototype, 'toBlob', {
-            value: function (callback, type, quality) {
-                var binStr = atob( this.toDataURL(type, quality).split(',')[1] ),
-                len = binStr.length,
-                arr = new Uint8Array(len);
+            value: function(callback, type, quality) {
+                var binStr = atob(this.toDataURL(type, quality).split(',')[1]),
+                    len = binStr.length,
+                    arr = new Uint8Array(len);
 
-                for (var i=0; i<len; i++ ) {
+                for (var i = 0; i < len; i++) {
                     arr[i] = binStr.charCodeAt(i);
                 }
 
-                callback( new Blob( [arr], {type: type || 'image/png'} ) );
+                callback(new Blob([arr], {
+                    type: type || 'image/png'
+                }));
             }
         });
     }
@@ -55,8 +176,8 @@
 
     var cssPrefixes = ['Webkit', 'Moz', 'ms'],
         emptyStyles = document.createElement('div').style,
-        EXIF_NORM = [1,8,3,6],
-        EXIF_FLIP = [2,7,4,5],
+        EXIF_NORM = [1, 8, 3, 6],
+        EXIF_FLIP = [2, 7, 4, 5],
         CSS_TRANS_ORG,
         CSS_TRANSFORM,
         CSS_USERSELECT;
@@ -84,7 +205,7 @@
     function getExifOffset(ornt, rotate) {
         var arr = EXIF_NORM.indexOf(ornt) > -1 ? EXIF_NORM : EXIF_FLIP,
             index = arr.indexOf(ornt),
-            offset = (rotate / 90) % arr.length;// 180 = 2%4 = 2 shift exif by 2 indexes
+            offset = (rotate / 90) % arr.length; // 180 = 2%4 = 2 shift exif by 2 indexes
 
         return arr[(arr.length + index + (offset % arr.length)) % arr.length];
     }
@@ -109,9 +230,10 @@
 
     function debounce(func, wait, immediate) {
         var timeout;
-        return function () {
-            var context = this, args = arguments;
-            var later = function () {
+        return function() {
+            var context = this,
+                args = arguments;
+            var later = function() {
                 timeout = null;
                 if (!immediate) func.apply(context, args);
             };
@@ -127,15 +249,14 @@
             var evt = document.createEvent("HTMLEvents");
             evt.initEvent("change", false, true);
             element.dispatchEvent(evt);
-        }
-        else {
+        } else {
             element.fireEvent("onchange");
         }
     }
 
     //http://jsperf.com/vanilla-css
     function css(el, styles, val) {
-        if (typeof (styles) === 'string') {
+        if (typeof(styles) === 'string') {
             var tmp = styles;
             styles = {};
             styles[tmp] = val;
@@ -149,8 +270,7 @@
     function addClass(el, c) {
         if (el.classList) {
             el.classList.add(c);
-        }
-        else {
+        } else {
             el.className += ' ' + c;
         }
     }
@@ -158,8 +278,7 @@
     function removeClass(el, c) {
         if (el.classList) {
             el.classList.remove(c);
-        }
-        else {
+        } else {
             el.className = el.className.replace(c, '');
         }
     }
@@ -178,10 +297,10 @@
     function loadImage(src, doExif) {
         var img = new Image();
         img.style.opacity = 0;
-        return new Promise(function (resolve) {
+        return new Promise(function(resolve) {
             function _resolve() {
                 img.style.opacity = 1;
-                setTimeout(function () {
+                setTimeout(function() {
                     resolve(img);
                 }, 1);
             }
@@ -191,13 +310,12 @@
                 img.setAttribute('crossOrigin', 'anonymous');
             }
 
-            img.onload = function () {
+            img.onload = function() {
                 if (doExif) {
-                    EXIF.getData(img, function () {
+                    EXIF.getData(img, function() {
                         _resolve();
                     });
-                }
-                else {
+                } else {
                     _resolve();
                 }
             };
@@ -210,11 +328,14 @@
         var h = img.naturalHeight;
         var orient = ornt || getExifOrientation(img);
         if (orient && orient >= 5) {
-            var x= w;
+            var x = w;
             w = h;
             h = x;
         }
-        return { width: w, height: h };
+        return {
+            width: w,
+            height: h
+        };
     }
 
     /* CSS Transform Prototype */
@@ -226,25 +347,23 @@
             suffix: ''
         }
     };
-    var Transform = function (x, y, scale) {
+    var Transform = function(x, y, scale) {
         this.x = parseFloat(x);
         this.y = parseFloat(y);
         this.scale = parseFloat(scale);
     };
 
-    Transform.parse = function (v) {
+    Transform.parse = function(v) {
         if (v.style) {
             return Transform.parse(v.style[CSS_TRANSFORM]);
-        }
-        else if (v.indexOf('matrix') > -1 || v.indexOf('none') > -1) {
+        } else if (v.indexOf('matrix') > -1 || v.indexOf('none') > -1) {
             return Transform.fromMatrix(v);
-        }
-        else {
+        } else {
             return Transform.fromString(v);
         }
     };
 
-    Transform.fromMatrix = function (v) {
+    Transform.fromMatrix = function(v) {
         var vals = v.substring(7).split(',');
         if (!vals.length || v === 'none') {
             vals = [1, 0, 0, 1, 0, 0];
@@ -253,7 +372,7 @@
         return new Transform(num(vals[4]), num(vals[5]), parseFloat(vals[0]));
     };
 
-    Transform.fromString = function (v) {
+    Transform.fromString = function(v) {
         var values = v.split(') '),
             translate = values[0].substring(Croppie.globals.translate.length + 1).split(','),
             scale = values.length > 1 ? values[1].substring(6) : 1,
@@ -263,12 +382,12 @@
         return new Transform(x, y, scale);
     };
 
-    Transform.prototype.toString = function () {
+    Transform.prototype.toString = function() {
         var suffix = TRANSLATE_OPTS[Croppie.globals.translate].suffix || '';
         return Croppie.globals.translate + '(' + this.x + 'px, ' + this.y + 'px' + suffix + ') scale(' + this.scale + ')';
     };
 
-    var TransformOrigin = function (el) {
+    var TransformOrigin = function(el) {
         if (!el || !el.style[CSS_TRANS_ORG]) {
             this.x = 0;
             this.y = 0;
@@ -279,11 +398,11 @@
         this.y = parseFloat(css[1]);
     };
 
-    TransformOrigin.prototype.toString = function () {
+    TransformOrigin.prototype.toString = function() {
         return this.x + 'px ' + this.y + 'px';
     };
 
-    function getExifOrientation (img) {
+    function getExifOrientation(img) {
         return img.exifdata ? img.exifdata.Orientation : 1;
     }
 
@@ -297,51 +416,51 @@
 
         ctx.save();
         switch (orientation) {
-          case 2:
-             ctx.translate(width, 0);
-             ctx.scale(-1, 1);
-             break;
+            case 2:
+                ctx.translate(width, 0);
+                ctx.scale(-1, 1);
+                break;
 
-          case 3:
-              ctx.translate(width, height);
-              ctx.rotate(180*Math.PI/180);
-              break;
+            case 3:
+                ctx.translate(width, height);
+                ctx.rotate(180 * Math.PI / 180);
+                break;
 
-          case 4:
-              ctx.translate(0, height);
-              ctx.scale(1, -1);
-              break;
+            case 4:
+                ctx.translate(0, height);
+                ctx.scale(1, -1);
+                break;
 
-          case 5:
-              canvas.width = height;
-              canvas.height = width;
-              ctx.rotate(90*Math.PI/180);
-              ctx.scale(1, -1);
-              break;
+            case 5:
+                canvas.width = height;
+                canvas.height = width;
+                ctx.rotate(90 * Math.PI / 180);
+                ctx.scale(1, -1);
+                break;
 
-          case 6:
-              canvas.width = height;
-              canvas.height = width;
-              ctx.rotate(90*Math.PI/180);
-              ctx.translate(0, -height);
-              break;
+            case 6:
+                canvas.width = height;
+                canvas.height = width;
+                ctx.rotate(90 * Math.PI / 180);
+                ctx.translate(0, -height);
+                break;
 
-          case 7:
-              canvas.width = height;
-              canvas.height = width;
-              ctx.rotate(-90*Math.PI/180);
-              ctx.translate(-width, height);
-              ctx.scale(1, -1);
-              break;
+            case 7:
+                canvas.width = height;
+                canvas.height = width;
+                ctx.rotate(-90 * Math.PI / 180);
+                ctx.translate(-width, height);
+                ctx.scale(1, -1);
+                break;
 
-          case 8:
-              canvas.width = height;
-              canvas.height = width;
-              ctx.translate(0, width);
-              ctx.rotate(-90*Math.PI/180);
-              break;
+            case 8:
+                canvas.width = height;
+                canvas.height = width;
+                ctx.translate(0, width);
+                ctx.rotate(-90 * Math.PI / 180);
+                break;
         }
-        ctx.drawImage(img, 0,0, width, height);
+        ctx.drawImage(img, 0, 0, width, height);
         ctx.restore();
     }
 
@@ -365,8 +484,7 @@
         if (self.options.useCanvas) {
             self.elements.canvas = document.createElement('canvas');
             self.elements.preview = self.elements.canvas;
-        }
-        else {
+        } else {
             self.elements.preview = self.elements.img;
         }
 
@@ -390,7 +508,10 @@
         viewport.setAttribute('tabindex', 0);
 
         addClass(self.elements.preview, 'cr-image');
-        setAttributes(self.elements.preview, { 'alt': 'preview', 'aria-grabbed': 'false' });
+        setAttributes(self.elements.preview, {
+            'alt': 'preview',
+            'aria-grabbed': 'false'
+        });
         addClass(overlay, 'cr-overlay');
 
         self.element.appendChild(boundary);
@@ -452,7 +573,7 @@
         return this.options.enableExif && window.EXIF;
     }
 
-    function _initializeResize () {
+    function _initializeResize() {
         var self = this;
         var wrap = document.createElement('div');
         var isDragging = false;
@@ -544,8 +665,7 @@
                 css(self.elements.viewport, {
                     height: self.options.viewport.height + 'px'
                 });
-            }
-            else if (direction === 'h' && newWidth >= minSize && newWidth <= maxWidth) {
+            } else if (direction === 'h' && newWidth >= minSize && newWidth <= maxWidth) {
                 css(wrap, {
                     width: newWidth + 'px'
                 });
@@ -630,8 +750,8 @@
         function scroll(ev) {
             var delta, targetZoom;
 
-            if(self.options.mouseWheelZoom === 'ctrl' && ev.ctrlKey !== true){
-              return 0; 
+            if (self.options.mouseWheelZoom === 'ctrl' && ev.ctrlKey !== true) {
+                return 0;
             } else if (ev.wheelDelta) {
                 delta = ev.wheelDelta / 1200; //wheelDelta min: -120 max: 120 // max x 10 x 2
             } else if (ev.deltaY) {
@@ -649,7 +769,7 @@
             change.call(self);
         }
 
-        self.elements.zoomer.addEventListener('input', change);// this is being fired twice on keypress
+        self.elements.zoomer.addEventListener('input', change); // this is being fired twice on keypress
         self.elements.zoomer.addEventListener('change', change);
 
         if (self.options.mouseWheelZoom) {
@@ -796,35 +916,32 @@
                 if (vpRect.left > imgRect.left + deltaX && vpRect.right < imgRect.right + deltaX) {
                     transform.x = left;
                 }
-            }
-            else {
+            } else {
                 transform.y = top;
                 transform.x = left;
             }
         }
 
         function toggleGrabState(isDragging) {
-          self.elements.preview.setAttribute('aria-grabbed', isDragging);
-          self.elements.boundary.setAttribute('aria-dropeffect', isDragging? 'move': 'none');
+            self.elements.preview.setAttribute('aria-grabbed', isDragging);
+            self.elements.boundary.setAttribute('aria-dropeffect', isDragging ? 'move' : 'none');
         }
 
         function keyDown(ev) {
-            var LEFT_ARROW  = 37,
-                UP_ARROW    = 38,
+            var LEFT_ARROW = 37,
+                UP_ARROW = 38,
                 RIGHT_ARROW = 39,
-                DOWN_ARROW  = 40;
+                DOWN_ARROW = 40;
 
             if (ev.shiftKey && (ev.keyCode === UP_ARROW || ev.keyCode === DOWN_ARROW)) {
                 var zoom = 0.0;
                 if (ev.keyCode === UP_ARROW) {
                     zoom = parseFloat(self.elements.zoomer.value, 10) + parseFloat(self.elements.zoomer.step, 10)
-                }
-                else {
+                } else {
                     zoom = parseFloat(self.elements.zoomer.value, 10) - parseFloat(self.elements.zoomer.step, 10)
                 }
                 self.setZoom(zoom);
-            }
-            else if (self.options.enableKeyMovement && (ev.keyCode >= 37 && ev.keyCode <= 40)) {
+            } else if (self.options.enableKeyMovement && (ev.keyCode >= 37 && ev.keyCode <= 40)) {
                 ev.preventDefault();
                 var movement = parseKeyDown(ev.keyCode);
 
@@ -975,11 +1092,12 @@
         self.options.update.call(self, data);
         if (self.$ && typeof Prototype === 'undefined') {
             self.$(self.element).trigger('update.croppie', data);
-        }
-        else {
+        } else {
             var ev;
             if (window.CustomEvent) {
-                ev = new CustomEvent('update', { detail: data });
+                ev = new CustomEvent('update', {
+                    detail: data
+                });
             } else {
                 ev = document.createEvent('CustomEvent');
                 ev.initCustomEvent('update', true, true, data);
@@ -1003,7 +1121,7 @@
             originReset = new TransformOrigin(),
             isVisible = _isVisible.call(self);
 
-        if (!isVisible || self.data.bound) {// if the croppie isn't visible or it doesn't need binding
+        if (!isVisible || self.data.bound) { // if the croppie isn't visible or it doesn't need binding
             return;
         }
 
@@ -1021,8 +1139,7 @@
 
         if (self.options.enableZoom) {
             _updateZoomLimits.call(self, true);
-        }
-        else {
+        } else {
             self._currentZoom = initialZoom;
         }
 
@@ -1032,8 +1149,7 @@
 
         if (self.data.points.length) {
             _bindPoints.call(self, self.data.points);
-        }
-        else {
+        } else {
             _centerImage.call(self);
         }
 
@@ -1041,7 +1157,7 @@
         _updateOverlay.call(self);
     }
 
-    function _updateZoomLimits (initial) {
+    function _updateZoomLimits(initial) {
         var self = this,
             minZoom = 0,
             maxZoom = self.options.maxZoom || 1.5,
@@ -1066,11 +1182,10 @@
 
         zoomer.min = fix(minZoom, 4);
         zoomer.max = fix(maxZoom, 4);
-        
+
         if (!initial && (scale < zoomer.min || scale > zoomer.max)) {
             _setZoomerVal.call(self, scale < zoomer.min ? zoomer.min : zoomer.max);
-        }
-        else if (initial) {
+        } else if (initial) {
             defaultInitialZoom = Math.max((boundaryData.width / imgData.width), (boundaryData.height / imgData.height));
             initialZoom = self.data.boundZoom !== null ? self.data.boundZoom : defaultInitialZoom;
             _setZoomerVal.call(self, initialZoom);
@@ -1136,8 +1251,7 @@
         if (exif && !customOrientation) {
             var orientation = getExifOrientation(img);
             drawCanvas(canvas, img, num(orientation || 0, 10));
-        }
-        else if (customOrientation) {
+        } else if (customOrientation) {
             drawCanvas(canvas, img, customOrientation);
         }
     }
@@ -1149,8 +1263,8 @@
             top = num(points[1]),
             right = num(points[2]),
             bottom = num(points[3]),
-            width = right-left,
-            height = bottom-top,
+            width = right - left,
+            height = bottom - top,
             circle = data.circle,
             canvas = document.createElement('canvas'),
             ctx = canvas.getContext('2d'),
@@ -1174,7 +1288,7 @@
             width = Math.min(width, self._originalImageWidth);
             height = Math.min(height, self._originalImageHeight);
         }
-    
+
         // console.table({ left, right, top, bottom, canvasWidth, canvasHeight });
         ctx.drawImage(this.elements.preview, left, top, width, height, startX, startY, canvasWidth, canvasHeight);
         if (circle) {
@@ -1216,8 +1330,8 @@
 
     function _getBlobResult(data) {
         var self = this;
-        return new Promise(function (resolve, reject) {
-            _getCanvas.call(self, data).toBlob(function (blob) {
+        return new Promise(function(resolve, reject) {
+            _getCanvas.call(self, data).toBlob(function(blob) {
                 resolve(blob);
             }, data.format, data.quality);
         });
@@ -1225,7 +1339,9 @@
 
     function _replaceImage(img) {
         if (this.elements.img.parentNode) {
-            Array.prototype.forEach.call(this.elements.img.classList, function(c) { img.classList.add(c); });
+            Array.prototype.forEach.call(this.elements.img.classList, function(c) {
+                img.classList.add(c);
+            });
             this.elements.img.parentNode.replaceChild(img, this.elements.img);
             this.elements.preview = img; // if the img is attached to the DOM, they're not using the canvas
         }
@@ -1239,19 +1355,16 @@
             zoom = null,
             hasExif = _hasExif.call(self);
 
-        if (typeof (options) === 'string') {
+        if (typeof(options) === 'string') {
             url = options;
             options = {};
-        }
-        else if (Array.isArray(options)) {
+        } else if (Array.isArray(options)) {
             points = options.slice();
-        }
-        else if (typeof (options) === 'undefined' && self.data.url) { //refreshing
+        } else if (typeof(options) === 'undefined' && self.data.url) { //refreshing
             _updatePropertiesFromImage.call(self);
             _triggerUpdate.call(self);
             return null;
-        }
-        else {
+        } else {
             url = options.url;
             points = options.points || [];
             zoom = typeof(options.zoom) === 'undefined' ? null : options.zoom;
@@ -1261,7 +1374,7 @@
         self.data.url = url || self.data.url;
         self.data.boundZoom = zoom;
 
-        return loadImage(url, hasExif).then(function (img) {
+        return loadImage(url, hasExif).then(function(img) {
             _replaceImage.call(self, img);
             if (!points.length) {
                 var natDim = naturalImageDimensions(img);
@@ -1273,8 +1386,7 @@
                 if (imgAspectRatio > aspectRatio) {
                     height = natDim.height;
                     width = height * aspectRatio;
-                }
-                else {
+                } else {
                     width = natDim.width;
                     height = natDim.height / aspectRatio;
                 }
@@ -1284,8 +1396,7 @@
                 var x1 = x0 + width;
                 var y1 = y0 + height;
                 self.data.points = [x0, y0, x1, y1];
-            }
-            else if (self.options.relative) {
+            } else if (self.options.relative) {
                 points = [
                     points[0] * img.naturalWidth / 100,
                     points[1] * img.naturalHeight / 100,
@@ -1294,7 +1405,7 @@
                 ];
             }
 
-            self.data.points = points.map(function (p) {
+            self.data.points = points.map(function(p) {
                 return parseFloat(p);
             });
             if (self.options.useCanvas) {
@@ -1303,7 +1414,7 @@
             _updatePropertiesFromImage.call(self);
             _triggerUpdate.call(self);
             cb && cb();
-        }).catch(function (err) {
+        }).catch(function(err) {
             console.error("Croppie:" + err);
         });
     }
@@ -1352,7 +1463,7 @@
         var self = this,
             data = _get.call(self),
             opts = deepExtend(clone(RESULT_DEFAULTS), clone(options)),
-            resultType = (typeof (options) === 'string' ? options : (opts.type || 'base64')),
+            resultType = (typeof(options) === 'string' ? options : (opts.type || 'base64')),
             size = opts.size || 'viewport',
             format = opts.format,
             quality = opts.quality,
@@ -1387,9 +1498,8 @@
         data.url = self.data.url;
         data.backgroundColor = backgroundColor;
 
-        prom = new Promise(function (resolve, reject) {
-            switch(resultType.toLowerCase())
-            {
+        prom = new Promise(function(resolve, reject) {
+            switch (resultType.toLowerCase()) {
                 case 'rawcanvas':
                     resolve(_getCanvas.call(self, data));
                     break;
@@ -1440,7 +1550,7 @@
 
     if (window.jQuery) {
         var $ = window.jQuery;
-        $.fn.croppie = function (opts) {
+        $.fn.croppie = function(opts) {
             var ot = typeof opts;
 
             if (ot === 'string') {
@@ -1449,15 +1559,13 @@
 
                 if (opts === 'get') {
                     return singleInst.get();
-                }
-                else if (opts === 'result') {
+                } else if (opts === 'result') {
                     return singleInst.result.apply(singleInst, args);
-                }
-                else if (opts === 'bind') {
+                } else if (opts === 'bind') {
                     return singleInst.bind.apply(singleInst, args);
                 }
 
-                return this.each(function () {
+                return this.each(function() {
                     var i = $(this).data('croppie');
                     if (!i) return;
 
@@ -1467,14 +1575,12 @@
                         if (opts === 'destroy') {
                             $(this).removeData('croppie');
                         }
-                    }
-                    else {
+                    } else {
                         throw 'Croppie ' + opts + ' method not found';
                     }
                 });
-            }
-            else {
-                return this.each(function () {
+            } else {
+                return this.each(function() {
                     var i = new Croppie(this, opts);
                     i.$ = $;
                     $(this).data('croppie', i);
@@ -1493,7 +1599,10 @@
         if (this.element.tagName.toLowerCase() === 'img') {
             var origImage = this.element;
             addClass(origImage, 'cr-original-image');
-            setAttributes(origImage, {'aria-hidden' : 'true', 'alt' : '' });
+            setAttributes(origImage, {
+                'aria-hidden': 'true',
+                'alt': ''
+            });
             var replacementDiv = document.createElement('div');
             this.element.parentNode.appendChild(replacementDiv);
             replacementDiv.appendChild(origImage);
@@ -1519,7 +1628,7 @@
             height: 100,
             type: 'square'
         },
-        boundary: { },
+        boundary: {},
         orientationControls: {
             enabled: true,
             leftClass: '',
@@ -1538,7 +1647,7 @@
         enforceBoundary: true,
         enableOrientation: false,
         enableKeyMovement: true,
-        update: function () { }
+        update: function() {}
     };
 
     Croppie.globals = {
@@ -1546,10 +1655,10 @@
     };
 
     deepExtend(Croppie.prototype, {
-        bind: function (options, cb) {
+        bind: function(options, cb) {
             return _bind.call(this, options, cb);
         },
-        get: function () {
+        get: function() {
             var data = _get.call(this);
             var points = data.points;
             if (this.options.relative) {
@@ -1560,20 +1669,20 @@
             }
             return data;
         },
-        result: function (type) {
+        result: function(type) {
             return _result.call(this, type);
         },
-        refresh: function () {
+        refresh: function() {
             return _refresh.call(this);
         },
-        setZoom: function (v) {
+        setZoom: function(v) {
             _setZoomerVal.call(this, v);
             dispatchChange(this.elements.zoomer);
         },
-        rotate: function (deg) {
+        rotate: function(deg) {
             _rotate.call(this, deg);
         },
-        destroy: function () {
+        destroy: function() {
             return _destroy.call(this);
         }
     });

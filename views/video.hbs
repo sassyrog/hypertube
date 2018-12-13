@@ -2,38 +2,44 @@
 	<title>{{title}}</title>
 {{/if}}
 <link rel="stylesheet" href="/stylesheets/video.css">
-<link href="https://vjs.zencdn.net/7.3.0/video-js.css" rel="stylesheet">
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
-<script src="https://vjs.zencdn.net/7.3.0/video.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
- crossorigin="anonymous"></script>
+
+
 <!-- Font Awesome -->
 <!--- Include the above in your HEAD tag --->
-{{!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
- crossorigin="anonymous"> --}}
 {{!-- <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"> --}}
 <!-- <link rel="stylesheet" href="/stylesheets/home.css"> -->
 
 <div class="head">
-	<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-		<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav"
-		 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="/user/profile"><img src="/images/avatar.png" width="40" height="40" class="d-inline-block align-top" alt=""></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		<a class="navbar-brand" href="/user/profile"><img src="/images/avatar.png" width="40" height="40" class="d-inline-block align-top"
-			 alt=""></a>
-		<div class="collapse navbar-collapse" id="navbarNav">
-			<ul class="navbar-nav">
+
+		<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 				<li class="nav-item active">
 					<a class="nav-link" href="/logout">logout<span class="sr-only">(current)</span></a>
 				</li>
 			</ul>
 		</div>
-		{{!-- <div class="profile_icon"></div> --}}
 	</nav>
 </div>
+
+{{!-- <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<a class="navbar-brand" href="/user/profile"><img src="/images/avatar.png" width="40" height="40" class="d-inline-block align-top" alt=""></a>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav">
+<li class="nav-item active">
+<a class="nav-link" href="/logout">logout<span class="sr-only">(current)</span></a>
+</li>
+</ul>
+</div>
+<div class="profile_icon"></div>
+</nav> --}}
 <div class="main">
 	<div class='player'>
 		<video poster="" id="videoPlayer" class="video-js vjs-default-skin vjs-fill" controls preload="metadata">
@@ -52,7 +58,7 @@
 				<div class="card-header">
 					<ul class="nav nav-tabs card-header-tabs">
 						<li class="watched nav-item nav-link active">
-							watched movies
+							movie cast
 						</li>
 						<li class="upadate-profile nav-item nav-link">
 							upadte profile
@@ -65,8 +71,8 @@
 
 				{{!-- containers related to cards --}}
 
-				<div class="card my-5">
-					sfssdd
+				<div class="card my-5 the-cast">
+
 				</div>
 			</div>
 		</div>
@@ -89,11 +95,26 @@
 	</div>
 </div>
 <div class="back-to-top_1 text-right" id="myBtn">
-	<a href="#" class="btn-block"><i class="arrow up"></i></a>
+	<a href="#" style="height:0" class="btn-block"><i class="arrow up"></i></a>
 </div>
-<div class="footer">
-	<p>Footer</p>
-</div>
+<footer class="text-white mt-4">
+	<div class="container-fluid py-3">
+		<div class="row">
+			<div class="col-md-3">
+				<h5></h5>
+			</div>
+			<div class="col-md-3"></div>
+			<div class="col-md-3"></div>
+			<div class="col-md-3"></div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">Creators
+				<span class="small"><br>- Gareth Lategan <br>- Roelf Diedericks <br>- Roger Ndaba </span></div>
+			<div class="col-md-3"></div>
+			<div class="col-md-3 text-right small align-self-end">©2018</div>
+		</div>
+	</div>
+</footer>
 
 <script>
 	var player = videojs('videoPlayer');
@@ -101,11 +122,11 @@
 	var query;
 
 
-	window.onscroll = function () {
+	window.onscroll = function() {
 		scrollFunction()
 	};
 
-	$('.btn-drop').on('click', function () {
+	$('.btn-drop').on('click', function() {
 		if (i) {
 			$('.drop-box').css({
 				'display': 'block',
@@ -136,14 +157,33 @@
 			data: JSON.stringify(data),
 			contentType: 'application/json',
 			url: '/comments/get_comments',
-			success: function (res) {
+			success: function(res) {
 				$('.com-boxes').html(res);
 			}
 		})
 	}
 
-	$('document').ready(function () {
-		$('.nav-item').on('click', function () {
+	$('document').ready(function() {
+
+		var encodedUrl = document.location.search.replace("info=", "");
+		var decodedUrl = Base64.decode(encodedUrl);
+		query = getQueryParams(decodedUrl);
+
+
+		var data = {};
+		data.id = query.mdbID;
+
+		$.ajax({
+			type: 'POST',
+			data: JSON.stringify(data),
+			contentType: 'application/json',
+			url: '/video/cast',
+			success: function(res) {
+				$('.the-cast').html(res);
+			}
+		});
+
+		$('.nav-item').on('click', function() {
 			$('.nav-item').removeClass('active');
 			$(this).addClass('active');
 			if ($(this).hasClass('upadate-profile')) {
@@ -157,10 +197,6 @@
 		$('#myBtn').css({
 			'display': 'none',
 		});
-		var encodedUrl = document.location.search.replace("info=", "");
-
-		var decodedUrl = Base64.decode(encodedUrl);
-		query = getQueryParams(decodedUrl);
 
 		getComments(query.title, query.year);
 		//console.log(query);
@@ -179,7 +215,7 @@
 		//		}
 	})
 
-	$('.comment-btn').on('click', function () {
+	$('.comment-btn').on('click', function() {
 
 		if ($('.comment').val() != '') {
 			var data = {};
@@ -191,7 +227,7 @@
 				data: JSON.stringify(data),
 				contentType: 'application/json',
 				url: '/comments',
-				success: function (res) {
+				success: function(res) {
 					//					$('.com-boxes').html(res);
 				}
 			})
@@ -207,5 +243,4 @@
 			document.getElementById("myBtn").style.display = "none";
 		}
 	}
-
 </script>
