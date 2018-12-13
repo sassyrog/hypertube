@@ -88,11 +88,14 @@ module.exports = function(passport) {
         },
         function(accessToken, refreshToken, profile, done) {
             var info = profile._json;
+            console.log(info);
+            
             createUserSocial(
                 info.login + info.id + '_git',
                 info.name,
                 'noSurname',
-                info.email, (err, user) => {
+                info.email,
+                (err, user) => {
                     if (err) throw (err);
                     done(null, user);
                 },

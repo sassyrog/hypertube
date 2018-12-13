@@ -2,6 +2,74 @@ body {
     background-color: black !important;
 }
 
+.drop-box {
+    display: none;
+    height: 0px;
+    transition: all 0.8s;
+    -webkit-transition: all 0.8s;
+    border: 1px solid #FF9900;
+    background-color: #FF9900;
+    color: #454545;
+}
+
+.middle-card {
+    padding-top: 10px;
+    border: 0 !important;
+    outline-color: none !important;
+    background-color: black !important;
+}
+
+.btn-drop {
+    border: 1px solid #FF9900;
+    background-color: #FF9900;
+    padding: 10px;
+    color: #454545;
+    transition: all 0.4s;
+}
+
+.btn-drop:hover {
+    border: 1px solid #FF9900 !important;
+    background-color: black !important;
+    color: white !important;
+}
+
+.input-group {
+    border-radius: 0;
+}
+
+.the-cast {
+    height: 84%;
+    width: 100%;
+    background-color: #E88C00 !important;
+    /* border: 0; */
+    overflow-y: scroll;
+    display: inline-block;
+}
+
+.cast-name {
+    position: absolute;
+    font-size: smaller;
+    line-height: 1.2;
+    width: 100%;
+    height: 10%;
+    /* background-color: #ff9900; */
+    bottom: 9px;
+}
+
+.cast-member {
+    position: relative;
+    margin: 1vw;
+    background-size: 100% 85%;
+    width: 170px;
+    height: 300px;
+    background-repeat: no-repeat;
+    /* border: 1px solid #FF9900; */
+    padding: 0;
+    background-color: white;
+    display: -webkit-inline-box;
+    border-radius: 4px;
+}
+
 i {
     border: 1px solid #FF9900;
     border-width: 0 3px 3px 0;
@@ -27,6 +95,7 @@ i:hover {
 }
 
 .back-to-top_1 {
+    height: 0;
     z-index: 3;
     position: fixed;
     top: 90vh;
@@ -36,6 +105,7 @@ i:hover {
 
 * {
     font-family: Consolas;
+    outline: none !important;
 }
 
 .comment-btn {
@@ -208,7 +278,6 @@ h4 {
 .post .post-footer .comments-list .comment .comment-heading .time {
     font-size: 12px;
     color: #aaa;
-    margin-top: 0;
     display: inline;
 }
 
@@ -245,7 +314,7 @@ h4 {
 .navbar {
     color: gold;
     font-weight: bold;
-    background-color: #FF9900;
+    background-color: #FF9900 !important;
 }
 
 .navbar-toggleable-md .navbar-nav .nav-link {
@@ -270,10 +339,6 @@ h4 {
 
 .col-lg-4 {
     margin: auto;
-}
-
-.collapse {
-    background-color: #ff9900;
 }
 
 .main {
@@ -310,6 +375,10 @@ h4 {
     height: auto;
     width: 850px;
     margin: auto;
+}
+
+footer {
+    background-color: #ff9900;
 }
 
 @media screen and (max-width: 990px) {

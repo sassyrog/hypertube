@@ -6,6 +6,7 @@ const app = express();
 const query = require('yify-search');
 const mdb = require('moviedb')('5d54c4f8fe9a065d6ed438ef09982650');
 const yifysubtitles = require('yifysubtitles');
+var http = require('http');
 
 let User = require('../models/user');
 
@@ -35,6 +36,7 @@ app.get('/', loggedIn, function(req, res) {
                 id: get_info["mdbID"]
             }, (mdb_err, mdb_res) => {
                 query.search(mdb_res.title, (yify_err, yify_res) => {
+                    if (yify_err) throw yify_err
                     if (yify_res.length != 0) {
                         for (i = 0; i < yify_res.length; i++) {
                             if (yify_res[i].year == mdb_res.release_date.substring(0, 4)) {
@@ -74,6 +76,25 @@ app.get('/', loggedIn, function(req, res) {
                                     resolve(magnet);
                                     console.log(subtitlesArr);
                                 });
+                                var movie_link = yify_res[i].large_cover_image;
+                                User.findById(id, function(err, user) {
+                                    if (err) throw err
+                                    var movie = {
+                                        title: movie_title,
+                                        poster: movie_link
+                                    };
+                                    if (user.movies.filter(function(e) {
+                                            return e.title === movie_title;
+                                        }).length > 0) {
+                                        return;
+                                    } else {
+                                        user.movies.push(movie);
+                                        user.save((err) => {
+                                            if (err)
+                                                throw err;
+                                        })
+                                    }
+                                })
                             }
                         }
                     } else {
@@ -117,9 +138,63 @@ app.get('/', loggedIn, function(req, res) {
                 res.render('login') //we need to do something when the YTS doesn't have the movie
             } else {
                 req.session.magnetURI = value
+                // console.log(value);
+
                 res.render('video')
             }
         });
     }
+    // res.render('video')
+    // // res.send('sdsd');
 });
+
+
+app.post('/cast', (reqe, response) => {
+
+
+    var cast = '';
+
+
+    var options = {
+        "method": "GET",
+        "hostname": "api.themoviedb.org",
+        "port": null,
+        "path": "/3/movie/" + reqe.body.id + "/credits?api_key=5d54c4f8fe9a065d6ed438ef09982650",
+        "headers": {}
+    };
+
+
+    var req = http.request(options, function(res) {
+        // console.log('dfdfdfdfdfdfdfdfdf');
+        var chunks = [];
+
+        res.on("data", function(chunk) {
+            chunks.push(chunk);
+        });
+
+        res.on("end", function() {
+            var body = Buffer.concat(chunks);
+
+            var obj = JSON.parse(body.toString());
+            var credits = obj.cast;
+            for (var i = credits.length - 1; i >= 0; i--) {
+                if (credits[i].profile_path === null) {
+                    credits.splice(i, 1);
+                }
+            }
+            for (var i = 0; i < credits.length; i++) {
+                cast = cast +
+                    '<div class="cast-member"' +
+                    'style="background-image:url(\'https://image.tmdb.org/t/p/w500/' +
+                    credits[i].profile_path + '\')">' +
+                    '<div class = "cast-name text-center">' + credits[i].name + ' -<br>' +
+                    credits[i].character + '</div></div>';
+            }
+            response.send(cast);
+
+        });
+    });
+    req.end();
+
+})
 module.exports = app;

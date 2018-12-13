@@ -3,6 +3,21 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" href="/stylesheets/croppie.css" />
 <script src="/javascripts/croppie.js"></script>
+<div class="head">
+	<nav class="navbar navbar-expand-md navbar-light bg-light">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+				<li class="nav-item active">
+					<a class="nav-link" href="/logout">Logout<span class="sr-only">(current)</span></a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</div>
 
 
 <div class="col-lg-6 col-sm-6">
@@ -46,76 +61,100 @@
 		</div>
 
 		<div class="card-body">
-			<div class="card card-signin my-5">
-				<div class="col-sm-9 col-md-7 col-lg-5 mx-auto the-form" style="display:none">
-					<form id="form" class="form-signin">
-						<div class="avatar-cont text-center">
-							<img {{#if pic}} src="{{pic}}" {{/if}} alt="Avatar" class="avatar">
-							<i class="fas fa-plus plus"></i>
-							<input type="file" name="pic" accept="image/*" style="display:none;">
+			{{!-- <div class="card card-signin my-5"> --}}
+			<div class="col-sm-9 col-md-7 col-lg-5 mx-auto the-form" style="display:none">
+				<form id="form" class="form-signin">
+					<div class="avatar-cont text-center">
+						<img {{#if pic}} src="{{pic}}" {{/if}} alt="Avatar" class="avatar">
+						<i class="fas fa-plus plus"></i>
+						<input type="file" name="pic" accept="image/*" style="display:none;">
+					</div>
+					<hr class="my-4">
+
+					<!-- firstname -->
+
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<div class="input-group-text">
+								<input type="checkbox" value="firstname" title="Edit firstname">
+							</div>
 						</div>
-						<hr class="my-4">
+						<input type="text" name="firstname" id="firstname" class="form-control" disabled="disabled" placeholder="firstname" {{#if firstname}} value="{{firstname}}" {{/if}}>
+					</div>
 
-						<!-- firstname -->
+					<!-- lastname -->
 
-						<div class="input-group">
-							<span class="input-group-addon"><input type="checkbox" value="firstname"></span>
-							<input type="text" name="firstname" id="firstname" class="form-control" disabled="disabled" placeholder="firstname" {{#if firstname}} value="{{firstname}}" {{/if}}>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<div class="input-group-text">
+								<input type="checkbox" value="lastname">
+							</div>
 						</div>
+						<input type="text" name="lastname" id="lastname" class="form-control" disabled="disabled" placeholder="lastname" {{#if lastname}} value="{{lastname}}" {{/if}}>
+					</div>
 
-						<!-- lastname -->
 
-						<div class="input-group">
-							<span class="input-group-addon"><input type="checkbox" value="lastname"></span>
-							<input type="text" name="lastname" id="lastname" class="form-control" disabled="disabled" placeholder="lastname" {{#if lastname}} value="{{lastname}}" {{/if}}>
+					<!-- username -->
+
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<div class="input-group-text">
+								<input type="checkbox" value="username">
+							</div>
 						</div>
+						<input type="text" name="username" id="username" class="form-control" disabled="disabled" placeholder="username" {{#if username}} value="{{username}}" {{/if}}>
+					</div>
 
-						<!-- username -->
 
-						<div class="input-group">
-							<span class="input-group-addon"><input type="checkbox" value="username"></span>
-							<input type="text" name="username" id="username" class="form-control" disabled="disabled" placeholder="username" {{#if username}} value="{{username}}" {{/if}}>
+					<!-- email -->
+
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<div class="input-group-text">
+								<input type="checkbox" value="email">
+							</div>
 						</div>
+						<input type="email" name="email" id="email" disabled="disabled" class="form-control" placeholder="email" {{#if email}} value="{{email}}" {{/if}}>
+					</div>
 
-						<!-- email -->
 
-						<div class="input-group">
-							<span class="input-group-addon"><input type="checkbox" value="email"></span>
-							<input type="email" name="email" id="email" disabled="disabled" class="form-control" placeholder="email" {{#if email}} value="{{email}}" {{/if}}>
+					<!-- passwords -->
+					<meter max="5" id="strength" value="0"></meter>
+
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<div class="input-group-text">
+								<input type="checkbox" value="password">
+							</div>
 						</div>
-
-						<!-- passwords -->
-						<meter max="5" id="strength" value="0"></meter>
-
-						<div class="input-group">
-							<span class="input-group-addon"><input type="checkbox" value="password"></span>
-							<input name="password1" type="password" id="password1" disabled="disabled" class="form-control" placeholder="password">
-							<div class="bar"></div>
-						</div>
-						<div class="input-group">
-							<span class="input-group-addon" style="width:39px;background-color:transparent;border:none;"></span>
-							<input name="password2" type="password" id="password2" disabled="disabled" class="form-control" placeholder="confirm password">
-						</div>
+						<input name="password1" type="password" id="password1" disabled="disabled" class="form-control" placeholder="password">
+						<div class="bar"></div>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon" style="width:39px;background-color:transparent;border:none;"></span>
+						<input name="password2" type="password" id="password2" disabled="disabled" class="form-control" placeholder="confirm password">
+					</div>
 
 
-						<button id="submit" class="btn btn-lg btn-primary btn-block" type="button"> <span>save changes</span> </button>
-						{{!-- <button id="submit" class="btn btn-lg btn-primary btn-block" type="submit"> <span>save changes</span> </button> --}}
+					<button id="submit" class="btn btn-lg btn-primary btn-block" type="button"> <span>save changes</span> </button>
+					{{!-- <button id="submit" class="btn btn-lg btn-primary btn-block" type="submit"> <span>save changes</span> </button> --}}
 
-						<a href="/home" class="btn-block"><button id="cancel" class="btn btn-lg btn-primary btn-block" type="button"> <span>cancel</span> </button></a>
-						<input type="text" style="display:none" name="" value="">
-					</form>
-				</div>
-				{{!-- </div> --}}
-
-				<div class="card my-5 the-movies">
-					{{#each movies}}
-						<div class="watched-movie-card" style="background-image:url('{{this.poster}}')">
-						</div>
-					{{/each}}
-				</div>
-
+					<a href="/home" class="btn-block"><button id="cancel" class="btn btn-lg btn-primary btn-block" type="button">
+							<span>cancel</span> </button></a>
+					<input type="text" style="display:none" name="" value="">
+				</form>
 			</div>
+			{{!-- </div> --}}
+
+			<div class="card my-5 the-movies">
+				{{#each movies}}
+					<div class="watched-movie-card" style="background-image:url('{{this.poster}}')">
+					</div>
+				{{/each}}
+			</div>
+
 		</div>
+		{{!-- </div> --}}
 	</div>
 
 </div>
@@ -123,6 +162,7 @@
 <div class="col-lg-5 mx-auto crop-container text-center">
 	<button class="btn btn-primary btn-crop" type="button" name="button">Done</button>
 </div>
+
 
 {{!-- <div style="width:500px;height:500px;background-color:red" id="upload-demo" class="">
 </div>
