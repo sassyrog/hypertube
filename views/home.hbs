@@ -2,11 +2,6 @@
 <script src="https://twitter.github.io/typeahead.js/js/handlebars.js"></script>
 <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
 <link rel="stylesheet" href="/stylesheets/home.css">
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://unpkg.com/popper.js/dist/umd/popper.min.js"></script>
-<script src="https://unpkg.com/tooltip@1.6.1/dist/Tooltip.min.js"></script>
-
 <div class="head">
 
 	<nav class="navbar navbar-expand-md navbar-light bg-light">
@@ -17,14 +12,23 @@
 
 		<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-				<li class="nav-item active" data-toggle="tooltip" title="logout">
+				<li class="nav-item active">
 					<a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt"></i></a>
+					<span class="tooltiptext">
+						<div class="speech-bubble">Logout</div>
+					</span>
 				</li>
 				<li class="nav-item active">
-					<a class="nav-link" href="/user/profile">settings<span class="sr-only">(current)</span></a>
+					<a class="nav-link" href="/user/profile"><i class="fas fa-cogs"></i></a>
+					<span class="tooltiptext">
+						<div class="speech-bubble">Setting</div>
+					</span>
 				</li>
-				<li class="nav-item active">
-					<img src="/images/search.svg" id="search_btn">
+				<li class="nav-item active" id="search_btn">
+					<a class="nav-link"><i class="fas fa-search"></i></a>
+					<span class="tooltiptext">
+						<div class="speech-bubble">Search</div>
+					</span>
 				</li>
 			</ul>
 		</div>
@@ -191,11 +195,6 @@
 
 	$('document').ready(function() {
 
-		// const instance = new Tooltip(, {
-		// 	title: "Hey there",
-		// 	trigger: "click",
-		// });
-		// instance.show();
 
 		var page = 1;
 

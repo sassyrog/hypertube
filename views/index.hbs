@@ -1,17 +1,24 @@
 <link rel="stylesheet" href="/stylesheets/style.css">
 <title>HyperTube</title>
-<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-	<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+	{{!-- <a class="navbar-brand" href="/user/profile"><img {{#if pic}} src="{{pic}}" {{else}} src="/images/avatar.png" {{/if}} width="40" height="40" class="d-inline-block align-top" alt=""></a> --}}
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
-	<a class="navbar-brand" href="#"><img src="/images/avatar.png" width="40" height="40" class="d-inline-block align-top" alt=""></a>
-	<div class="collapse navbar-collapse" id="navbarNav">
-		<ul class="navbar-nav">
+
+	<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+		<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 			<li class="nav-item active">
-				<a class="nav-link" href="/login">login</a>
+				<a class="nav-link" href="/login"><i class="fas fa-sign-out-alt"></i></a>
+				<span class="tooltiptext">
+					<div class="speech-bubble">Login</div>
+				</span>
 			</li>
 			<li class="nav-item active">
-				<a class="nav-link" href="/register">sign up</a>
+				<a class="nav-link" href="/register"><i class="fas fa-user-plus"></i></a>
+				<span class="tooltiptext">
+					<div class="speech-bubble">Sign-Up</div>
+				</span>
 			</li>
 		</ul>
 	</div>
