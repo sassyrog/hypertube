@@ -32,7 +32,7 @@ router.post('/', (req, res) => {
         if (user) {
 
             var templateDir = path.resolve(__dirname, '..', 'templates/emails');
-            console.log(templateDir);
+            // console.log(templateDir);
 
 
             hashPromise = new Promise((resolve, reject) => {
@@ -59,7 +59,7 @@ router.post('/', (req, res) => {
                     link: 'http://localhost:8080/forgot/password/' + link
                 }
 
-                console.log(locals.link);
+                // console.log(locals.link);
                 template.render(locals, function(err, result) {
                     if (err)
                         console.log(err);

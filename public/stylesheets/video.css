@@ -2,6 +2,39 @@ body {
     background-color: black !important;
 }
 
+p {
+    font-size: 1vw!important;
+}
+
+h1 {
+    font-size: 1vw!important;
+}
+
+.cast-name {
+    font-size: xx-small!important;
+}
+
+.back {
+    padding-top: 43px;
+    padding-left: 88px;
+    position: absolute;
+    z-index: 3;
+}
+
+.fa-arrow-left:hover {
+    transform: scale(2.4);
+    transition: 0.6s;
+}
+
+.fa-arrow-left {
+    font-style: normal;
+    font-size: 30px;
+    color: #ff9900;
+    border: 0px;
+    transition: 0.6s;
+    transform: scale(2);
+}
+
 .drop-box {
     display: none;
     height: 0px;

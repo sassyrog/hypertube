@@ -113,6 +113,11 @@
 </footer>
 <script>
 	var i = 0;
+	
+	$('.back').on('click', function() {
+		window.history.back();
+	})
+
 	function makeMovieCall(filter = 'none', page = '1') {
 		var data = {};
 		data.filter = filter;
@@ -204,7 +209,7 @@
 
 		setInterval(function() {
 			$('.alert').fadeOut();
-		}, 1000);
+		}, 2000);
 
 		makeMovieCall();
 
