@@ -148,13 +148,10 @@
 		})
 	})
 
-
 	function getComments(title, year) {
 		var data = {};
-
 		data.title = title;
 		data.year = year;
-
 		$.ajax({
 			type: 'POST',
 			data: JSON.stringify(data),
@@ -202,7 +199,6 @@
 		});
 
 		getComments(query.title, query.year);
-		//console.log(query);
 		player.poster('https://image.tmdb.org/t/p/w1280' + query.poster);
 
 		$('.vid_desc').find('h2').html(query.title);
@@ -219,7 +215,6 @@
 	})
 
 	$('.comment-btn').on('click', function() {
-
 		if ($('.comment').val() != '') {
 			var data = {};
 			data.comment = $('.comment').val();
@@ -231,14 +226,11 @@
 				contentType: 'application/json',
 				url: '/comments',
 				success: function(res) {
-					//					$('.com-boxes').html(res);
 				}
 			})
 			getComments();
 		}
 	})
-
-
 	function scrollFunction() {
 		if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
 			document.getElementById("myBtn").style.display = "block";
