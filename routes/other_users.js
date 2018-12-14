@@ -18,7 +18,7 @@ router.post('/', (req, res) => {
                 '<hr>' +
                 '<div class="card-body text-center">' +
                 '<a href="#"><h5 class="card-title">' + users[i].firstname + ' ' + users[i].lastname + '</h5></a>' +
-                '<p class="card-text">some text here</p>' +
+                '<p class="card-text"></p>' +
                 '</div>' +
                 '</div>' +
                 '</div>';

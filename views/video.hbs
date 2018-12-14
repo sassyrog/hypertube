@@ -48,8 +48,11 @@
 <div class="main">
 	<div class='player'>
 		<video poster="" id="videoPlayer" class="video-js vjs-default-skin vjs-fill" controls preload="metadata">
-			<source src="http://localhost:8080/video" type="video/mp4">
+			<source src="/video" type="video/mp4">
 			Your browser does not support the video tag.
+			{{#each subtitles}}
+				<track kind='subtitles' src='{{this.path}}' srclang='{{this.langShort}}' label='{{this.lang}}' />
+			{{/each}}
 		</video>
 	</div>
 	<br>
@@ -65,11 +68,8 @@
 						<li class="watched nav-item nav-link active">
 							movie cast
 						</li>
-						{{!-- <li class="nav-item nav-link">
-					</li> --}}
 					</ul>
 				</div>
-
 
 				{{!-- containers related to cards --}}
 
@@ -80,6 +80,7 @@
 		</div>
 
 		{{!-- comment input --}}
+
 		<div class="container">
 			<div class="row">
 				<div class="input-group">
@@ -89,6 +90,7 @@
 					</span>
 				</div>
 			</div>
+	
 			{{!-- list  of comments --}}
 
 			<div class="com-boxes row">
@@ -122,7 +124,6 @@
 	var player = videojs('videoPlayer');
 	var i = 1;
 	var query;
-
 
 	window.onscroll = function() {
 		scrollFunction()
@@ -168,7 +169,6 @@
 		var decodedUrl = Base64.decode(encodedUrl);
 		query = getQueryParams(decodedUrl);
 
-
 		var data = {};
 		data.id = query.mdbID;
 
@@ -193,6 +193,7 @@
 				$('.the-movies').css('display', 'block');
 			}
 		})
+	
 		$('#myBtn').css({
 			'display': 'none',
 		});

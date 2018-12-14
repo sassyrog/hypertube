@@ -6,6 +6,7 @@ const passport = require('passport');
 const bcrypt = require('bcryptjs');
 
 let User = require('../models/user');
+let Lang = require('../config/languages');
 
 
 var chalk = require('chalk');
