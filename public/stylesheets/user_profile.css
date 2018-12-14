@@ -10,6 +10,55 @@ body {
     transition: 300ms;
 }
 
+.dropdown {
+    margin-bottom: 1rem!important;
+}
+
+.dropdown-toggle {
+    /* border: 2px solid #fff;
+    color: #FF9900;
+    background-color: #262626; */
+
+    border: 2px solid #262626;
+    color: black;
+    background-color: #FF9900;
+    font-style: bold;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.dropdown-toggle:hover {
+    border: 2px solid #fff;
+    color: #FF9900;
+    background-color: #262626;
+    border: 2px solid #262626;
+    color: #fff;
+    padding: 10px;
+    background-color: #FF9900;
+}
+
+.dropdown-menu {
+    left: -10px !important;
+}
+
+.dropdown-item {
+    font-size: small;
+}
+
+.dropdown-menu {
+    height: 300px;
+    overflow-y: scroll;
+    position: absolute;
+    transform: translate3d(159px, 48px, 0px);
+    top: 0px;
+    left: 0px;
+    will-change: transform;
+    padding: 0;
+    color: #FF9900;
+    background-color: #262626;
+    padding: 13px ;
+}
+
 body i {
     font-family: 'Font Awesome 5 Free' !important;
 }
@@ -369,10 +418,19 @@ input {
     }
 
     .input-group>.form-control {
-        font-size: small;
+        font-size: x-small;
     }
 
     .card-title {
         font-size: small;
     }
+
+    .dropdown-toggle {
+        font-size: x-small;
+    }
+
+    .dropdown-item {
+        font-size: xx-small;
+    }
+
 }

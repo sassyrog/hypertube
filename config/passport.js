@@ -51,7 +51,8 @@ function createUserSocial(username, firstname, lastname, email, callback, callba
 
 module.exports = function(passport) {
     // Local Strategy
-    passport.use(new LocalStrategy(function(username, password, done) {
+    passport.use(new LocalStrategy({ passReqToCallback: true },
+        function(req, username, password, done) {
         // Match Username
         let query = {
             username: username
@@ -60,15 +61,16 @@ module.exports = function(passport) {
             if (err) throw err;
             if (!user) {
                 //find user by user username
-                return done(null, false, {
-                    message: 'no such username'
-                });
+                req.flash('success_msg', 'Welcome');
+                return done(null, false);
             }
             // Match Password
             bcrypt.compare(password, user.password, function(err, isMatch) {
                 if (err) throw err;
                 if (isMatch) {
-                    return done(null, user);
+                    return done(null, user, {
+                        success_msg: 'Welcome'
+                    });
                 } else {
                     return done(null, false, {
                         username: user.username,
@@ -84,12 +86,18 @@ module.exports = function(passport) {
     passport.use(new GitHubStrategy({
             clientID: '449bce79ea0b6ece13cb',
             clientSecret: '58e21c5ed194cf7a67c8d3af0dac9388f9c0555c',
-            callbackURL: "http://localhost:8080/auth/github/callback"
+            callbackURL: "http://localhost:8080/auth/github/callback",
+            passReqToCallback: true
         },
-        function(accessToken, refreshToken, profile, done) {
+        function(req, accessToken, refreshToken, profile, done) {
             var info = profile._json;
             console.log(info);
             
+            if (!info.email) {
+                req.flash('error', 'Git email not found');
+                return done(null, false)
+            }
+
             createUserSocial(
                 info.login + info.id + '_git',
                 info.name,
@@ -188,8 +196,9 @@ module.exports = function(passport) {
         },
         function(accessToken, refreshToken, profile, cb) {
             var info = profile._json;
-
-            img = info.image_url.substring(0, 30) + 'large_' + info.login + '.jpg';
+            // console.log(info);
+            
+            img = '/images/avatar.png';
             createUserSocial(
                 info.login + info.id + '_42',
                 info.first_name,

@@ -70,7 +70,7 @@
 					watched movies
 				</li>
 				<li class="upadate-profile nav-item nav-link">
-					upadte profile
+					upadate profile
 				</li>
 				{{!-- <li class="nav-item nav-link">
 				</li> --}}
@@ -78,7 +78,6 @@
 		</div>
 
 		<div class="card-body">
-			{{!-- <div class="card card-signin my-5"> --}}
 			<div class="col-sm-9 col-md-7 col-lg-5 mx-auto the-form" style="display:none">
 				<form id="form" class="form-signin">
 					<div class="avatar-cont text-center">
@@ -87,6 +86,54 @@
 						<input type="file" name="pic" accept="image/*" style="display:none;">
 					</div>
 					<hr class="my-4">
+					<input type="text" style="display:none" value="English" id="language">
+					<div class="dropdown">
+						<button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+						 aria-haspopup="true" aria-expanded="false">
+							Preferred Language
+						</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<a class="dropdown-item">English</a>
+							<a class="dropdown-item">Albanian</a>
+							<a class="dropdown-item">Arabic</a>
+							<a class="dropdown-item">Bengali</a>
+							<a class="dropdown-item">Bulgarian</a>
+							<a class="dropdown-item">Chinese</a>
+							<a class="dropdown-item">Croatian</a>
+							<a class="dropdown-item">Czech</a>
+							<a class="dropdown-item">Danish</a>
+							<a class="dropdown-item">Dutch</a>
+							<a class="dropdown-item">Estonian</a>
+							<a class="dropdown-item">Persian</a>
+							<a class="dropdown-item">Finnish</a>
+							<a class="dropdown-item">French</a>
+							<a class="dropdown-item">German</a>
+							<a class="dropdown-item">Modern Greek</a>
+							<a class="dropdown-item">Hebrew</a>
+							<a class="dropdown-item">Hungarian</a>
+							<a class="dropdown-item">Indonesian</a>
+							<a class="dropdown-item">Italian</a>
+							<a class="dropdown-item">Japanese</a>
+							<a class="dropdown-item">Korean</a>
+							<a class="dropdown-item">Lithuanian</a>
+							<a class="dropdown-item">Macedonian</a>
+							<a class="dropdown-item">Malay</a>
+							<a class="dropdown-item">Norwegian</a>
+							<a class="dropdown-item">Polish</a>
+							<a class="dropdown-item">Portuguese</a>
+							<a class="dropdown-item">Romanian</a>
+							<a class="dropdown-item">Russian</a>
+							<a class="dropdown-item">Serbian</a>
+							<a class="dropdown-item">Slovenian</a>
+							<a class="dropdown-item">Spanish</a>
+							<a class="dropdown-item">Swedish</a>
+							<a class="dropdown-item">Thai</a>
+							<a class="dropdown-item">Turkish</a>
+							<a class="dropdown-item">Urdu</a>
+							<a class="dropdown-item">Ukrainian</a>
+							<a class="dropdown-item">Vietnamese</a>
+						</div>
+					</div>
 
 					<!-- firstname -->
 
@@ -123,18 +170,6 @@
 						</div>
 						<input type="text" name="username" id="username" class="form-control" disabled="disabled" placeholder="username"
 						 {{#if username}} value="{{username}}" {{/if}}>
-					</div>
-
-					<div class="dropdown">
-						<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-						 aria-haspopup="true" aria-expanded="false">
-							Preferred Language
-						</button>
-						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-							<a class="dropdown-item">Action</a>
-							<a class="dropdown-item">Another action</a>
-							<a class="dropdown-item">Something else here</a>
-						</div>
 					</div>
 
 					<!-- email -->
@@ -223,6 +258,11 @@
 		showZoomer: false,
 	});
 
+	$('.dropdown-item').on('click', function() {
+		$('.dropdown-toggle').html($(this).html()) ,
+		$('#language').attr('value', $(this).html())
+	})
+
 	$('.nav-item').on('click', function () {
 		$('.nav-item').removeClass('active');
 		$(this).addClass('active');
@@ -278,8 +318,9 @@
 				username = $('#username').val(),
 				email = $('#email').val(),
 				p1 = $('#password1').val(),
-				p2 = $('#password2').val();
-			tex = '';
+				p2 = $('#password2').val(),
+				prelang = $('#language').val(),
+				tex = '';
 			var reg = /^[a-z]+$/i;
 			var regU = /^[a-z0-9_]+$/i;
 			var regem = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
