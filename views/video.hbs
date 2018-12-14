@@ -65,11 +65,8 @@
 						<li class="watched nav-item nav-link active">
 							movie cast
 						</li>
-						{{!-- <li class="nav-item nav-link">
-					</li> --}}
 					</ul>
 				</div>
-
 
 				{{!-- containers related to cards --}}
 
@@ -80,6 +77,7 @@
 		</div>
 
 		{{!-- comment input --}}
+
 		<div class="container">
 			<div class="row">
 				<div class="input-group">
@@ -89,6 +87,7 @@
 					</span>
 				</div>
 			</div>
+	
 			{{!-- list  of comments --}}
 
 			<div class="com-boxes row">
@@ -122,7 +121,6 @@
 	var player = videojs('videoPlayer');
 	var i = 1;
 	var query;
-
 
 	window.onscroll = function() {
 		scrollFunction()
@@ -168,7 +166,6 @@
 		var decodedUrl = Base64.decode(encodedUrl);
 		query = getQueryParams(decodedUrl);
 
-
 		var data = {};
 		data.id = query.mdbID;
 
@@ -193,6 +190,7 @@
 				$('.the-movies').css('display', 'block');
 			}
 		})
+	
 		$('#myBtn').css({
 			'display': 'none',
 		});

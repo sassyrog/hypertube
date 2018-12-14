@@ -1,11 +1,13 @@
 <link rel="stylesheet" href="/stylesheets/user_profile.css">
-<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+ crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" href="/stylesheets/croppie.css" />
 <script src="/javascripts/croppie.js"></script>
 <div class="head">
 	<nav class="navbar navbar-expand-md navbar-light bg-light">
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02"
+		 aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 
@@ -22,7 +24,6 @@
 	</nav>
 </div>
 
-
 <div class="col-lg-6 col-sm-6">
 	<div class="card hovercard">
 		<div class="back">
@@ -31,7 +32,8 @@
 		<div class="useravatar">
 			<img alt="" {{#if pic}} src="{{pic}}" {{else}} src="/images/avatar.png" {{/if}}>
 		</div>
-		<div class="card-info"> <span class="card-title"> &nbsp {{#ifCond firstname '&&' lastname}} {{firstname}} {{lastname}} {{/ifCond}}</span>
+		<div class="card-info"> <span class="card-title"> &nbsp {{#ifCond firstname '&&' lastname}} {{firstname}} {{lastname}}
+				{{/ifCond}}</span>
 
 		</div>
 	</div>
@@ -82,7 +84,8 @@
 								<input type="checkbox" value="firstname" title="Edit firstname">
 							</div>
 						</div>
-						<input type="text" name="firstname" id="firstname" class="form-control" disabled="disabled" placeholder="firstname" {{#if firstname}} value="{{firstname}}" {{/if}}>
+						<input type="text" name="firstname" id="firstname" class="form-control" disabled="disabled" placeholder="firstname"
+						 {{#if firstname}} value="{{firstname}}" {{/if}}>
 					</div>
 
 					<!-- lastname -->
@@ -93,7 +96,8 @@
 								<input type="checkbox" value="lastname">
 							</div>
 						</div>
-						<input type="text" name="lastname" id="lastname" class="form-control" disabled="disabled" placeholder="lastname" {{#if lastname}} value="{{lastname}}" {{/if}}>
+						<input type="text" name="lastname" id="lastname" class="form-control" disabled="disabled" placeholder="lastname"
+						 {{#if lastname}} value="{{lastname}}" {{/if}}>
 					</div>
 
 
@@ -105,9 +109,21 @@
 								<input type="checkbox" value="username">
 							</div>
 						</div>
-						<input type="text" name="username" id="username" class="form-control" disabled="disabled" placeholder="username" {{#if username}} value="{{username}}" {{/if}}>
+						<input type="text" name="username" id="username" class="form-control" disabled="disabled" placeholder="username"
+						 {{#if username}} value="{{username}}" {{/if}}>
 					</div>
 
+					<div class="dropdown">
+						<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+						 aria-haspopup="true" aria-expanded="false">
+							Preferred Language
+						</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<a class="dropdown-item">Action</a>
+							<a class="dropdown-item">Another action</a>
+							<a class="dropdown-item">Something else here</a>
+						</div>
+					</div>
 
 					<!-- email -->
 
@@ -117,7 +133,8 @@
 								<input type="checkbox" value="email">
 							</div>
 						</div>
-						<input type="email" name="email" id="email" disabled="disabled" class="form-control" placeholder="email" {{#if email}} value="{{email}}" {{/if}}>
+						<input type="email" name="email" id="email" disabled="disabled" class="form-control" placeholder="email"
+						 {{#if email}} value="{{email}}" {{/if}}>
 					</div>
 
 
@@ -137,7 +154,6 @@
 						<span class="input-group-addon" style="width:39px;background-color:transparent;border:none;"></span>
 						<input name="password2" type="password" id="password2" disabled="disabled" class="form-control" placeholder="confirm password">
 					</div>
-
 
 					<button id="submit" class="btn btn-lg btn-primary btn-block" type="button"> <span>save changes</span> </button>
 					{{!-- <button id="submit" class="btn btn-lg btn-primary btn-block" type="submit"> <span>save changes</span> </button> --}}
@@ -195,7 +211,7 @@
 		showZoomer: false,
 	});
 
-	$('.nav-item').on('click', function() {
+	$('.nav-item').on('click', function () {
 		$('.nav-item').removeClass('active');
 		$(this).addClass('active');
 		if ($(this).hasClass('upadate-profile')) {
@@ -207,13 +223,13 @@
 		}
 	})
 
-	$('.back').on('click', function() {
+	$('.back').on('click', function () {
 		window.history.back();
 	})
 
-	$('document').ready(function() {
+	$('document').ready(function () {
 
-		console.log('{{#each movies}}<li class="err_li">{{this.title}}</li>{{/each}}');
+		//		console.log('{{#each movies}}<li class="err_li">{{this.title}}</li>{{/each}}');
 
 		var arr = [];
 		arr['firstname'] = '{{firstname}}';
@@ -222,14 +238,7 @@
 		arr['email'] = '{{email}}';
 		arr['pic'] = '{{pic}}';
 
-		// var arr = [];
-		// arr['firstname'] = 'roger';
-		// arr['lastname'] = 'ndaba';
-		// arr['username'] = 'rogerndaba';
-		// arr['email'] = 'rogerndaba@outlook.com';
-		// arr['pic'] = '/images/avatar.png';
-
-		$('input:checkbox').on('click', function() {
+		$('input:checkbox').on('click', function () {
 			if ($(this).prop('checked')) {
 				if ($(this).val() == 'password') {
 					$('#' + $(this).val() + '1').attr('disabled', false);
@@ -250,7 +259,7 @@
 			}
 		})
 
-		$('.form-control').on('input', function() {
+		$('.form-control').on('input', function () {
 			var track = 0;
 			var firstname = $('#firstname').val(),
 				lastname = $('#lastname').val(),
@@ -272,7 +281,7 @@
 					data: JSON.stringify(data),
 					contentType: 'application/json',
 					url: '/user/update/email',
-					success: function(res) {
+					success: function (res) {
 						// console.log(res)
 						if (res.toString() == 'taken') {
 							$('#err_msg').css('display', 'block');
@@ -290,7 +299,7 @@
 					data: JSON.stringify(data),
 					contentType: 'application/json',
 					url: '/user/update/username',
-					success: function(res) {
+					success: function (res) {
 						// console.log(res)
 						if (res.toString() == 'taken') {
 							$('#err_msg').css('display', 'block');
@@ -327,7 +336,7 @@
 		});
 
 		i = 0;
-		$('#submit').on('click', function() {
+		$('#submit').on('click', function () {
 			if (!$('#err_msg').html().trim()) {
 				var dataJsn = {};
 				if ($('.avatar').attr('src') != arr['pic']) {
@@ -336,7 +345,7 @@
 					dataJsn[key] = value;
 					console.log(dataJsn);
 				}
-				$('input:checkbox').each(function() {
+				$('input:checkbox').each(function () {
 					if ($(this).prop('checked')) {
 						if (this.value == 'password') {
 							if ($($('#' + this.value + '1')).val() && $($('#' + this.value + '2')).val()) {
@@ -353,8 +362,6 @@
 						}
 					}
 				});
-				// console.log($('.avatar').attr('src'));
-				// if ($('#pic').val())
 				if (Object.keys(dataJsn).length != 0) {
 					console.log(dataJsn);
 					$.ajax({
@@ -362,7 +369,7 @@
 						data: JSON.stringify(dataJsn),
 						contentType: 'application/json',
 						url: '/user/update',
-						success: function(res) {
+						success: function (res) {
 							var source = $('#entry-template').html();
 							var template = Handlebars.compile(source);
 
@@ -371,9 +378,6 @@
 							});
 
 							$('.middle-card').prepend(htm);
-							// setInterval(function() {
-							// 	$(location).attr('href', '/user/profile')
-							// }, 1500);
 							console.log(htm);
 						}
 					})
@@ -381,16 +385,16 @@
 			}
 		});
 
-		$('.plus').on('click', function() {
+		$('.plus').on('click', function () {
 			$('input:file').click();
 		});
 
-		$('input:file').change(function(e) {
+		$('input:file').change(function (e) {
 			var file = event.target.files[0];
 			// console.log(file);
 			var reader = new FileReader();
 
-			reader.onload = function(e) {
+			reader.onload = function (e) {
 				uploadCrop.croppie('bind', {
 					url: e.target.result
 				})
@@ -400,10 +404,10 @@
 			// reader
 		})
 
-		$('.btn-crop').on('click', function() {
+		$('.btn-crop').on('click', function () {
 			uploadCrop.croppie('result', {
 				type: 'base64'
-			}).then(function(g) {
+			}).then(function (g) {
 				// html is div (overflow hidden)
 				// console.log(g);
 				$('.avatar').attr('src', g);
@@ -413,4 +417,5 @@
 			});
 		})
 	});
+
 </script>
