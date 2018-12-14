@@ -13,6 +13,7 @@ function loggedIn(req, res, next) {
     if (req.user) {
         next();
     } else {
+        req.flash('error', 'Please login first');
         res.redirect('/login');
     }
 }
@@ -92,13 +93,24 @@ router.get('/home', loggedIn, function(req, res) {
             pic: info.profile_img
         });
     } else {
-    res.render('home');
+        res.render('home');
     }
 });
 
-router.get('/test', function(req, res) {
-    // console.log(req.user);
-    res.render('test');
+router.get('/other/users', loggedIn, function(req, res) {
+    var info = req.session.passport.user;
+    if (info) {
+        res.render('other_users', {
+            title: 'Other users',
+            firstname: info.firstname,
+            lastname: info.lastname,
+            username: info.username,
+            email: info.email,
+            pic: info.profile_img
+        });
+    } else {
+        res.render('other_users');
+    }
 });
 
 router.get('/logout', async function(req, res) {
