@@ -319,7 +319,6 @@
 				email = $('#email').val(),
 				p1 = $('#password1').val(),
 				p2 = $('#password2').val(),
-				prelang = $('#language').val(),
 				tex = '';
 			var reg = /^[a-z]+$/i;
 			var regU = /^[a-z0-9_]+$/i;
@@ -392,11 +391,11 @@
 		$('#submit').on('click', function () {
 			if (!$('#err_msg').html().trim()) {
 				var dataJsn = {};
+				dataJsn.lang = $('#language').val();
 				if ($('.avatar').attr('src') != arr['pic']) {
 					var key = 'pic';
 					var value = $('.avatar').attr('src');
 					dataJsn[key] = value;
-					console.log(dataJsn);
 				}
 				$('input:checkbox').each(function () {
 					if ($(this).prop('checked')) {
