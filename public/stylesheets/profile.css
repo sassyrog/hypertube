@@ -5,6 +5,11 @@
     border-radius: 50%;
 }
 
+.dropdown {
+    position: relative;
+    padding-bottom: 15px !important;
+}
+
 .form-control:disabled, .form-control:disabled, .form-control:disabled {
     background-color: #FFC773;
 }

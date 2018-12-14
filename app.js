@@ -41,6 +41,7 @@ db.once('open', function() {
 
 
 
+
 // console.log(rand(15));
 // console.log((+new Date).toString(36).slice(-12));
 
@@ -136,40 +137,19 @@ app.use(function(req, res, next) {
 //     console.log(result);
 // })
 
-// var options = {
-//     "method": "GET",
-//     "hostname": "api.themoviedb.org",
-//     "port": null,
-//     "path": "/3/movie/335983/credits?api_key=5d54c4f8fe9a065d6ed438ef09982650",
-//     "headers": {}
-// };
-//
-// var req = http.request(options, function(res) {
-//     var chunks = [];
-//
-//     res.on("data", function(chunk) {
-//         chunks.push(chunk);
-//     });
-//
-//     res.on("end", function() {
-//         var body = Buffer.concat(chunks);
-//
-//         var obj = JSON.parse(body.toString());
-//         var credits = obj.cast;
-//         for (var i = credits.length - 1; i >= 0; i--) {
-//             if (credits[i].profile_path === null) {
-//                 credits.splice(i, 1);
-//             }
-//         }
-//         // credits.splice(k, 1);
-//         console.log(credits);
-//     });
-// });
-//
-// req.end();
+var request = require("request")
+ 
+// var ur = "https://restcountries.eu/rest/v2/lang/es"
 
+// request({
+//     url: ur,
+//     json: true
+// }, function (error, response, body) {
 
-
+//     if (!error && response.statusCode === 200) {
+//         console.log(body) // Print the json response
+//     }
+// })
 
 
 
