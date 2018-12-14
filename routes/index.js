@@ -113,10 +113,10 @@ router.get('/other/users', loggedIn, function(req, res) {
     }
 });
 
-router.get('/logout', async function(req, res) {
-    req.session.destroy(async function(err) {
+router.get('/logout', function(req, res) {
+    req.session.destroy(function(err) {
         if (err) return next(err)
-        await req.logout()
+        req.logout()
         res.redirect('/');
     });
 });
