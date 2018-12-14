@@ -1,0 +1,123 @@
+<link rel="stylesheet" href="/stylesheets/other_users.css">
+
+<div class="body-wrapper">
+
+	<div class="loader">
+		<div class="load-spin">
+
+			<div class="fa-3x">
+				<i class="fas fa-spinner fa-spin"></i>
+			</div>
+
+		</div>
+	</div>
+
+	<div class="head">
+
+		<nav class="navbar navbar-expand-md navbar-light bg-light">
+			<a class="navbar-brand" href="/user/profile"><img {{#if pic}} src="{{pic}}" {{else}} src="/images/avatar.png" {{/if}} width="40" height="40" class="d-inline-block align-top" alt=""></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+					<li class="nav-item active">
+						<a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt"></i></a>
+						<span class="tooltiptext">
+							<div class="speech-bubble">Logout</div>
+						</span>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="/user/profile"><i class="fas fa-cogs"></i></a>
+						<span class="tooltiptext">
+							<div class="speech-bubble">Setting</div>
+						</span>
+					</li>
+				</ul>
+			</div>
+		</nav>
+
+		<div class="container">
+			{{#if success_msg}}
+				<div id="errors" class="alert alert-success text-center" role="alert">{{success_msg}}</div>
+			{{else if error}}
+				<div id="errors" class="alert alert-danger text-center" role="alert">{{error}}</div>
+			{{/if}}
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="card my-5">
+				<h2 class="text-center">Other Tubers</h2>
+				<div class="card-body profiles text-center">
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+<footer class="text-white mt-4">
+	<div class="container-fluid py-3">
+		<div class="row">
+			<div class="col-md-3">
+				<h5></h5>
+			</div>
+			<div class="col-md-3"></div>
+			<div class="col-md-3"></div>
+			<div class="col-md-3"></div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">Credits<span class="small"><br>- Gareth Lategan <br>- Roelf Diedericks <br>- Roger Ndaba </span></div>
+			<div class="col-md-3">cxx</div>
+			<div class="col-md-3 text-right small align-self-end">©2018</div>
+		</div>
+	</div>
+</footer>
+
+<script>
+	function disable() {
+		$(window).on('wheel.impair', function() {
+			return false;
+		});
+	}
+
+	function enable() {
+		$(window).off('wheel.impair');
+	}
+
+	$(document).ajaxStart(function() {
+		$('.loader').css({
+			'display': 'block'
+		})
+		disable();
+		console.log('loading...');
+	}).ajaxStop(function() {
+
+		setInterval(function() {
+			$('.loader').css({
+				'display': 'none'
+			})
+			enable();
+		}, 800);
+		console.log('stop');
+	});
+
+
+	$(document).ready(function() {
+		var data = {};
+
+		$.ajax({
+			type: 'POST',
+			data: JSON.stringify(data),
+			contentType: 'application/json',
+			url: '/see/other/users',
+			success: function(res) {
+				$('.profiles').html(res);
+			}
+		});
+	})
+</script>
