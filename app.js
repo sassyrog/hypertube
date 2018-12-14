@@ -51,6 +51,7 @@ db.on('error', function(err) {
 
 var app = express();
 
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -185,6 +186,8 @@ app.use(bodyParser.json({
 
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('assets'));
+
 
 
 app.use('/', indexRouter);

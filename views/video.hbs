@@ -46,7 +46,7 @@
 			<source src="/video" type="video/mp4">
 			Your browser does not support the video tag.
 			{{#each subtitles}}
-				<track kind='captions' src='{{this.path}}' srclang='{{this.langShort}}' label='{{this.lang}}' />
+				<track kind='subtitles' src='{{this.path}}' srclang='{{this.langShort}}' label='{{this.lang}}' />
 			{{/each}}
 		</video>
 	</div>

@@ -8,6 +8,7 @@ const mdb = require('moviedb')('5d54c4f8fe9a065d6ed438ef09982650');
 const yifysubtitles = require('yifysubtitles');
 var http = require('http');
 
+var chalk = require('chalk');
 let User = require('../models/user');
 
 function loggedIn(req, res, next) {
@@ -35,6 +36,7 @@ app.get('/', loggedIn, function(req, res) {
             mdb.movieInfo({
                 id: get_info["mdbID"]
             }, (mdb_err, mdb_res) => {
+				console.log(mdb_res);
                 query.search(mdb_res.title, (yify_err, yify_res) => {
                     if (yify_err) throw yify_err
                     if (yify_res.length != 0) {
@@ -44,16 +46,20 @@ app.get('/', loggedIn, function(req, res) {
                                 var movie_title = yify_res[i].title;
 								var movie_link = yify_res[i].large_cover_image;
 								yifysubtitles(yify_res[i].imdb_code, {
-                                    path: __dirname + '/../tmp',
-                                    langs: ['en', 'fr', 'zh']
+                                    path: __dirname + '/../assets/tmp',
+                                    langs: ['sq','ar','bn','bg','zh','hr','cs','da','nl','en','et','fa','fi','fr','de','el','he','hu','id','it','ja','ko','lt','mk','ms','no','pl','pt','ro','ru','sr','sl','es','sv','th','tr','ur','uk','vi']
                                 }).then(res => {
                                     console.log(res);
                                     res.forEach(function(sub) {
                                         var subStats = []
                                         subStats["lang"] = sub.lang;
                                         subStats["langShort"] = sub.langShort;
-                                        subStats["path"] = sub.path;
-                                        subtitlesArr.push(subStats);
+										subfile = sub.path.replace(/.+?(?=assets)/g, '');
+										subStats["path"] = subfile.substr(6);
+										console.log(subStats);
+										if (subStats["path"]) {
+											subtitlesArr.push(subStats);
+										}
 									});
 									User.findById(id, function(err, user) {
 										var movie = {
@@ -111,6 +117,9 @@ app.get('/', loggedIn, function(req, res) {
         const parts = range.replace(/bytes=/, "").split("-")
         var engine = torrentStream(req.session.magnetURI)
         engine.on('ready', function() {
+
+			
+
             engine.files.forEach(function(file) {
                 if (file.name.match(/mp4$/)) {
                     const fileSize = file.length
@@ -140,7 +149,7 @@ app.get('/', loggedIn, function(req, res) {
                 req.session.magnetURI = value
                 // console.log(value);
 
-                res.render('video')
+                res.render('video', {subtitles: subtitlesArr})
             }
         });
     }
