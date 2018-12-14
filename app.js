@@ -246,7 +246,7 @@ app.use('/forgot/password', require('./routes/password_reset'));
 
 app.use('/comments', require('./routes/comments'));
 
-// app.use('/scrapper', require('./routes/scrapper'));
+app.use('/see/other/users', require('./routes/other_users'));
 
 
 

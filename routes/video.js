@@ -9,14 +9,15 @@ const yifysubtitles = require('yifysubtitles');
 var http = require('http');
 
 var chalk = require('chalk');
+var flash = require('connect-flash');
 let User = require('../models/user');
 
 function loggedIn(req, res, next) {
-    if (req.user) {
-        next();
-    } else {
-        res.redirect('/login');
-    }
+	if (req.user) {
+		next();
+	} else {
+		res.redirect('/login');
+	}
 }
 
 app.get('/', loggedIn, function(req, res) {
@@ -144,7 +145,8 @@ app.get('/', loggedIn, function(req, res) {
     } else {
         magnet_promise.then(function(value) {
             if (value == "404") {
-                res.render('login') //we need to do something when the YTS doesn't have the movie
+                req.flash('error', 'Video Not Found');
+				res.redirect('/home') //we need to do something when the YTS doesn't have the movie
             } else {
                 req.session.magnetURI = value
                 // console.log(value);
@@ -157,53 +159,48 @@ app.get('/', loggedIn, function(req, res) {
     // // res.send('sdsd');
 });
 
-
 app.post('/cast', (reqe, response) => {
 
+	var cast = '';
 
-    var cast = '';
+	var options = {
+		"method": "GET",
+		"hostname": "api.themoviedb.org",
+		"port": null,
+		"path": "/3/movie/" + reqe.body.id + "/credits?api_key=5d54c4f8fe9a065d6ed438ef09982650",
+		"headers": {}
+	};
 
+	var req = http.request(options, function(res) {
+		var chunks = [];
 
-    var options = {
-        "method": "GET",
-        "hostname": "api.themoviedb.org",
-        "port": null,
-        "path": "/3/movie/" + reqe.body.id + "/credits?api_key=5d54c4f8fe9a065d6ed438ef09982650",
-        "headers": {}
-    };
+		res.on("data", function(chunk) {
+			chunks.push(chunk);
+		});
 
+		res.on("end", function() {
+			var body = Buffer.concat(chunks);
 
-    var req = http.request(options, function(res) {
-        // console.log('dfdfdfdfdfdfdfdfdf');
-        var chunks = [];
+			var obj = JSON.parse(body.toString());
+			var credits = obj.cast;
+			for (var i = credits.length - 1; i >= 0; i--) {
+				if (credits[i].profile_path === null) {
+					credits.splice(i, 1);
+				}
+			}
+			for (var i = 0; i < credits.length; i++) {
+				cast = cast +
+					'<div class="cast-member"' +
+					'style="background-image:url(\'https://image.tmdb.org/t/p/w500/' +
+					credits[i].profile_path + '\')">' +
+					'<div class = "cast-name text-center">' + credits[i].name + ' -<br>' +
+					credits[i].character + '</div></div>';
+			}
+			response.send(cast);
 
-        res.on("data", function(chunk) {
-            chunks.push(chunk);
-        });
-
-        res.on("end", function() {
-            var body = Buffer.concat(chunks);
-
-            var obj = JSON.parse(body.toString());
-            var credits = obj.cast;
-            for (var i = credits.length - 1; i >= 0; i--) {
-                if (credits[i].profile_path === null) {
-                    credits.splice(i, 1);
-                }
-            }
-            for (var i = 0; i < credits.length; i++) {
-                cast = cast +
-                    '<div class="cast-member"' +
-                    'style="background-image:url(\'https://image.tmdb.org/t/p/w500/' +
-                    credits[i].profile_path + '\')">' +
-                    '<div class = "cast-name text-center">' + credits[i].name + ' -<br>' +
-                    credits[i].character + '</div></div>';
-            }
-            response.send(cast);
-
-        });
-    });
-    req.end();
+		});
+	});
+	req.end();
 
 })
 module.exports = app;
