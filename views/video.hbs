@@ -214,9 +214,9 @@
 				contentType: 'application/json',
 				url: '/comments',
 				success: function(res) {
+					getComments(query.title, query.year);
 				}
 			})
-			getComments();
 		}
 	})
 	function scrollFunction() {
