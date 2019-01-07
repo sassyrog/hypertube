@@ -1,3 +1,17 @@
-<h1>{{message}}</h1>
-<h2>{{error.status}}</h2>
-<pre>{{error.stack}}</pre>
+<link rel="stylesheet" href="/stylesheets/error.css">
+
+<div class="container h-100">
+	<div class="row h-100 justify-content-center align-items-center">
+		<div class="error">
+			Error : {{error.status}}
+		</div>
+		<div class="error-status">
+			{{message}}
+		</div>
+	</div>
+</div>
+
+
+
+
+{{!-- <p> {{#ifCond error.status '==' 404}} dfdfdfdfdf {{/ifCond}}</p> --}}

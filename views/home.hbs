@@ -80,20 +80,24 @@
 		<div class="gala">
 		</div>
 	</div>
-	<div class="movie-desc">
-		<div class="box">
-			<div class="cancel">
-				<img style="width:100%;height:100%" src="/images/cancel.svg" id="cancel">
+	<div class="container movie-desc">
+		<div class="row justify-content-center align-items-center">
+			<div class="box">
+				<div class="cancel">
+					<img style="width:100%;height:100%" src="/images/cancel.svg" id="cancel">
+				</div>
+				{{!-- <hr class="my-4 d-flex"> --}}
+
 			</div>
-		</div>
-		<a class="movie_link" href="">
-			<div class="play_btn">
-				<img src="/images/play_btn.svg" id="start_play">
+			<a class="movie_link" href="">
+				<div class="play_btn">
+					<img src="/images/play_btn.svg" id="start_play">
+				</div>
+			</a>
+			<div class="vid_desc text-center">
+				<h1></h1>
+				<p class="overview"></p>
 			</div>
-		</a>
-		<div class="vid_desc">
-			<h1></h1>
-			<p class="overview"></p>
 		</div>
 	</div>
 </div>
@@ -130,6 +134,7 @@
 	$('.back').on('click', function() {
 		window.history.back();
 	})
+
 	function makeMovieCall(filter = 'none', page = '1') {
 		var data = {};
 		data.filter = filter;

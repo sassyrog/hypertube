@@ -124,8 +124,7 @@ h1 {
     right: 0;
     position: relative;
     align-self: center;
-    margin-left: 1vw;
-    margin-right: 12vw;
+    margin: 2vw;
 }
 
 .play_btn {
@@ -208,8 +207,7 @@ h1 {
     background-size: 100%;
     background-repeat: no-repeat;
     clip-path: polygon(-34% 0%, 101% 0%, 100% 90%);
-    /* filter: blur(8px);
-	-webkit-filter: blur(8px); */
+    border-bottom: 2px solid black;
 }
 
 .box:hover {
@@ -425,7 +423,6 @@ a:hover {
 
 .container {
     height: 0px;
-    top: 2px;
     right: 0;
     left: 0;
 }
@@ -535,10 +532,12 @@ a:hover {
 
     .play_btn {
         margin-top: 2vw;
+        width: 13vw;
     }
 
     .movie-desc {
-        top: 80px;
+        top: 30vw;
+        height: 380px !important;
     }
 
     .box {
@@ -553,8 +552,13 @@ a:hover {
         display: block;
     }
 
-    .container {
+    .cancel {
+        width: 7vw;
+        height: 7vw;
+    }
+
+    /* .container {
         padding: 0;
         margin: 0;
-    }
+    } */
 }
