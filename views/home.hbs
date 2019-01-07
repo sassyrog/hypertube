@@ -15,13 +15,11 @@
 	</div>
 
 	<div class="head">
-
 		<nav class="navbar navbar-expand-md navbar-light bg-light">
 			<a class="navbar-brand" href="/user/profile"><img {{#if pic}} src="{{pic}}" {{else}} src="/images/avatar.png" {{/if}} width="40" height="40" class="d-inline-block align-top" alt=""></a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-
 			<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 					<li class="nav-item active">
@@ -51,7 +49,6 @@
 				</ul>
 			</div>
 		</nav>
-
 		<div class="container">
 			{{#if success_msg}}
 				<div id="errors" class="alert alert-success text-center" role="alert">{{success_msg}}</div>
@@ -69,7 +66,6 @@
 			</form>
 		</div>
 	</div>
-
 	<div class="containers">
 		<div class="btn-group d-flex justify-content-center" id="sort-btn">
 			<button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -100,9 +96,7 @@
 			<p class="overview"></p>
 		</div>
 	</div>
-
 </div>
-
 <nav aria-label="Page navigation example" class="pagi d-none">
 	<ul class="pagination justify-content-center">
 		<li class="page-item" value="prev">
@@ -136,7 +130,6 @@
 	$('.back').on('click', function() {
 		window.history.back();
 	})
-
 	function makeMovieCall(filter = 'none', page = '1') {
 		var data = {};
 		data.filter = filter;
@@ -224,13 +217,11 @@
 			'display': 'block'
 		})
 		disable();
-		console.log('loading...');
 	}).ajaxStop(function() {
 		$('.loader').css({
 			'display': 'none'
 		})
 		enable();
-		console.log('stop');
 	});
 
 
@@ -333,7 +324,6 @@
 					contentType: 'application/json',
 					url: '/movie/search',
 					success: function(res) {
-						console.log(res);
 						$('.gala').html(res);
 					}
 				});

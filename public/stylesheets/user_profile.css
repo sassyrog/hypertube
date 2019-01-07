@@ -6,8 +6,8 @@ body {
     outline-color: transparent !important;
     font-family: Consolas !important;
     text-decoration: none !important;
-    -webkit-transition: 300ms;
-    transition: 300ms;
+    /* -webkit-transition: 300ms;
+    transition: 300ms; */
 }
 
 .dropdown {

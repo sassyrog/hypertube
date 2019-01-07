@@ -141,8 +141,6 @@
 			}
 		})
 
-
-
 		$('.form-control').on('input', function() {
 			var firstname = $('#firstname').val(),
 				lastname = $('#lastname').val(),
@@ -154,7 +152,6 @@
 			var reg = /^[a-z]+$/i;
 			var regU = /^[a-z0-9_]+$/i;
 			var regem = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-
 
 			if (this.name === 'email' && email && email.match(regem)) {
 				console.log(this.value);
@@ -203,8 +200,6 @@
 				$('#err_msg').css('display', 'none');
 			}
 			$('#err_msg').html(tex);
-
 		})
-
 	});
 </script>
