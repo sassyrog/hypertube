@@ -10,10 +10,9 @@
 		 aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-
 		<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-				<li class="nav-item active">
+				<li class="nav-item active" style='float:right;'>
 					<a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt"></i></a>
 					<span class="tooltiptext">
 						<div class="speech-bubble">Logout</div>
@@ -35,21 +34,21 @@
 		</div>
 	</nav>
 </div>
-
 <div class="col-lg-6 col-sm-6">
 	<div class="card hovercard">
 		<div class="back">
 			<i class="fas fa-arrow-left"></i>
 		</div>
 		<div class="useravatar">
-			<img alt="" {{#if pic}} src="{{pic}}" {{else}} src="/images/avatar.png" {{/if}}>
+			<img id="profile_img" alt="" {{#if pic}} src="{{pic}}" {{else}} src="/images/avatar.png" {{/if}}>
 		</div>
-		<div class="card-info"> <span class="card-title"> &nbsp {{#ifCond firstname '&&' lastname}} {{firstname}} {{lastname}}
-				{{/ifCond}}</span>
-
+		<div class="card-info"> 
+			<span class="card-title"> 
+				&nbsp {{#ifCond firstname '&&' lastname}} {{firstname}} {{lastname}}
+				{{/ifCond}}
+			</span>
 		</div>
 	</div>
-
 	<div class="middle-card card text-center">
 		{{#if errors}}
 			<div id="errors" class="alert alert-danger" role="alert">
@@ -72,11 +71,8 @@
 				<li class="upadate-profile nav-item nav-link">
 					upadate profile
 				</li>
-				{{!-- <li class="nav-item nav-link">
-				</li> --}}
 			</ul>
 		</div>
-
 		<div class="card-body">
 			<div class="col-sm-9 col-md-7 col-lg-5 mx-auto the-form" style="display:none">
 				<form id="form" class="form-signin">
@@ -142,7 +138,7 @@
 							<div class="input-group-text">
 								<input type="checkbox" value="firstname" title="Edit firstname">
 							</div>
-						</div>
+ 						</div>
 						<input type="text" name="firstname" id="firstname" class="form-control" disabled="disabled" placeholder="firstname"
 						 {{#if firstname}} value="{{firstname}}" {{/if}}>
 					</div>
@@ -183,11 +179,7 @@
 						<input type="email" name="email" id="email" disabled="disabled" class="form-control" placeholder="email"
 						 {{#if email}} value="{{email}}" {{/if}}>
 					</div>
-
-
-					<!-- passwords -->
 					<meter max="5" id="strength" value="0"></meter>
-
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
 							<div class="input-group-text">
@@ -201,53 +193,31 @@
 						<span class="input-group-addon" style="width:39px;background-color:transparent;border:none;"></span>
 						<input name="password2" type="password" id="password2" disabled="disabled" class="form-control" placeholder="confirm password">
 					</div>
-
 					<button id="submit" class="btn btn-lg btn-primary btn-block" type="button"> <span>save changes</span> </button>
-					{{!-- <button id="submit" class="btn btn-lg btn-primary btn-block" type="submit"> <span>save changes</span> </button> --}}
-
 					<a href="/home" class="btn-block"><button id="cancel" class="btn btn-lg btn-primary btn-block" type="button">
 							<span>cancel</span> </button></a>
 					<input type="text" style="display:none" name="" value="">
 				</form>
 			</div>
-			{{!-- </div> --}}
-
 			<div class="card my-5 the-movies">
 				{{#each movies}}
 					<div class="watched-movie-card" style="background-image:url('{{this.poster}}')">
 					</div>
 				{{/each}}
 			</div>
-
 		</div>
-		{{!-- </div> --}}
 	</div>
-
 </div>
-
 <div class="col-lg-5 mx-auto crop-container text-center">
 	<button class="btn btn-primary btn-crop" type="button" name="button">Done</button>
 </div>
-
-
-{{!-- <div style="width:500px;height:500px;background-color:red" id="upload-demo" class="">
-</div>
-
-<button type="button" name="button"></button>
-
-<p></p> --}}
-{{!-- <img src="" alt="" id="the_img"> --}}
-{{!-- <img src="/images/logo.png" width="300" height="300" alt="" class="the_img"> --}}
-
 <script id="entry-template" type="text/x-handlebars-template">
 	<div id="errors" class="alert alert-success" role="alert">
 		\{{success_msg}}
 	</div>
 </script>
-
 <script>
 	var uploadCrop;
-
 	uploadCrop = $('.crop-container').croppie({
 		viewport: {
 			width: 200,
@@ -257,12 +227,10 @@
 		enableExif: true,
 		showZoomer: false,
 	});
-
 	$('.dropdown-item').on('click', function() {
 		$('.dropdown-toggle').html($(this).html()) ,
 		$('#language').attr('value', $(this).html())
 	})
-
 	$('.nav-item').on('click', function () {
 		$('.nav-item').removeClass('active');
 		$(this).addClass('active');
@@ -274,22 +242,16 @@
 			$('.the-movies').css('display', 'block');
 		}
 	})
-
 	$('.back').on('click', function () {
 		window.history.back();
 	})
-
 	$('document').ready(function () {
-
-		//		console.log('{{#each movies}}<li class="err_li">{{this.title}}</li>{{/each}}');
-
 		var arr = [];
 		arr['firstname'] = '{{firstname}}';
 		arr['lastname'] = '{{lastname}}';
 		arr['username'] = '{{username}}';
 		arr['email'] = '{{email}}';
 		arr['pic'] = '{{pic}}';
-
 		$('input:checkbox').on('click', function () {
 			if ($(this).prop('checked')) {
 				if ($(this).val() == 'password') {
@@ -310,7 +272,6 @@
 				}
 			}
 		})
-
 		$('.form-control').on('input', function () {
 			var track = 0;
 			var firstname = $('#firstname').val(),
@@ -319,13 +280,10 @@
 				email = $('#email').val(),
 				p1 = $('#password1').val(),
 				p2 = $('#password2').val(),
-				prelang = $('#language').val(),
 				tex = '';
 			var reg = /^[a-z]+$/i;
 			var regU = /^[a-z0-9_]+$/i;
 			var regem = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-
-
 			if (this.name === 'email' && email && email.match(regem)) {
 				var data = {};
 				data.email = this.value;
@@ -335,7 +293,6 @@
 					contentType: 'application/json',
 					url: '/user/update/email',
 					success: function (res) {
-						// console.log(res)
 						if (res.toString() == 'taken') {
 							$('#err_msg').css('display', 'block');
 							$('#err_msg').html('email already taken');
@@ -353,7 +310,6 @@
 					contentType: 'application/json',
 					url: '/user/update/username',
 					success: function (res) {
-						// console.log(res)
 						if (res.toString() == 'taken') {
 							$('#err_msg').css('display', 'block');
 							$('#err_msg').html('username already taken');
@@ -387,16 +343,15 @@
 			}
 			$('#err_msg').html(tex);
 		});
-
 		i = 0;
 		$('#submit').on('click', function () {
 			if (!$('#err_msg').html().trim()) {
 				var dataJsn = {};
+				dataJsn.lang = $('#language').val();
 				if ($('.avatar').attr('src') != arr['pic']) {
 					var key = 'pic';
 					var value = $('.avatar').attr('src');
 					dataJsn[key] = value;
-					console.log(dataJsn);
 				}
 				$('input:checkbox').each(function () {
 					if ($(this).prop('checked')) {
@@ -416,7 +371,6 @@
 					}
 				});
 				if (Object.keys(dataJsn).length != 0) {
-					console.log(dataJsn);
 					$.ajax({
 						type: 'POST',
 						data: JSON.stringify(dataJsn),
@@ -425,28 +379,25 @@
 						success: function (res) {
 							var source = $('#entry-template').html();
 							var template = Handlebars.compile(source);
-
 							var htm = template({
 								success_msg: "changes saved"
 							});
-
+							setTimeout(function (){
+								$('.alert-success').fadeOut();
+							}, 1000);
 							$('.middle-card').prepend(htm);
-							console.log(htm);
+							$('#profile_img').attr('src', res.profile_img);
 						}
 					})
 				}
 			}
 		});
-
 		$('.plus').on('click', function () {
 			$('input:file').click();
 		});
-
 		$('input:file').change(function (e) {
 			var file = event.target.files[0];
-			// console.log(file);
 			var reader = new FileReader();
-
 			reader.onload = function (e) {
 				uploadCrop.croppie('bind', {
 					url: e.target.result
@@ -454,21 +405,14 @@
 				$('.crop-container').css('display', 'block');
 			}
 			reader.readAsDataURL(file);
-			// reader
 		})
-
 		$('.btn-crop').on('click', function () {
 			uploadCrop.croppie('result', {
 				type: 'base64'
 			}).then(function (g) {
-				// html is div (overflow hidden)
-				// console.log(g);
 				$('.avatar').attr('src', g);
 				$('.crop-container').css('display', 'none');
-
-				// with img positioned inside.
 			});
 		})
 	});
-
 </script>

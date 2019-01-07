@@ -19,7 +19,6 @@ router.post('/', (req, res) => {
     });
 
     newComment.save().then(item => {
-            console.log('jesus!!!');
             res.send("item saved to database");
         })
         .catch(err => {
