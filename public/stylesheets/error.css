@@ -1,0 +1,19 @@
+body {
+    background-color: black;
+}
+
+* {
+    color: #ff9900;
+    font-family: Consolas;
+    letter-spacing: -1px;
+}
+
+.error {
+    font-weight: bold;
+    font-size: 10vw;
+}
+
+.error-status {
+    font-weight: bold;
+    font-size: 3vw;
+}

@@ -11,7 +11,8 @@ const expressValidator = require('express-validator');
 var bodyParser = require('body-parser');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var videoRouter = require('./routes/video');
+var videoRouter =  require('./routes/video');
+
 const config = require('./config/database');
 const rp = require('request-promise');
 const url = 'https://en.wikipedia.org/wiki/List_of_Presidents_of_the_United_States';
@@ -50,6 +51,7 @@ db.on('error', function(err) {
 });
 
 var app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -164,6 +166,8 @@ app.use(bodyParser.json({
 
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('assets'));
+
 
 
 app.use('/', indexRouter);

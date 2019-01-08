@@ -54,7 +54,8 @@
     "torrent-stream": "^1.1.0",
     "vid-streamer": "^1.0.0",
     "yify-query": "^2.0.3",
-    "yify-search": "^1.0.0"
+    "yify-search": "^1.0.0",
+    "yifysubtitles": "^2.1.2"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.5.0",

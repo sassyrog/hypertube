@@ -35,7 +35,8 @@ body {
     margin: auto;
 }
 
-.fa-spinner, .fa-spin {
+.fa-spinner,
+.fa-spin {
     color: #ff9900;
     font-size: 100% !important;
 }
@@ -90,7 +91,8 @@ body {
     padding-left: 1.5rem;
 }
 
-.fa, .fas {
+.fa,
+.fas {
     font-size: 25px;
 }
 
@@ -124,8 +126,7 @@ h1 {
     right: 0;
     position: relative;
     align-self: center;
-    margin-left: 1vw;
-    margin-right: 12vw;
+    margin: 2vw;
 }
 
 .play_btn {
@@ -208,8 +209,6 @@ h1 {
     background-size: 100%;
     background-repeat: no-repeat;
     clip-path: polygon(-34% 0%, 101% 0%, 100% 90%);
-    /* filter: blur(8px);
-	-webkit-filter: blur(8px); */
 }
 
 .box:hover {
@@ -302,7 +301,12 @@ ul {
     list-style-type: none;
 }
 
-h1, h2, h3, h4, h5, p {
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
     font-weight: 400;
 }
 
@@ -425,7 +429,6 @@ a:hover {
 
 .container {
     height: 0px;
-    top: 2px;
     right: 0;
     left: 0;
 }
@@ -435,7 +438,8 @@ a:hover {
     height: 20px;
 }
 
-.movie-content-header, .movie-info {
+.movie-content-header,
+.movie-info {
     display: table;
     width: 100%;
 }
@@ -535,10 +539,12 @@ a:hover {
 
     .play_btn {
         margin-top: 2vw;
+        width: 13vw;
     }
 
     .movie-desc {
-        top: 80px;
+        top: 30vw;
+        height: 380px !important;
     }
 
     .box {
@@ -553,8 +559,13 @@ a:hover {
         display: block;
     }
 
-    .container {
+    .cancel {
+        width: 7vw;
+        height: 7vw;
+    }
+
+    /* .container {
         padding: 0;
         margin: 0;
-    }
+    } */
 }
