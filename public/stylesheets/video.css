@@ -172,6 +172,15 @@ h4 {
 
 .post .post-description p {
     color: #FF9900;
+    padding-top: 60px !important;
+}
+
+.post .post-description {
+    padding-top: 0px !important;
+}
+
+.pull-left {
+    padding-bottom: 10px !important;
 }
 
 .container {
