@@ -19,7 +19,7 @@ function loggedIn(req, res, next) {
 }
 
 
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
     res.render('index', {
         title: 'hypertube'
     });
@@ -75,13 +75,13 @@ router.get('/login', (req, res, next) => {
     } else {
         next();
     }
-}, function(req, res) {
+}, function (req, res) {
     res.render('login', {
         title: 'login'
     });
 });
 
-router.get('/home', loggedIn, function(req, res) {
+router.get('/home', loggedIn, function (req, res) {
     var info = req.session.passport.user;
     if (info) {
         res.render('home', {
@@ -97,7 +97,7 @@ router.get('/home', loggedIn, function(req, res) {
     }
 });
 
-router.get('/other/users', loggedIn, function(req, res) {
+router.get('/other/users', loggedIn, function (req, res) {
     var info = req.session.passport.user;
     if (info) {
         res.render('other_users', {
@@ -113,15 +113,15 @@ router.get('/other/users', loggedIn, function(req, res) {
     }
 });
 
-router.get('/logout', function(req, res) {
-    req.session.destroy(function(err) {
+router.get('/logout', function (req, res) {
+    req.session.destroy(function (err) {
         if (err) return next(err)
         req.logout()
         res.redirect('/');
     });
 });
 
-router.get('/register', function(req, res) {
+router.get('/register', function (req, res) {
     res.render('register', {
         title: 'registration'
     });

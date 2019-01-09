@@ -18,7 +18,7 @@ router.post('/', (req, res) => {
 	const password = req.body.password;
 	const pic = req.body.pic;
 
-	User.findById(id, function(err, user) {
+	User.findById(id, function (err, user) {
 		if (firstname)
 			user.firstname = firstname;
 		if (lastname)
@@ -35,8 +35,8 @@ router.post('/', (req, res) => {
 			res.send(user);
 		})
 		if (password) {
-			bcrypt.genSalt(10, function(err, salt) {
-				bcrypt.hash(password, salt, function(err, hash) {
+			bcrypt.genSalt(10, function (err, salt) {
+				bcrypt.hash(password, salt, function (err, hash) {
 					user.password = hash;
 					user.save((err) => {
 						if (err) throw err;
@@ -46,13 +46,6 @@ router.post('/', (req, res) => {
 				});
 			});
 		}
-		//res.send(user);
-		// req.logout();
-		// res.redirect('/');
-		// req.login(user, function(err) {
-		// 	if (err) { return next(err); }
-		// 	return res.redirect('/');
-		// });
 	});
 })
 
@@ -63,7 +56,7 @@ router.post('/email', (req, res) => {
 			"$regex": "^" + req.body.email + "\\b",
 			"$options": "i"
 		}
-	}, function(err, user) {
+	}, function (err, user) {
 		if (user != null) {
 			if (user.id == id) {
 				res.send('same')
@@ -83,7 +76,7 @@ router.post('/username', (req, res) => {
 			"$regex": "^" + req.body.username + "\\b",
 			"$options": "i"
 		}
-	}, function(err, user) {
+	}, function (err, user) {
 		if (user != null) {
 			if (user.id == id) {
 				res.send('same')
