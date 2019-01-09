@@ -18,9 +18,13 @@ router.get('/register', function (req, res) {
 	res.render('register');
 });
 
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 router.post('/register', function (req, res) {
-	const firstname = req.body.firstname;
-	const lastname = req.body.lastname;
+	const firstname = capitalizeFirstLetter(req.body.firstname.toLowerCase());
+	const lastname = capitalizeFirstLetter(req.body.lastname.toLowerCase());
 	const username = req.body.username;
 	const email = req.body.email.toLowerCase();
 	const password1 = req.body.password1;
