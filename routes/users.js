@@ -8,21 +8,21 @@ const emailExistence = require('email-existence');
 const fs = require('fs');
 
 require('../config/passport')(passport);
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
 	res.send('respond with a resource');
 });
 
 let User = require('../models/user');
 
-router.get('/register', function(req, res) {
+router.get('/register', function (req, res) {
 	res.render('register');
 });
 
-router.post('/register', function(req, res) {
+router.post('/register', function (req, res) {
 	const firstname = req.body.firstname;
 	const lastname = req.body.lastname;
 	const username = req.body.username;
-	const email = req.body.email;
+	const email = req.body.email.toLowerCase();
 	const password1 = req.body.password1;
 	const password2 = req.body.password2;
 
@@ -46,13 +46,13 @@ router.post('/register', function(req, res) {
 				"$regex": "^" + username + "\\b",
 				"$options": "i"
 			}
-		}, function(err, user) {
+		}, function (err, user) {
 			User.findOne({
 				email: {
 					"$regex": "^" + email + "\\b",
 					"$options": "i"
 				}
-			}, function(err, mail) {
+			}, function (err, mail) {
 				if (user || mail) {
 					if (user) {
 						res.render('register', {
@@ -70,7 +70,7 @@ router.post('/register', function(req, res) {
 						});
 					}
 				} else {
-					emailExistence.check(email, function(error, response) {
+					emailExistence.check(email, function (error, response) {
 						if (!response) {
 							res.render('register', {
 								firstname: firstname,
@@ -87,7 +87,7 @@ router.post('/register', function(req, res) {
 								password: password1,
 								profile_img: '/images/avatar.png'
 							});
-							User.createUser(newUser, function(err, user) {
+							User.createUser(newUser, function (err, user) {
 								if (err) throw err;
 							});
 							req.flash('success_msg', 'You are registered and can now login');
@@ -100,7 +100,7 @@ router.post('/register', function(req, res) {
 	}
 });
 
-router.get('/login', function(req, res) {
+router.get('/login', function (req, res) {
 	res.render('login', {
 		title: 'login'
 	});
@@ -111,7 +111,7 @@ router.post('/login',
 		failureRedirect: '/users/login',
 		failureFlash: true
 	}),
-	function(req, res) {
+	function (req, res) {
 		req.session.save(() => {
 			res.redirect('/home');
 		})

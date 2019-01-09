@@ -19,8 +19,8 @@ function createUserSocial(username, firstname, lastname, email, callback, callba
 		profile_img: image
 	})
 	hashPromise = new Promise((resolve, reject) => {
-		bcrypt.genSalt(10, function(err, salt) {
-			bcrypt.hash(newUser.password, salt, function(err, hash) {
+		bcrypt.genSalt(10, function (err, salt) {
+			bcrypt.hash(newUser.password, salt, function (err, hash) {
 				if (err)
 					reject(err)
 				else {
@@ -49,49 +49,53 @@ function createUserSocial(username, firstname, lastname, email, callback, callba
 }
 
 
-module.exports = function(passport) {
+module.exports = function (passport) {
 	// Local Strategy
-	passport.use(new LocalStrategy({ passReqToCallback: true },
-		function(req, username, password, done) {
-		// Match Username
-		let query = {
-			username: username
-		};
-		User.findOne(query, function(err, user) {
-			if (err) throw err;
-			if (!user) {
-				//find user by user username
-				req.flash('success_msg', 'Welcome');
-				return done(null, false);
-			}
-			// Match Password
-			bcrypt.compare(password, user.password, function(err, isMatch) {
+	passport.use(new LocalStrategy({
+			passReqToCallback: true
+		},
+		function (req, username, password, done) {
+			// Match Username
+			let query = {
+				username: username
+			};
+			console.log('------>' + username);
+
+			User.findOne(query, function (err, user) {
 				if (err) throw err;
-				if (isMatch) {
-					return done(null, user, {
-						success_msg: 'Welcome'
-					});
-				} else {
+				if (!user) {
+					//find user by user username
 					return done(null, false, {
-						username: user.username,
-						message: 'wrong password my broer'
+						message: 'incorrect username or password'
 					});
 				}
+				bcrypt.compare(password, user.password, function (err, isMatch) {
+					if (err) throw err;
+					if (isMatch) {
+						return done(null, user, {
+							success_msg: 'Welcome'
+						});
+					} else {
+						return done(null, false, {
+							username: user.username,
+							message: 'incorrect username or password'
+						});
+					}
+				});
 			});
-		});
-	}));
+		}));
 
 	//////////////////////// GITHUB STRATEGY //////////////////////////////////////
-	
+
 	passport.use(new GitHubStrategy({
-		clientID: secrets.github.gh_key,
-		clientSecret: secrets.github.s_gh_key,
-		callbackURL: "http://localhost:8080/auth/github/callback",
-		passReqToCallback: true
+			clientID: secrets.github.gh_key,
+			clientSecret: secrets.github.s_gh_key,
+			callbackURL: "http://localhost:8080/auth/github/callback",
+			passReqToCallback: true
 		},
-		function(req, accessToken, refreshToken, profile, done) {
+		function (req, accessToken, refreshToken, profile, done) {
 			var info = profile._json;
-			
+
 			if (!info.email) {
 				req.flash('error', 'Git email not found');
 				return done(null, false)
@@ -125,7 +129,7 @@ module.exports = function(passport) {
 			passReqToCallback: true
 
 		},
-		function(req, accessToken, refreshToken, profile, done) {
+		function (req, accessToken, refreshToken, profile, done) {
 
 			var info = profile._json;
 
@@ -167,7 +171,7 @@ module.exports = function(passport) {
 			],
 			passReqToCallback: true
 		},
-		function(req, accessToken, refreshToken, profile, done) {
+		function (req, accessToken, refreshToken, profile, done) {
 
 			var info = profile._json;
 
@@ -202,7 +206,7 @@ module.exports = function(passport) {
 			callbackURL: "http://localhost:8080/auth/42/callback",
 			passReqToCallback: true
 		},
-		function(accessToken, refreshToken, profile, cb) {
+		function (accessToken, refreshToken, profile, cb) {
 			var info = profile._json;
 			// console.log(info);
 
@@ -210,7 +214,7 @@ module.exports = function(passport) {
 				req.flash('error', '42 email not found');
 				return done(null, false)
 			}
-			
+
 			img = '/images/avatar.png';
 			createUserSocial(
 				info.login + info.id + '_42',
@@ -229,12 +233,12 @@ module.exports = function(passport) {
 		}
 	));
 
-	passport.serializeUser(function(user, done) {
+	passport.serializeUser(function (user, done) {
 		// console.log(user);
 		done(null, user);
 	});
 
-	passport.deserializeUser(function(user, done) {
+	passport.deserializeUser(function (user, done) {
 		// console.log(user);
 
 		done(null, user);
