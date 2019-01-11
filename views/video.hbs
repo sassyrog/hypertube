@@ -171,6 +171,10 @@
 
 	$('document').ready(function () {
 
+		$('.comment-btn').on('click', function() {
+			$('.comment').val('');
+		})
+
 		var encodedUrl = document.location.search.replace("info=", "");
 		var decodedUrl = Base64.decode(encodedUrl);
 		query = getQueryParams(decodedUrl);
